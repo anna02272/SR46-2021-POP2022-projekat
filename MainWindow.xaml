@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button Name="btnProfessors"
+                Click="btnProfessors_Click" Margin="412,90,204,258">Professors</Button>
+
+        <Button Name="btnStudents"
+                Click="btnStudents_Click" Margin="123,90,493,258">Students</Button>
     </Grid>
 </Window>

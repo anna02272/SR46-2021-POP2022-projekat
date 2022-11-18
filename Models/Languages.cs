@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace SR46_2021_POP2022.Models
 {
-    public enum EUserType
+    internal class Languages
     {
-        ADMINISTRATOR, PROFESSOR, STUDENT
     }
 }
-

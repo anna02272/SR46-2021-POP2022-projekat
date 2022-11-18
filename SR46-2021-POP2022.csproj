@@ -56,6 +56,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
+    <Compile Include="Models\Languages.cs" />
+    <Compile Include="Models\School.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Repositories\IFilePersistence.cs" />
     <Compile Include="Repositories\IProfessorRepository.cs" />
@@ -70,6 +72,18 @@
     <Compile Include="Services\ProfessorService.cs" />
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Views\AddEditProfessorsWindow.xaml.cs">
+      <DependentUpon>AddEditProfessorsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditStudentsWindow.xaml.cs">
+      <DependentUpon>AddEditStudentsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowProfessorsWindow.xaml.cs">
+      <DependentUpon>ShowProfessorsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowStudentsWindow.xaml.cs">
+      <DependentUpon>ShowStudentsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +97,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddEditProfessorsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditStudentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowProfessorsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowStudentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Address.cs" />

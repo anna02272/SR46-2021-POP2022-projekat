@@ -233,82 +233,84 @@ namespace SR46_2021_POP2022
             ShowStudents(students);
         }
 
-        static void Main(string[] args)
+
+
+        static void main(string[] args)
         {
-            //inicijalno kreiranje podataka i punjenje fajlova
+            //            //inicijalno kreiranje podataka i punjenje fajlova
 
-            //Data.Instance.Initialize();
+            //            Data.Instance.Initialize();
 
-            //citanje iz tekstualnih fajlova
-            Data.Instance.LoadData();
+            //            //citanje iz tekstualnih fajlova
+            //            Data.Instance.LoadData();
 
-            string option;
+            //            string option;
 
-            do
-            {
-                Console.WriteLine("Menu");
-                Console.WriteLine("Option 1: Prikaz svih profesora");
-                Console.WriteLine("Option 2: Unos novog profesora");
-                Console.WriteLine("Option 3: Modifikacija profesora");
-                Console.WriteLine("Option 4: Brisanje profesora");
-
-
-                Console.WriteLine("Option 5: Prikaz svih studenata");
-                Console.WriteLine("Option 6: Unos novog studenta");
-                Console.WriteLine("Option 7: Modifikacija studenta");
-                Console.WriteLine("Option 8: Brisanje studenta");
-
-                Console.WriteLine("Option 9: Pretraga po email adresi");
-                Console.WriteLine("Option 10: Sortiranje po email adresi");
+            //            do
+            //            {
+            //                Console.WriteLine("Menu");
+            //                Console.WriteLine("Option 1: Prikaz svih profesora");
+            //                Console.WriteLine("Option 2: Unos novog profesora");
+            //                Console.WriteLine("Option 3: Modifikacija profesora");
+            //                Console.WriteLine("Option 4: Brisanje profesora");
 
 
-                Console.WriteLine("Option X: Kraj");
-                Console.WriteLine("Option>>>");
-                option = Console.ReadLine();
+            //                Console.WriteLine("Option 5: Prikaz svih studenata");
+            //                Console.WriteLine("Option 6: Unos novog studenta");
+            //                Console.WriteLine("Option 7: Modifikacija studenta");
+            //                Console.WriteLine("Option 8: Brisanje studenta");
 
-                switch (option)
-                {
-                    case "1":
-                        ShowProfessors();
+            //                Console.WriteLine("Option 9: Pretraga po email adresi");
+            //                Console.WriteLine("Option 10: Sortiranje po email adresi");
 
-                        break;
-                    case "2":
-                        AddProfessor();
 
-                        break;
-                    case "3":
-                        UpdateProfessor();
+            //                Console.WriteLine("Option X: Kraj");
+            //                Console.WriteLine("Option>>>");
+            //                option = Console.ReadLine();
 
-                        break;
-                    case "4":
-                        DeleteProfessor();
-                        break;
-                    case "5":
-                        ShowStudents();
-                        break;
-                    case "6":
-                        AddStudent();
-                        break;
-                    case "7":
-                        UpdateStudent();
-                        break;
-                    case "8":
-                        DeleteStudent();
-                        break;
-                    case "9":
-                        SearchByEmail();
-                        break;
-                    case "10":
-                        SortByEmail();
-                        break;
-                    case "X":
-                        break;
-                    default:
-                        Console.WriteLine("Molimo ponovite unos opcije!");
-                        break;
-                }
+            //                switch (option)
+            //                {
+            //                    case "1":
+            //                        ShowProfessors();
 
-            } while (!option.Equals("X"));
+            //                        break;
+            //                    case "2":
+            //                        AddProfessor();
+
+            //                        break;
+            //                    case "3":
+            //                        UpdateProfessor();
+
+            //                        break;
+            //                    case "4":
+            //                        DeleteProfessor();
+            //                        break;
+            //                    case "5":
+            //                        ShowStudents();
+            //                        break;
+            //                    case "6":
+            //                        AddStudent();
+            //                        break;
+            //                    case "7":
+            //                        UpdateStudent();
+            //                        break;
+            //                    case "8":
+            //                        DeleteStudent();
+            //                        break;
+            //                    case "9":
+            //                        SearchByEmail();
+            //                        break;
+            //                    case "10":
+            //                        SortByEmail();
+            //                        break;
+            //                    case "X":
+            //                        break;
+            //                    default:
+            //                        Console.WriteLine("Molimo ponovite unos opcije!");
+            //                        break;
+            //                }
+
+            //            } while (!option.Equals("X"));
+            }
         }
-    }
 }

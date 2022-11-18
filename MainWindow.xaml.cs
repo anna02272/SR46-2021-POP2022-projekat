@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SR46_2021_POP2022.Models;
+using SR46_2021_POP2022.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,21 @@ namespace SR46_2021_POP2022
         public MainWindow()
         {
             InitializeComponent();
+            Data.Instance.LoadData();
+        }
+
+        private void btnProfessors_Click(object sender, RoutedEventArgs e)
+        {
+            var professorsWindow = new ShowProfessorsWindow();
+            professorsWindow.Show();
+            this.Hide();
+        }
+
+        private void btnStudents_Click(object sender, RoutedEventArgs e)
+        {
+            var studentsWindow = new ShowStudentsWindow();
+            studentsWindow.Show();
+            this.Hide();
         }
     }
 }

@@ -6,11 +6,14 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using SR46_2021_POP2022.Services;
+using System.Security.AccessControl;
 
 namespace SR46_2021_POP2022.Models
 {
     sealed class Data
     {
+        
         private static readonly Data instance = new Data();
         public IUserService UserService { get; set; }
         public IProfessorService ProfessorService { get; set; }
@@ -33,7 +36,6 @@ namespace SR46_2021_POP2022.Models
                 return instance;
             }
         }
-
 
 
         public void Initialize()
@@ -97,18 +99,20 @@ namespace SR46_2021_POP2022.Models
             var professors = LoadProfessors();
             var students = LoadStudents();
 
-            foreach (var professor in professors)
-            {
-                var user = users.Find(u => u.Email == professor.UserId);
-                professor.User = user;
-            }
-
-            foreach (var student in students)
-            {
-                var user = users.Find(u => u.Email == student.UserId);
-                student.User = user;
-            }
-
+            //if (professor)
+            //{ 
+                foreach (var professor in professors)
+                {
+                    var user = users.Find(u => u.Email == professor.UserId);
+                    professor.User = user;
+                }
+            //} else { 
+                foreach (var student in students)
+                    {
+                        var user = users.Find(u => u.Email == student.UserId);
+                        student.User = user;
+                    }
+            //}
             UserService.Set(users);
             ProfessorService.Set(professors);
             StudentService.Set(students);
@@ -116,29 +120,54 @@ namespace SR46_2021_POP2022.Models
 
         private List<User> LoadUsers()
         {
-            IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(Config.usersFilePath, FileMode.Open, FileAccess.Read))
+            try
             {
-                return (List<User>)formatter.Deserialize(stream);
+                IFormatter formatter = new BinaryFormatter();
+
+                using (Stream stream = new FileStream(Config.usersFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    return (List<User>)formatter.Deserialize(stream);
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<User>();
             }
         }
 
         private List<Professor> LoadProfessors()
         {
-            IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(Config.professorsFilePath, FileMode.Open, FileAccess.Read))
+            try
             {
-                return (List<Professor>)formatter.Deserialize(stream);
+                IFormatter formatter = new BinaryFormatter();
+                using (Stream stream = new FileStream(Config.professorsFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    return (List<Professor>)formatter.Deserialize(stream);
+                }
             }
+            catch (Exception e)
+            {
+                return new List<Professor>();
+            }
+
         }
 
         private List<Student> LoadStudents()
         {
-            IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(Config.studentsFilePath, FileMode.Open, FileAccess.Read))
+            try
             {
-                return (List<Student>)formatter.Deserialize(stream);
+                IFormatter formatter = new BinaryFormatter();
+                using (Stream stream = new FileStream(Config.studentsFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    return (List<Student>)formatter.Deserialize(stream);
+                     }
+                }
+            catch (Exception e)
+            {
+                return new List<Student>();
             }
+
         }
     }
 }
+
