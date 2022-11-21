@@ -56,11 +56,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
-    <Compile Include="Models\Languages.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Repositories\IAddressRepository.cs" />
     <Compile Include="Repositories\IFilePersistence.cs" />
+    <Compile Include="Repositories\ILanguageRepository.cs" />
+    <Compile Include="Repositories\ILessonRepository.cs" />
     <Compile Include="Repositories\IProfessorRepository.cs" />
+    <Compile Include="Repositories\ISchoolRepository.cs" />
     <Compile Include="Repositories\IStudentRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\ProfessorRepository.cs" />

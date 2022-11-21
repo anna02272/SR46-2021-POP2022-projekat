@@ -72,27 +72,13 @@
             <ComboBoxItem Content="OTHER"></ComboBoxItem>
         </ComboBox>
 
-        <Label Grid.Column="0" Grid.Row="6" 
-               Name="lblUserType" 
-               Content="User Type:"
-               HorizontalAlignment="Left" Width="62" Grid.ColumnSpan="2" Margin="124,0,0,28" Grid.RowSpan="2"/>
 
-        <ComboBox Grid.Column="1" Grid.Row="6" Name="cbUserType" Margin="5,0,344,5"  Text="{Binding UserType}">
-            <ComboBoxItem Content="ADMINISTRATOR"></ComboBoxItem>
-            <ComboBoxItem Content="PROFESSOR"></ComboBoxItem>
-            <ComboBoxItem Content="STUDENT"></ComboBoxItem>
-        </ComboBox>
-
-        <Label Grid.Row="7" 
+        <Label Grid.Row="6" 
                Name="lblAddress" 
                Content="Address:"
                HorizontalAlignment="Left" Width="62" Margin="124,1,0,55" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
 
-        <TextBox Grid.Column="1" Grid.Row="7" Name="txtAddress"  Margin="5,5,344,5" Text="{Binding Address}"></TextBox>
-
-        <Label Grid.Row="8" Name ="lblIsActive" Content="Is Active:" HorizontalAlignment="Left" Width="62" Margin="123,1,0,55"
-               Grid.RowSpan ="3" Grid.ColumnSpan="2"/>
-        <CheckBox Grid.Column="1" Grid.Row="8" Name="chIsActive" Margin="5,5,580,5" ></CheckBox>
+        <TextBox Grid.Column="1" Grid.Row="6" Name="txtAddress"  Margin="5,5,344,5" Text="{Binding Address}"></TextBox>
 
         <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="Button_Click">Cancel</Button>
         <Button Name="btnSave" Grid.Column="1" Grid.Row="9" Width="100" Margin= "214,31,300,73" Click="btnSave_Click">Save</Button>

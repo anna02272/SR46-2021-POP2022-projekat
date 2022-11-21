@@ -12,7 +12,7 @@ namespace SR46_2021_POP2022.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public Address Address { get; set; } 
-        public List<Languages> Languages { get; set; } 
+        public List<Language> Languages { get; set; } 
       
 
         public override string ToString()

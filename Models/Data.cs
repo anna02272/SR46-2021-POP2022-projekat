@@ -17,8 +17,13 @@ namespace SR46_2021_POP2022.Models
         private static readonly Data instance = new Data();
         public IUserService UserService { get; set; }
         public IProfessorService ProfessorService { get; set; }
-
         public IStudentService StudentService { get; set; }
+        public IAddressService AddressService { get; set; }
+        public ISchoolService SchoolService { get; set; }
+        public ILanguageService LanguageService { get; set; }
+        public ILessonService LessonService { get; set; }
+
+
 
         static Data() { }
 
@@ -27,6 +32,10 @@ namespace SR46_2021_POP2022.Models
             UserService = new UserService();
             ProfessorService = new ProfessorService();
             StudentService = new StudentService();
+            AddressService = new AddressService();
+            SchoolService = new SchoolService();
+            LanguageService = new LanguageService();
+            LessonService = new LessonService();
         }
 
         public static Data Instance
@@ -91,32 +100,38 @@ namespace SR46_2021_POP2022.Models
             UserService.Add(user1);
             ProfessorService.Add(user2);
             StudentService.Add(user3);
+            AddressService.Add(address);
+     
         }
 
         public void LoadData()
+
         {
             var users = LoadUsers();
             var professors = LoadProfessors();
             var students = LoadStudents();
+            var addresses = LoadAddresses();
+            var languages = LoadLanguages();
 
-            //if (professor)
-            //{ 
-                foreach (var professor in professors)
-                {
-                    var user = users.Find(u => u.Email == professor.UserId);
-                    professor.User = user;
-                }
-            //} else { 
-                foreach (var student in students)
-                    {
-                        var user = users.Find(u => u.Email == student.UserId);
-                        student.User = user;
-                    }
-            //}
-            UserService.Set(users);
+
+            foreach (var professor in professors)
+            {
+                var user = users.Find(u => u.Email == professor.UserId);
+                professor.User = user;
+
+            }
+            foreach (var student in students)
+            {
+                var user = users.Find(u => u.Email == student.UserId);
+                student.User = user;
+            }
+
+                UserService.Set(users);
             ProfessorService.Set(professors);
             StudentService.Set(students);
         }
+
+
 
         private List<User> LoadUsers()
         {
