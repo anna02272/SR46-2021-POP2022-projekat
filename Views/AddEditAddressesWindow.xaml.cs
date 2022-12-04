@@ -17,66 +17,58 @@ using System.Windows.Shapes;
 namespace SR46_2021_POP2022.Views
 {
     /// <summary>
-    /// Interaction logic for AddEditStudentsWindow.xaml
+    /// Interaction logic for AddEditAddressesWindow.xaml
     /// </summary>
-    public partial class AddEditStudentsWindow : Window
+    public partial class AddEditAddressesWindow : Window
     {
-        private Student student;
-        private IStudentService studentService = new StudentService();
+        private Address address;
+        private IAddressService addressService = new AddressService();
         private bool isAddMode;
 
-        public AddEditStudentsWindow(Student student)
+        public AddEditAddressesWindow(Address address)
         {
             InitializeComponent();
-            this.student = student.Clone() as Student;
+            this.address = address.Clone() as Address;
 
-            DataContext = this.student;
+            DataContext = this.address;
 
             isAddMode = false;
-            txtJMBG.IsReadOnly = true;
-            txtEmail.IsReadOnly = true;
+            txtId.IsReadOnly = true;
+            
         }
-        public AddEditStudentsWindow()
+
+        public AddEditAddressesWindow()
         {
             InitializeComponent();
 
-            var user = new User
+            var address = new Address
             {
-                UserType = EUserType.STUDENT,
-                IsActive = true
+                IsNotDeleted = true
             };
 
-            student = new Student
-            {
-                User = user
-            };
+           
 
             isAddMode = true;
-            DataContext = student;
+            DataContext = address;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (student.User.IsValid)
+            if (address.IsValid)
             {
                 if (isAddMode)
                 {
-                    studentService.Add(student);
+                    addressService.Add(address);
                 }
                 else
                 {
-                    studentService.Update(student.User.Email, student);
+                    addressService.Update(address.Id, address);
                 }
 
                 DialogResult = true;
                 Close();
             }
-        
-        //Data.Instance.StudentService.Add(newUser);
-
-        //DialogResult = true;
-        //Close();
-    }
+        }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

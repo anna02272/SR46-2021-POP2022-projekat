@@ -25,7 +25,7 @@ namespace SR46_2021_POP2022
         public MainWindow()
         {
             InitializeComponent();
-            Data.Instance.LoadData();
+            Data.Load();
         }
 
         private void btnProfessors_Click(object sender, RoutedEventArgs e)
@@ -39,6 +39,31 @@ namespace SR46_2021_POP2022
         {
             var studentsWindow = new ShowStudentsWindow();
             studentsWindow.Show();
+            this.Hide();
+        }
+
+        private void btnSchools_Click(object sender, RoutedEventArgs e)
+        {
+            var schoolsWindow = new ShowSchoolsWindow();
+            schoolsWindow.Show();
+            this.Hide();
+        }
+        private void btnLanguages_Click(object sender, RoutedEventArgs e)
+        {
+            var languagesWindow = new ShowLanguagesWindow();
+            languagesWindow.Show();
+            this.Hide();
+        }
+        private void btnLessons_Click(object sender, RoutedEventArgs e)
+        {
+            var lessonsWindow = new ShowLessonsWindow();
+            lessonsWindow.Show();
+            this.Hide();
+        }
+        private void btnAddresses_Click(object sender, RoutedEventArgs e)
+        {
+            var addressesWindow = new ShowAddressesWindow();
+            addressesWindow.Show();
             this.Hide();
         }
     }

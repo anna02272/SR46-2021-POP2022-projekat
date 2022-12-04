@@ -30,42 +30,43 @@
                Content="Email:"
                HorizontalAlignment="Right" Width="41"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="0" Name="txtEmail" Margin="5,5,344,5" Text="{Binding Email}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="0" Name="txtEmail" Margin="5,5,344,5" Text="{Binding Path = User.Email, ValidatesOnDataErrors=True}"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="1" 
                Name="lblPassword" 
                Content="Password:"
                HorizontalAlignment="Right" Width="62"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="1" Name="txtPassword"  Margin="5,5,344,5" Text="{Binding Password}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="txtPassword"  Margin="5,5,344,5" Text="{Binding Path= User.Password, ValidatesOnDataErrors=True}"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="2" 
                Name="lblFirstName" 
                Content="First name:"
                HorizontalAlignment="Right" Width="67"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="2" Name="txtFirstName"  Margin="5,5,344,5" Text="{Binding FirstName}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="2" Name="txtFirstName"  Margin="5,5,344,5" 
+                 Text="{Binding Path = User.FirstName, ValidatesOnDataErrors=True }"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="3" 
                Name="lblLastName" 
                Content="Last name:"
                HorizontalAlignment="Right" Width="66"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="3" Name="txtLastName"  Margin="5,5,344,5" Text="{Binding LastName}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" Name="txtLastName"  Margin="5,5,344,5" Text="{Binding Path = User.LastName, ValidatesOnDataErrors=True}"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="4" 
                Name="lblJMBG" 
                Content="JMBG:"
                HorizontalAlignment="Right" Width="43"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="4" Name="txtJMBG"  Margin="5,5,344,5" Text="{Binding JMBG}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="4" Name="txtJMBG"  Margin="5,5,344,5" Text="{Binding Path= User.JMBG, ValidatesOnDataErrors=True}"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="5" 
                Name="lblGender" 
                Content="Gender:"
                HorizontalAlignment="Left" Width="52" Grid.ColumnSpan="2" Margin="134,0,0,28" Grid.RowSpan="2"/>
 
-        <ComboBox Grid.Column="1" Grid.Row="5" Name="cbGender" Margin="5,0,344,5"  Text="{Binding Gender}">
+        <ComboBox Grid.Column="1" Grid.Row="5" Name="cbGender" Margin="5,0,344,5"  Text="{Binding User.Gender}">
             <ComboBoxItem Content="MALE"></ComboBoxItem>
             <ComboBoxItem Content="FEMEALE"></ComboBoxItem>
             <ComboBoxItem Content="OTHER"></ComboBoxItem>
@@ -76,10 +77,12 @@
                Name="lblAddress" 
                Content="Address:"
                HorizontalAlignment="Left" Width="62" Margin="124,1,0,55" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+       
+        <ComboBox SelectedItem ="{Binding Path=User.Address}" Grid.Column="1" Grid.Row="6" Name="cbAddress" Margin="5,5,344,5" ></ComboBox>
 
-        <TextBox Grid.Column="1" Grid.Row="6" Name="txtAddress"  Margin="5,5,344,5" Text="{Binding Address}"></TextBox>
+        <!--<TextBox Grid.Column="1" Grid.Row="6" Name="txtAddress"  Margin="5,5,344,5" Text="{Binding Path = User.Address}"></TextBox>-->
 
-        <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="Button_Click">Cancel</Button>
+        <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="btnCancel_Click">Cancel</Button>
         <Button Name="btnSave" Grid.Column="1" Grid.Row="9" Width="100" Margin= "214,31,300,73" Click="btnSave_Click">Save</Button>
 
 

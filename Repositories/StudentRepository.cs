@@ -10,25 +10,24 @@ using System.Threading.Tasks;
 
 namespace SR46_2021_POP2022.Repositories
 {
-    class StudentRepository : IStudentRepository, IFilePersistence
+    class StudentRepository : IStudentRepository
     {
-        private static List<Student> students = new List<Student>();
 
         public void Add(Student student)
         {
-            students.Add(student);
-            Save();
+            Data.Instance.Students.Add(student);
+            Data.Instance.Save();
         }
 
         public void Add(List<Student> newStudents)
         {
-            students.AddRange(newStudents);
-            Save();
+            Data.Instance.Students.AddRange(newStudents);
+            Data.Instance.Save();
 
         }
         public void Set(List<Student> newStudents)
         {
-            students = newStudents;
+            Data.Instance.Students = newStudents;
         }
         public void Delete(string email)
         {
@@ -38,33 +37,33 @@ namespace SR46_2021_POP2022.Repositories
             {
                 student.User.IsActive = false;
             }
-            Save();
+            Data.Instance.Save();
         }
 
         public List<Student> GetAll()
         {
-            return students;
+            return Data.Instance.Students;
         }
 
         public Student GetById(string email)
         {
-            return students.Find(u => u.User.Email == email);
+            return Data.Instance.Students.Find(u => u.User.Email == email);
 
         }
 
         public void Update(string email, Student updatedStudent)
         {
-            Save();
+            Data.Instance.Save();
         }
 
-        public void Save()
-        {
-            IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(Config.studentsFilePath, FileMode.Create, FileAccess.Write))
-            {
-                formatter.Serialize(stream, students);
-            }
-        }
+        //public void Save()
+        //{
+            //IFormatter formatter = new BinaryFormatter();
+            //using (Stream stream = new FileStream(Config.studentsFilePath, FileMode.Create, FileAccess.Write))
+            //{
+            //    formatter.Serialize(stream, students);
+            //}
+        //}
 
     }
 }

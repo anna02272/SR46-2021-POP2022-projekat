@@ -7,13 +7,28 @@ using System.Threading.Tasks;
 namespace SR46_2021_POP2022.Models
 {
     [Serializable]
-    class Student
+    public class Student : ICloneable
     {
-        [NonSerialized]
         private User user;
 
-        public User User { get => user; set => user = value; }
+        public User User
+        {
+            get => user;
+            set
+            {
+                user = value;
+                UserId = user.Email;
+            }
+        }
         public string UserId { get; set; }
+
+        public object Clone()
+        {
+            return new Student
+            {
+                User = User.Clone() as User
+            };
+        }
 
         public override string ToString()
         {

@@ -56,10 +56,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
+    <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\IAddressRepository.cs" />
     <Compile Include="Repositories\IFilePersistence.cs" />
     <Compile Include="Repositories\ILanguageRepository.cs" />
@@ -68,23 +70,58 @@
     <Compile Include="Repositories\ISchoolRepository.cs" />
     <Compile Include="Repositories\IStudentRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\LanguageRepository.cs" />
+    <Compile Include="Repositories\LessonRepository.cs" />
     <Compile Include="Repositories\ProfessorRepository.cs" />
+    <Compile Include="Repositories\SchoolRepository.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\IAddressService.cs" />
+    <Compile Include="Services\ILanguageService.cs" />
+    <Compile Include="Services\ILessonService.cs" />
     <Compile Include="Services\IProfessorService.cs" />
+    <Compile Include="Services\ISchoolService.cs" />
     <Compile Include="Services\IStudentService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LanguageService.cs" />
+    <Compile Include="Services\LessonService.cs" />
     <Compile Include="Services\ProfessorService.cs" />
+    <Compile Include="Services\SchoolService.cs" />
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Views\AddEditAddressesWindow.xaml.cs">
+      <DependentUpon>AddEditAddressesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditLanguagesWindow.xaml.cs">
+      <DependentUpon>AddEditLanguagesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditLessonsWindow.xaml.cs">
+      <DependentUpon>AddEditLessonsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEditProfessorsWindow.xaml.cs">
       <DependentUpon>AddEditProfessorsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditSchoolsWindow.xaml.cs">
+      <DependentUpon>AddEditSchoolsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddEditStudentsWindow.xaml.cs">
       <DependentUpon>AddEditStudentsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ShowAddressesWindow.xaml.cs">
+      <DependentUpon>ShowAddressesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowLanguagesWindow.xaml.cs">
+      <DependentUpon>ShowLanguagesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowLessonsWindow.xaml.cs">
+      <DependentUpon>ShowLessonsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShowProfessorsWindow.xaml.cs">
       <DependentUpon>ShowProfessorsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowSchoolsWindow.xaml.cs">
+      <DependentUpon>ShowSchoolsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowStudentsWindow.xaml.cs">
       <DependentUpon>ShowStudentsWindow.xaml</DependentUpon>
@@ -102,7 +139,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddEditAddressesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditLanguagesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditLessonsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddEditProfessorsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEditSchoolsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,7 +163,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ShowAddressesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowLanguagesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowLessonsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShowProfessorsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowSchoolsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

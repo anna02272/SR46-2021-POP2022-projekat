@@ -1,11 +1,11 @@
-﻿<Window x:Class="SR46_2021_POP2022.Views.ShowStudentsWindow"
+﻿<Window x:Class="SR46_2021_POP2022.Views.ShowAddressesWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR46_2021_POP2022.Views"
         mc:Ignorable="d"
-        Title="ShowStudentsWindow" Height="450" Width="800">
+        Title="ShowAddressesWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -14,20 +14,19 @@
 
         <Menu Grid.Row="0" 
               VerticalAlignment="Top" 
-              Height="30"
-              >
-            <MenuItem Name="miAddStudent" Height="30" Header="Add student" Click="miAddStudent_Click"></MenuItem>
-            <MenuItem Name="miUpdateStudent" Height="30" Header="Update student" Click="miUpdateStudent_Click"></MenuItem>
-            <MenuItem Name="miDeleteStudent" Height="30" Header="Delete student" Click="miDeleteStudent_Click"></MenuItem>
+              Height="30">
+            <MenuItem Name="miAddAddress" Height="30" Header="Add address" Click="miAddAddress_Click"></MenuItem>
+            <MenuItem Name="miUpdateAddress" Height="30" Header="Update address" Click="miUpdateAddress_Click"></MenuItem>
+            <MenuItem Name="miDeleteAddress" Height="30" Header="Delete address" Click="miDeleteAddress_Click"></MenuItem>
         </Menu>
 
         <DataGrid CanUserAddRows="False" 
                   IsReadOnly="True" 
                   Grid.Row="1" 
-                  Name="dgStudents" 
+                  Name="dgAddresses" 
                   Width="800" 
                   Margin="0,0,-8,0"
-                  AutoGeneratingColumn="dgStudents_AutoGeneratingColumn"/>
+                  AutoGeneratingColumn="dgAddresses_AutoGeneratingColumn"/>
 
     </Grid>
 </Window>

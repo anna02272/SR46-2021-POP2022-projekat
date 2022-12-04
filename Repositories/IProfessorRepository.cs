@@ -16,5 +16,6 @@ namespace SR46_2021_POP2022.Repositories
         void Set(List<Professor> professors);
         void Update(string email, Professor professor);
         void Delete(string email);
+        //List<Professor> Search(string search);
     }
 }

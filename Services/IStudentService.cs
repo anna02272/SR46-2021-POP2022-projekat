@@ -14,7 +14,7 @@ namespace SR46_2021_POP2022.Services
         List<Student> GetActiveStudents();
         List<Student> GetActiveStudentsByEmail(string email);
         List<Student> GetActiveStudentsOrderedByEmail();
-        void Add(User student);
+        void Add(Student student);
         void Set(List<Student> students);
         void Update(string email, Student student);
         void Delete(string email);

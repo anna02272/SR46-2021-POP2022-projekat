@@ -9,25 +9,34 @@
     <Grid>
 
         <Grid.RowDefinitions>
+            <!--<RowDefinition Height="88"></RowDefinition>-->
             <RowDefinition Height="30"></RowDefinition>
+            <!--<RowDefinition Height="331"></RowDefinition>-->
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0" 
               VerticalAlignment="Top" 
-              Height="30"
+              Height="30" 
               >
             <MenuItem Name="miAddProfessor" Height="30" Header="Add professor" Click="miAddProfessor_Click"></MenuItem>
             <MenuItem Name="miUpdateProfessor" Height="30" Header="Update professor" Click="miUpdateProfessor_Click"></MenuItem>
             <MenuItem Name="miDeleteProfessor" Height="30" Header="Delete professor" Click="miDeleteProfessor_Click"></MenuItem>
         </Menu>
 
+        <!--<TextBox Name="txtSearch" Grid.Column="0" 
+                 Margin="5,5,5,5" Width="350" Grid.RowSpan="2" Height="30" 
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                  KeyUp="txtSearch_KeyDown" 
+                  ></TextBox>-->
+        
         <DataGrid CanUserAddRows="False" 
                   IsReadOnly="True" 
                   Grid.Row="1" 
                   Name="dgProfessors" 
                   Width="800" 
-                  Margin="0,0,-8,0"/>
+                  Margin="0,0,-8,0"
+                  AutoGeneratingColumn="dgProfessors_AutoGeneratingColumn"/>
 
     </Grid>
 </Window>

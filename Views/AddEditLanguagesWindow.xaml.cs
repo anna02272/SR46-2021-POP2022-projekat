@@ -17,66 +17,61 @@ using System.Windows.Shapes;
 namespace SR46_2021_POP2022.Views
 {
     /// <summary>
-    /// Interaction logic for AddEditStudentsWindow.xaml
+    /// Interaction logic for AddEditLanguagesWindow.xaml
     /// </summary>
-    public partial class AddEditStudentsWindow : Window
+    public partial class AddEditLanguagesWindow : Window
     {
-        private Student student;
-        private IStudentService studentService = new StudentService();
+        private Language language;
+            
+        private ILanguageService languageService = new LanguageService();
         private bool isAddMode;
 
-        public AddEditStudentsWindow(Student student)
+        public AddEditLanguagesWindow(Language language)
         {
             InitializeComponent();
-            this.student = student.Clone() as Student;
+            this.language = language.Clone() as Language;
 
-            DataContext = this.student;
+            DataContext = this.language;
 
             isAddMode = false;
-            txtJMBG.IsReadOnly = true;
-            txtEmail.IsReadOnly = true;
+            txtId.IsReadOnly = true;
+           
         }
-        public AddEditStudentsWindow()
+
+        public AddEditLanguagesWindow()
         {
             InitializeComponent();
 
-            var user = new User
+            var language = new Language
             {
-                UserType = EUserType.STUDENT,
-                IsActive = true
+              
+                IsNotDeleted = true,
+               
             };
 
-            student = new Student
-            {
-                User = user
-            };
+         
 
             isAddMode = true;
-            DataContext = student;
+            DataContext = language;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (student.User.IsValid)
+            if (language.IsValid)
             {
                 if (isAddMode)
                 {
-                    studentService.Add(student);
+                    languageService.Add(language);
                 }
                 else
                 {
-                    studentService.Update(student.User.Email, student);
+                    languageService.Update(language.Id, language);
                 }
 
                 DialogResult = true;
                 Close();
             }
-        
-        //Data.Instance.StudentService.Add(newUser);
-
-        //DialogResult = true;
-        //Close();
-    }
+        }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

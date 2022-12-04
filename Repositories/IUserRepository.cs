@@ -16,5 +16,6 @@ namespace SR46_2021_POP2022.Repositories
         void Set(List<User> users);
         void Update(string email, User user);
         void Delete(string email);
+        
     }
 }

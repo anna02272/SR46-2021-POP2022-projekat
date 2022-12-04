@@ -40,15 +40,9 @@ namespace SR46_2021_POP2022.Services
             return studentRepository.GetAll().Where(s => s.User.IsActive).OrderBy(s => s.User.Email).ToList();
 
         }
-        public void Add(User user)
+        public void Add(Student student)
         {
-            userRepository.Add(user);
-
-            var student = new Student
-            {
-                User = user,
-                UserId = user.Email
-            };
+            userRepository.Add(student.User);
             studentRepository.Add(student);
         }
         public void Set(List<Student> students)
