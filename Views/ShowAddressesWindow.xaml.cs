@@ -73,7 +73,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<Address> addresses = addressService.GetAll().ToList();
+            List<Address> addresses = addressService.GetAll().Select(p => p).ToList();
             dgAddresses.ItemsSource = addresses;
         }
 

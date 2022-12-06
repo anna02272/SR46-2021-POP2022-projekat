@@ -41,10 +41,10 @@ namespace SR46_2021_POP2022.Views
         {
             InitializeComponent();
 
-            var lesson = new Lesson
+            lesson = new Lesson
             {
               
-                IsNotDeleted = true
+                IsDeleted = false
             };
 
           

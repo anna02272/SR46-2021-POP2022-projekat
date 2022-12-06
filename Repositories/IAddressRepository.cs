@@ -13,8 +13,8 @@ namespace SR46_2021_POP2022.Repositories
             List<Address> GetAll();
             Address GetById(int id);
             void Add(Address address);
-            void Add(List<Address> address);
-            void Set(List<Address> address);
+            void Add(List<Address> addresses);
+            void Set(List<Address> addresses);
             void Update(int id, Address address);
             void Delete(int id);
         

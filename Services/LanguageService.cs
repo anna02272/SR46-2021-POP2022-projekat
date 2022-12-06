@@ -29,13 +29,13 @@ namespace SR46_2021_POP2022.Services
         }
         public List<Language> GetActiveLanguages()
         {
-            return languageRepository.GetAll().Where(p => p.IsNotDeleted).ToList();
+            return languageRepository.GetAll().Where(p => !p.IsDeleted).ToList();
         }
 
 
         public List<Language> GetActiveLanguagesOrderedByNameOfLanguage()
         {
-            return languageRepository.GetAll().Where(p => p.IsNotDeleted).OrderBy(p => p.NameOfLanguage).ToList();
+            return languageRepository.GetAll().Where(p => !p.IsDeleted).OrderBy(p => p.NameOfLanguage).ToList();
         }
         public void Add(Language language)
         {
@@ -60,7 +60,7 @@ namespace SR46_2021_POP2022.Services
 
         public List<Language> GetActiveLanguagesByNameOfLanguage(string nameOfLanguage)
         {
-            return languageRepository.GetAll().Where(p => p.IsNotDeleted && p.NameOfLanguage.Contains(nameOfLanguage)).ToList();
+            return languageRepository.GetAll().Where(p => !p.IsDeleted && p.NameOfLanguage.Contains(nameOfLanguage)).ToList();
         }
     }
 }

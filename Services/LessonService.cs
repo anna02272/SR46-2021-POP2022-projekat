@@ -30,14 +30,10 @@ namespace SR46_2021_POP2022.Services
 
         public List<Lesson> GetAvailableLessons()
         {
-            return lessonRepository.GetAll().Where(p => p.IsNotDeleted).ToList();
+            return lessonRepository.GetAll().Where(p => !p.IsDeleted).ToList();
         }
 
-        //public List<Lesson> GetAvailableLessonsById(int id)
-        //{
-        //    return lessonRepository.GetAll().Where(p => p.Status && p.Id.ToString().Contains(id.ToString())).ToList();
-        //}
-     
+       
 
         public void Add(Lesson lesson)
         {
@@ -69,12 +65,12 @@ namespace SR46_2021_POP2022.Services
 
         public List<Lesson> GetAvailableLessonsByName(string name)
         {
-            return lessonRepository.GetAll().Where(p => p.IsNotDeleted && p.Name.Contains(name)).ToList();
+            return lessonRepository.GetAll().Where(p => !p.IsDeleted && p.Name.Contains(name)).ToList();
         }
 
         public List<Lesson> GetAvailableLessonsOrderedByName()
         {
-            return lessonRepository.GetAll().Where(p => p.IsNotDeleted).OrderBy(p => p.Name).ToList();
+            return lessonRepository.GetAll().Where(p => !p.IsDeleted).OrderBy(p => p.Name).ToList();
         }
     }
 }

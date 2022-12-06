@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,19 +8,19 @@ using System.Threading.Tasks;
 namespace SR46_2021_POP2022.Models
 {
     [Serializable]
-    public class Address : ICloneable
+    public class Address : ICloneable, IDataErrorInfo
     {
         public int Id { get; set; }
         public string Street { get; set; }
         public string StreetNumber { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public bool IsNotDeleted { get; set; }
+        public bool IsDeleted { get; set; }
         public bool IsValid { get; set; }
 
         public Address()
         {
-            IsNotDeleted = true;
+            IsDeleted = false;
         }
 
         public object Clone()
@@ -31,7 +32,7 @@ namespace SR46_2021_POP2022.Models
                 StreetNumber = StreetNumber,
                 City = City,
                 Country = Country,
-                IsNotDeleted   = IsNotDeleted
+                IsDeleted   = IsDeleted
             };
         }
         public string Error

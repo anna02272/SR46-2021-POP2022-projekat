@@ -22,6 +22,7 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowLessonsWindow : Window
     {
         private LessonService lessonService = new LessonService();
+        private AddEditLessonsWindow addEditLessonWindow;
 
         public ShowLessonsWindow()
         {
@@ -49,7 +50,7 @@ namespace SR46_2021_POP2022.Views
             {
                 var lessons = lessonService.GetAll();
 
-                var addEditLessonWindow = new AddEditLessonsWindow(lessons[selectedIndex]);
+                addEditLessonWindow = new AddEditLessonsWindow(lessons[selectedIndex]);
 
                 var successeful = addEditLessonWindow.ShowDialog();
 
@@ -73,7 +74,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<Lesson> lessons = lessonService.GetAll().ToList();
+            List<Lesson> lessons = lessonService.GetAll().Select(p => p).ToList();
             dgLessons.ItemsSource = lessons;
         }
 

@@ -37,7 +37,7 @@ namespace SR46_2021_POP2022.Repositories
 
             if (language != null)
             {
-                language.IsNotDeleted = false;
+                language.IsDeleted = true;
             }
 
             Data.Instance.Save();

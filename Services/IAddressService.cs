@@ -16,7 +16,7 @@ namespace SR46_2021_POP2022.Services
         List<Address> GetActiveAddressesByCountry(string country);
         List<Address> GetActiveAddressesOrderedByCountry();
         void Add(Address address);
-        void Set(List<Address> addresss);
+        void Set(List<Address> addresses);
         void Update(int id, Address address);
         void Delete(int id);
        

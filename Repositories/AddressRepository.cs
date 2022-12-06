@@ -19,18 +19,18 @@ namespace SR46_2021_POP2022.Repositories
             {
                 Data.Instance.Addresses.Add(address);
                 Data.Instance.Save();
-        }
+             }
 
             public void Add(List<Address> newAddresses)
             {
                 Data.Instance.Addresses.AddRange(newAddresses);
                 Data.Instance.Save();
-        }
+             }
 
             public void Set(List<Address> newAddresses)
             {
                 Data.Instance.Addresses = newAddresses;
-        }
+             }
 
             public void Delete(int id)
             {
@@ -38,7 +38,7 @@ namespace SR46_2021_POP2022.Repositories
 
                 if (address != null)
                 {
-                    address.IsNotDeleted = false;
+                    address.IsDeleted = true;
             }
 
                 Data.Instance.Save();
@@ -48,7 +48,7 @@ namespace SR46_2021_POP2022.Repositories
             public List<Address> GetAll()
             {
                  return Data.Instance.Addresses;
-        }
+              }
 
             public Address GetById(int id)
             {

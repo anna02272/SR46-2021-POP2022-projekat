@@ -73,7 +73,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<School> schools = schoolService.GetAll().ToList();
+            List<School> schools = schoolService.GetAll().Select(p => p).ToList();
             dgSchools.ItemsSource = schools;
         }
 

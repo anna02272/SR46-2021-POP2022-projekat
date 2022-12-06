@@ -39,7 +39,7 @@
                Content="NameOfLanguage:"
                HorizontalAlignment="Left" Width="108" Grid.ColumnSpan="2" Margin="78,0,0,32" Grid.RowSpan="2"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="1" Name="txtNameOfLanguage"  Margin="5,5,344,5" Text="{Binding Path=NameOfLanguage, ValidatesOnDataErrors=True}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="txtNameOfLanguage"  Margin="5,5,344,5" Text="{Binding Path = NameOfLanguage, ValidatesOnDataErrors=True}"></TextBox>
 
         <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="btnCancel_Click">Cancel</Button>
         <Button Name="btnSave" Grid.Column="1" Grid.Row="9" Width="100" Margin= "214,31,300,73" Click="btnSave_Click">Save</Button>

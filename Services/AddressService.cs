@@ -52,17 +52,17 @@ namespace SR46_2021_POP2022.Services
 
         public List<Address> GetActiveAddresses()
         {
-            return addressRepository.GetAll().Where(p => p.IsNotDeleted).ToList();
+            return addressRepository.GetAll().Where(p => !p.IsDeleted).ToList();
         }
 
         public List<Address> GetActiveAddressesByCountry(string country)
         {
-            return addressRepository.GetAll().Where(p => p.IsNotDeleted && p.Country.Contains(country)).ToList();
+            return addressRepository.GetAll().Where(p => !p.IsDeleted && p.Country.Contains(country)).ToList();
         }
 
         public List<Address> GetActiveAddressesOrderedByCountry()
         {
-            return addressRepository.GetAll().Where(p => p.IsNotDeleted).OrderBy(p => p.Country).ToList();
+            return addressRepository.GetAll().Where(p => !p.IsDeleted).OrderBy(p => p.Country).ToList();
         }
     }
 }

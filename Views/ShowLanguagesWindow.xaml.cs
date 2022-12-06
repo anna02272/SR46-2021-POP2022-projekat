@@ -31,9 +31,9 @@ namespace SR46_2021_POP2022.Views
 
         private void miAddLanguage_Click(object sender, RoutedEventArgs e)
         {
-            var addEditLanguageWindow = new AddEditLanguagesWindow();
+            var addEditLanguagesWindow = new AddEditLanguagesWindow();
 
-            var successeful = addEditLanguageWindow.ShowDialog();
+            var successeful = addEditLanguagesWindow.ShowDialog();
 
             if ((bool)successeful)
             {
@@ -73,7 +73,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<Language> languages = languageService.GetAll().ToList();
+            List<Language> languages = languageService.GetAll().Select(p => p).ToList();
             dgLanguages.ItemsSource = languages;
         }
 

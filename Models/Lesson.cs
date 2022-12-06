@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ using System.Threading.Tasks;
 namespace SR46_2021_POP2022.Models
 {
     [Serializable]
-    public class Lesson :ICloneable
+    public class Lesson :ICloneable, IDataErrorInfo
+
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,12 +20,12 @@ namespace SR46_2021_POP2022.Models
         public TimeSpan Duration { get; set; }
         public bool Status {get; set;}
         public Student Student { get; set; }
-        public bool IsNotDeleted { get; set; }
+        public bool IsDeleted { get; set; }
         public bool IsValid { get; set; }
 
         public Lesson()
         {
-            IsNotDeleted = true;
+            IsDeleted = false;
             Status = false;
         }
 
@@ -33,13 +35,13 @@ namespace SR46_2021_POP2022.Models
             {
                 Id = Id,
                 Name = Name,
-                Professor = Professor,
+                Professor = Professor?.Clone() as Professor,
                 Date = Date,
                 Time = Time, 
                 Duration = Duration,
                 Status = Status, 
-                Student = Student,
-                IsNotDeleted = IsNotDeleted
+                Student = Student?.Clone() as Student,
+                IsDeleted = IsDeleted
 
             };
         }

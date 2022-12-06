@@ -15,14 +15,18 @@ namespace SR46_2021_POP2022.Models
         [NonSerialized]
         private static Data instance;
 
+       
         public List<User> Users { get; set; }
         public List<Professor> Professors { get; set; }
-        public List <Student> Students { get; set; }
+        public  List <Student> Students { get; set; }
         public List<School> Schools { get; set; }
         public List<Language> Languages { get; set; }
         public List<Lesson> Lessons { get; set; }
         public List<Address> Addresses { get; set; }
         public List<Administrator> Administrators { get; set; }
+       
+
+
 
 
 
@@ -30,6 +34,7 @@ namespace SR46_2021_POP2022.Models
 
         private Data()
         {
+           
             Users = new List<User>();
             Professors = new List<Professor>();
             Students = new List<Student>();
@@ -38,6 +43,7 @@ namespace SR46_2021_POP2022.Models
             Lessons = new List<Lesson>();
             Addresses = new List<Address>();
             Administrators = new List<Administrator>();
+          
         }
 
         public static Data Instance
@@ -55,15 +61,18 @@ namespace SR46_2021_POP2022.Models
             private set => instance = value;
         }
 
+  
+
         public void Initialize()
         {
             Address address = new Address
             {
+                Id = 1,
                 City = "Novi Sad",
                 Country = "Srbija",
                 Street = "ulica1",
                 StreetNumber = "22",
-                Id = 1
+                IsDeleted = false,
             };
 
             User user1 = new User()
@@ -105,6 +114,7 @@ namespace SR46_2021_POP2022.Models
             };
 
             Users.Add(user1);
+            Addresses.Add(address);
 
             var professor = new Professor
             {
@@ -132,6 +142,7 @@ namespace SR46_2021_POP2022.Models
 
         public static void Load()
         {
+           
             try
             {
                 IFormatter formatter = new BinaryFormatter();

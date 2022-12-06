@@ -25,6 +25,7 @@ namespace SR46_2021_POP2022.Views
         private IAddressService addressService = new AddressService();
         private bool isAddMode;
 
+
         public AddEditAddressesWindow(Address address)
         {
             InitializeComponent();
@@ -41,9 +42,9 @@ namespace SR46_2021_POP2022.Views
         {
             InitializeComponent();
 
-            var address = new Address
+            address = new Address
             {
-                IsNotDeleted = true
+                IsDeleted = false
             };
 
            

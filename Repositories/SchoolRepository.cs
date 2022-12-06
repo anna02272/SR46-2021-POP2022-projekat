@@ -37,7 +37,7 @@ namespace SR46_2021_POP2022.Repositories
 
             if (school != null)
             {
-                school.IsNotDeleted = false;
+                school.IsDeleted = true;
             }
 
             Data.Instance.Save();

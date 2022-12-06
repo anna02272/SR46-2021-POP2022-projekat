@@ -52,17 +52,17 @@ namespace SR46_2021_POP2022.Services
 
         public List<School> GetActiveSchools()
         {
-            return schoolRepository.GetAll().Where(p => p.IsNotDeleted).ToList();
+            return schoolRepository.GetAll().Where(p => !p.IsDeleted).ToList();
         }
 
         public List<School> GetActiveSchoolsByName(string name)
         {
-            return schoolRepository.GetAll().Where(p => p.IsNotDeleted && p.Name.Contains(name)).ToList();
+            return schoolRepository.GetAll().Where(p => !p.IsDeleted && p.Name.Contains(name)).ToList();
         }
 
         public List<School> GetActiveSchoolsOrderedByName()
         {
-            return schoolRepository.GetAll().Where(p => p.IsNotDeleted).OrderBy(p => p.Name).ToList();
+            return schoolRepository.GetAll().Where(p => !p.IsDeleted).OrderBy(p => p.Name).ToList();
         }
 
     }

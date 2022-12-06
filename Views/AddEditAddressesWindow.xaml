@@ -58,7 +58,7 @@
         <Label Grid.Column="0" Grid.Row="4" 
                Name="lblCountry" 
                Content="Country:"
-               HorizontalAlignment="Right" Width="43"></Label>
+               HorizontalAlignment="Left" Width="66" Grid.ColumnSpan="2" Margin="120,0,0,32" Grid.RowSpan="2"></Label>
 
         <TextBox Grid.Column="1" Grid.Row="4" Name="txtCountry"  Margin="5,5,344,5" Text="{Binding Path = Country, ValidatesOnDataErrors=True}"></TextBox>
 

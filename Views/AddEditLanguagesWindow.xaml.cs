@@ -1,4 +1,5 @@
 ﻿using SR46_2021_POP2022.Models;
+using SR46_2021_POP2022.Repositories;
 using SR46_2021_POP2022.Services;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace SR46_2021_POP2022.Views
 {
@@ -24,6 +26,7 @@ namespace SR46_2021_POP2022.Views
         private Language language;
             
         private ILanguageService languageService = new LanguageService();
+       
         private bool isAddMode;
 
         public AddEditLanguagesWindow(Language language)
@@ -42,10 +45,10 @@ namespace SR46_2021_POP2022.Views
         {
             InitializeComponent();
 
-            var language = new Language
+            language = new Language
             {
-              
-                IsNotDeleted = true,
+             
+                IsDeleted = false,
                
             };
 
@@ -71,7 +74,7 @@ namespace SR46_2021_POP2022.Views
                 DialogResult = true;
                 Close();
             }
-        }
+        } 
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -79,4 +82,8 @@ namespace SR46_2021_POP2022.Views
             Close();
         }
     }
-}
+   
+
+   
+
+        }

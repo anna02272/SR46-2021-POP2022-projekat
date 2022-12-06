@@ -79,6 +79,10 @@ namespace SR46_2021_POP2022.Views
         {
             List<User> users = studentService.GetAll().Select(s => s.User).ToList();
             dgStudents.ItemsSource = users;
+
+            //List<User> users = Data.Instance.StudentService.GetAll()
+            //    .Select(p => p.User).ToList();
+            //dgStudents.ItemsSource = users;
         }
         private void dgStudents_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {

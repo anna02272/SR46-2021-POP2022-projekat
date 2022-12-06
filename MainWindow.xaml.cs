@@ -24,47 +24,51 @@ namespace SR46_2021_POP2022
     {
         public MainWindow()
         {
+         
             InitializeComponent();
+           
             Data.Load();
+           
         }
 
         private void btnProfessors_Click(object sender, RoutedEventArgs e)
         {
             var professorsWindow = new ShowProfessorsWindow();
-            professorsWindow.Show();
-            this.Hide();
+            professorsWindow.ShowDialog();
+            //professorsWindow.Show();
+            //this.Close();
         }
 
         private void btnStudents_Click(object sender, RoutedEventArgs e)
         {
             var studentsWindow = new ShowStudentsWindow();
-            studentsWindow.Show();
-            this.Hide();
+            studentsWindow.ShowDialog();
+            //this.Hide();
         }
 
         private void btnSchools_Click(object sender, RoutedEventArgs e)
         {
             var schoolsWindow = new ShowSchoolsWindow();
-            schoolsWindow.Show();
-            this.Hide();
+            schoolsWindow.ShowDialog();
+            //this.Hide();
         }
         private void btnLanguages_Click(object sender, RoutedEventArgs e)
         {
             var languagesWindow = new ShowLanguagesWindow();
-            languagesWindow.Show();
-            this.Hide();
+            languagesWindow.ShowDialog();
+            //this.Hide();
         }
         private void btnLessons_Click(object sender, RoutedEventArgs e)
         {
             var lessonsWindow = new ShowLessonsWindow();
-            lessonsWindow.Show();
-            this.Hide();
+            lessonsWindow.ShowDialog();
+            /*this.Hide();*/
         }
         private void btnAddresses_Click(object sender, RoutedEventArgs e)
         {
             var addressesWindow = new ShowAddressesWindow();
-            addressesWindow.Show();
-            this.Hide();
+            addressesWindow.ShowDialog();
+            //this.Hide();
         }
     }
 }

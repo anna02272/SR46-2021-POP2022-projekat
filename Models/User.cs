@@ -51,7 +51,7 @@ namespace SR46_2021_POP2022.Models
         {
             get
             {
-                if (string.IsNullOrEmpty(Email))
+                if (string.IsNullOrEmpty(Email) )
                 {
                     return "Email cannot be empty!";
                 }
