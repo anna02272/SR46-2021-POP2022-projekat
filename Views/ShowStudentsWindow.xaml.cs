@@ -22,37 +22,37 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowStudentsWindow : Window
     {
         private StudentService studentService = new StudentService();
-        //public enum State { ADMINISTRATION, DOWNLOADING };
-        //State state;
-        //public Student SelectedStudent = null;
+        public enum State { ADMINISTRATION, DOWNLOADING };
+        State state;
+        public Student SelectedStudent = null;
 
-        //public ShowStudentsWindow(State state = State.ADMINISTRATION)
-        //{
-        //    InitializeComponent();
-        //    this.state = state;
+        public ShowStudentsWindow(State state = State.ADMINISTRATION)
+        {
+            InitializeComponent();
+            this.state = state;
 
-        //    if (state == State.DOWNLOADING)
-        //    {
-        //        miAddStudent.Visibility = Visibility.Collapsed;
-        //        miUpdateStudent.Visibility = Visibility.Collapsed;
-        //        miDeleteStudent.Visibility = Visibility.Collapsed;
-        //    }
-        //    else
-        //    {
-        //        miPickStudent.Visibility = Visibility.Hidden;
-        //    }
+            if (state == State.DOWNLOADING)
+            {
+                miAddStudent.Visibility = Visibility.Collapsed;
+                miUpdateStudent.Visibility = Visibility.Collapsed;
+                miDeleteStudent.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                miPickStudent.Visibility = Visibility.Hidden;
+            }
 
-        //    dgStudents.ItemsSource = Data.Instance.Students;
+            dgStudents.ItemsSource = Data.Instance.Students;
 
-        //    dgStudents.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-        //}
-      
+            dgStudents.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+        }
+
 
         private void miPickStudent_Click(object sender, RoutedEventArgs e)
         {
-            //SelectedStudent = dgStudents.SelectedItem as Student;
-            //this.DialogResult = true;
-            //this.Close();
+            SelectedStudent = dgStudents.SelectedItem as Student;
+            this.DialogResult = true;
+            this.Close();
         }
         public ShowStudentsWindow()
         {
@@ -109,12 +109,10 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<User> users = studentService.GetActiveStudents().Select(s => s.User).ToList();
+            List<User> users = studentService.GetAll().Select(s => s.User).ToList();
             dgStudents.ItemsSource = users;
 
-            //List<User> users = Data.Instance.StudentService.GetAll()
-            //    .Select(p => p.User).ToList();
-            //dgStudents.ItemsSource = users;
+           
         }
         private void dgStudents_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {

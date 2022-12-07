@@ -79,21 +79,21 @@ namespace SR46_2021_POP2022.Views
         }
         private void btnPickAddress_Click(object sender, RoutedEventArgs e)
         {
-            //ShowAddressesWindow aw = new ShowAddressesWindow(ShowAddressesWindow.State.DOWNLOADING);
-            //if (aw.ShowDialog() == true)
-            //{
-            //    school.Address = aw.SelectedAddress;
+            ShowAddressesWindow aw = new ShowAddressesWindow(ShowAddressesWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                school.Address = aw.SelectedAddress;
 
-            //}
+            }
         }
         private void btnPickLanguage_Click(object sender, RoutedEventArgs e)
         {
-            //ShowLanguagesWindow aw = new ShowLanguagesWindow(ShowLanguagesWindow.State.DOWNLOADING);
-            //if (aw.ShowDialog() == true)
-            //{
-            //    school.Language = aw.SelectedLanguage;
+            ShowLanguagesWindow aw = new ShowLanguagesWindow(ShowLanguagesWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                school.Language = aw.SelectedLanguage;
 
-            //}
+            }
         }
     }
 }

@@ -24,37 +24,37 @@ namespace SR46_2021_POP2022.Views
     {
         private ProfessorService professorService = new ProfessorService();
 
-        //public enum State { ADMINISTRATION, DOWNLOADING };
-        //State state;
-        //public Professor SelectedProfessor = null;
+        public enum State { ADMINISTRATION, DOWNLOADING };
+        State state;
+        public Professor SelectedProfessor = null;
 
-        //public ShowProfessorsWindow(State state = State.ADMINISTRATION)
-        //{
-        //    InitializeComponent();
-        //    this.state = state;
+        public ShowProfessorsWindow(State state = State.ADMINISTRATION)
+        {
+            InitializeComponent();
+            this.state = state;
 
-        //    if (state == State.DOWNLOADING)
-        //    {
-        //        miAddProfessor.Visibility = Visibility.Collapsed;
-        //        miUpdateProfessor.Visibility = Visibility.Collapsed;
-        //        miDeleteProfessor.Visibility = Visibility.Collapsed;
-        //    }
-        //    else
-        //    {
-        //        miPickProfessor.Visibility = Visibility.Hidden;
-        //    }
+            if (state == State.DOWNLOADING)
+            {
+                miAddProfessor.Visibility = Visibility.Collapsed;
+                miUpdateProfessor.Visibility = Visibility.Collapsed;
+                miDeleteProfessor.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                miPickProfessor.Visibility = Visibility.Hidden;
+            }
 
-        //    dgProfessors.ItemsSource = Data.Instance.Professors;
+            dgProfessors.ItemsSource = Data.Instance.Professors;
 
-        //    dgProfessors.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-        //}
-      
+            dgProfessors.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+        }
+
 
         private void miPickProfessor_Click(object sender, RoutedEventArgs e)
         {
-            //SelectedProfessor = dgProfessors.SelectedItem as Professor;
-            //this.DialogResult = true;
-            //this.Close();
+            SelectedProfessor = dgProfessors.SelectedItem as Professor;
+            this.DialogResult = true;
+            this.Close();
         }
         public ShowProfessorsWindow()
         {
@@ -106,7 +106,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<User> users = professorService.GetActiveProfessors().Select(p => p.User).ToList();
+            List<User> users = professorService.GetAll().Select(p => p.User).ToList();
             dgProfessors.ItemsSource = users;
         }
 

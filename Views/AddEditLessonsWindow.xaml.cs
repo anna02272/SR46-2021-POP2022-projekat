@@ -35,7 +35,7 @@ namespace SR46_2021_POP2022.Views
 
             isAddMode = false;
             txtId.IsReadOnly = true;
-           
+
         }
 
         public AddEditLessonsWindow()
@@ -44,11 +44,11 @@ namespace SR46_2021_POP2022.Views
 
             lesson = new Lesson
             {
-              
+
                 IsDeleted = false
             };
 
-          
+
 
             isAddMode = true;
             DataContext = lesson;
@@ -64,7 +64,7 @@ namespace SR46_2021_POP2022.Views
                 }
                 else
                 {
-                    lessonService.Update(lesson.Id, lesson) ;
+                    lessonService.Update(lesson.Id, lesson);
                 }
 
                 DialogResult = true;
@@ -80,22 +80,24 @@ namespace SR46_2021_POP2022.Views
 
         private void btnPickStudent_Click(object sender, RoutedEventArgs e)
         {
-            //ShowStudentsWindow aw = new ShowStudentsWindow(ShowStudentsWindow.State.DOWNLOADING);
-            //if (aw.ShowDialog() == true)
-            //{
-            //    lesson.Student = aw.SelectedStudent;
+            ShowStudentsWindow aw = new ShowStudentsWindow(ShowStudentsWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                lesson.Student = aw.SelectedStudent;
 
             }
-         
+        }
         private void btnPickProfessor_Click(object sender, RoutedEventArgs e)
         {
-            //ShowProfessorsWindow aw = new ShowProfessorsWindow(ShowProfessorsWindow.State.DOWNLOADING);
-            //if (aw.ShowDialog() == true)
-            //{
-            //    lesson.Professor = aw.SelectedProfessor;
+            ShowProfessorsWindow aw = new ShowProfessorsWindow(ShowProfessorsWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                lesson.Professor = aw.SelectedProfessor;
 
+            }
         }
+    }
 }
-}
+
     
 

@@ -89,12 +89,12 @@ namespace SR46_2021_POP2022.Views
 
         private void btnPickAddress_Click(object sender, RoutedEventArgs e)
         {
-            //ShowAddressesWindow aw = new ShowAddressesWindow(ShowAddressesWindow.State.DOWNLOADING);
-            //if (aw.ShowDialog() == true)
-            //{
-            //    student.User.Address = aw.SelectedAddress;
+            ShowAddressesWindow aw = new ShowAddressesWindow(ShowAddressesWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                student.User.Address = aw.SelectedAddress;
 
-            //}
+            }
         }
     }
 }
