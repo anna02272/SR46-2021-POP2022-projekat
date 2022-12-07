@@ -6,6 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 using SR46_2021_POP2022.Models;
 using SR46_2021_POP2022;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace SR46_2021_POP2022.Models
 {
@@ -23,8 +25,10 @@ namespace SR46_2021_POP2022.Models
         public List<Language> Languages { get; set; }
         public List<Lesson> Lessons { get; set; }
         public List<Address> Addresses { get; set; }
-        public List<Administrator> Administrators { get; set; }
        
+        public List<Administrator> Administrators { get; set; }
+     
+
 
 
 
@@ -44,7 +48,9 @@ namespace SR46_2021_POP2022.Models
             Addresses = new List<Address>();
             Administrators = new List<Administrator>();
           
+
         }
+      
 
         public static Data Instance
         {
@@ -67,7 +73,7 @@ namespace SR46_2021_POP2022.Models
         {
             Address address = new Address
             {
-                Id = 1,
+                Id = "1",
                 City = "Novi Sad",
                 Country = "Srbija",
                 Street = "ulica1",
@@ -131,6 +137,7 @@ namespace SR46_2021_POP2022.Models
             Students.Add(student);
         }
 
+       
         public void Save()
         {
             IFormatter formatter = new BinaryFormatter();

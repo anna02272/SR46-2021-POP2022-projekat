@@ -31,7 +31,7 @@ namespace SR46_2021_POP2022.Repositories
             Data.Instance.Lessons = newLessons;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
            Lesson lesson = GetById(id);
 
@@ -48,12 +48,12 @@ namespace SR46_2021_POP2022.Repositories
             return Data.Instance.Lessons;
         }
 
-        public Lesson GetById(int id)
+        public Lesson GetById(string id)
         {
             return Data.Instance.Lessons.Find(u => u.Id == id);
         }
 
-        public void Update(int id, Lesson updatedLesson)
+        public void Update(string id, Lesson updatedLesson)
         {
             Data.Instance.Save();
         }

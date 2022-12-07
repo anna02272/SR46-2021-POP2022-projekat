@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,32 @@ namespace SR46_2021_POP2022.Models
         {
             return $"[Professor] {User.FirstName} {User.LastName}, {User.Email}";
         }
-    }
+
+        //public Address _address;
+        //public Address address
+        //{
+        //    get
+        //    {
+        //        return _address;
+        //    }
+        //    set
+        //    {
+        //        _address = value;
+        //        OnPropertyChanged("Address");
+        //    }
+
+        //}
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //protected void OnPropertyChanged(String propertyName)
+        //{
+        //    if (PropertyChanged != null)
+        //    {
+        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        //    }
+        //}
+  
+
     //[Serializable]
     //class Professor
     //{
@@ -49,4 +75,5 @@ namespace SR46_2021_POP2022.Models
     //        return $"[Professor] {User.FirstName} {User.LastName}, {User.Email}";
     //    }
     //}
+}
 }

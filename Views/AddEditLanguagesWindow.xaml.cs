@@ -34,7 +34,7 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
             this.language = language.Clone() as Language;
 
-            DataContext = this.language;
+            DataContext = language;
 
             isAddMode = false;
             txtId.IsReadOnly = true;
@@ -68,7 +68,7 @@ namespace SR46_2021_POP2022.Views
                 }
                 else
                 {
-                    languageService.Update(language.Id, language);
+                    languageService.Update(language.Id, this.language);
                 }
 
                 DialogResult = true;

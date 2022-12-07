@@ -11,12 +11,12 @@ namespace SR46_2021_POP2022.Repositories
     {
       
             List<Address> GetAll();
-            Address GetById(int id);
+            Address GetById(string id);
             void Add(Address address);
             void Add(List<Address> addresses);
             void Set(List<Address> addresses);
-            void Update(int id, Address address);
-            void Delete(int id);
+            void Update(string id, Address address);
+            void Delete(string id);
         
     }
 }

@@ -2,6 +2,7 @@
 using SR46_2021_POP2022.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,41 @@ namespace SR46_2021_POP2022.Views
     {
         private AddressService addressService = new AddressService();
 
+        //public enum State { ADMINISTRATION, DOWNLOADING };
+        //State state;
+        //public Address SelectedAddress = null;
+
+        //public ShowAddressesWindow(State state = State.ADMINISTRATION)
+        //{
+        //    InitializeComponent();
+        //    this.state = state;
+
+        //    if (state == State.DOWNLOADING)
+        //    {
+        //        miAddAddress.Visibility = Visibility.Collapsed;
+        //        miUpdateAddress.Visibility = Visibility.Collapsed;
+        //        miDeleteAddress.Visibility = Visibility.Collapsed;
+        //    }
+        //    else
+        //    {
+        //        miPickAddress.Visibility = Visibility.Hidden;
+        //    }
+
+        //    dgAddresses.ItemsSource = Data.Instance.Addresses;
+
+        //    dgAddresses.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+        //}
         public ShowAddressesWindow()
         {
             InitializeComponent();
             RefreshDataGrid();
+        }
+
+        private void miPickAddress_Click(object sender, RoutedEventArgs e)
+        {
+            //SelectedAddress = dgAddresses.SelectedItem as Address;
+            //this.DialogResult = true;
+            //this.Close();
         }
 
         private void miAddAddress_Click(object sender, RoutedEventArgs e)
@@ -71,9 +103,10 @@ namespace SR46_2021_POP2022.Views
             }
         }
 
+       
         private void RefreshDataGrid()
         {
-            List<Address> addresses = addressService.GetAll().Select(p => p).ToList();
+            List<Address> addresses = addressService.GetActiveAddresses().Select(p => p).ToList();
             dgAddresses.ItemsSource = addresses;
         }
 

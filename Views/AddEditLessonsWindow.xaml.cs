@@ -1,5 +1,6 @@
 ﻿using SR46_2021_POP2022.Models;
 using SR46_2021_POP2022.Services;
+using SR46_2021_POP2022.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
             this.lesson = lesson.Clone() as Lesson;
 
-            DataContext = this.lesson;
+            DataContext = lesson;
 
             isAddMode = false;
             txtId.IsReadOnly = true;
@@ -76,5 +77,25 @@ namespace SR46_2021_POP2022.Views
             DialogResult = false;
             Close();
         }
-    }
+
+        private void btnPickStudent_Click(object sender, RoutedEventArgs e)
+        {
+            //ShowStudentsWindow aw = new ShowStudentsWindow(ShowStudentsWindow.State.DOWNLOADING);
+            //if (aw.ShowDialog() == true)
+            //{
+            //    lesson.Student = aw.SelectedStudent;
+
+            }
+         
+        private void btnPickProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            //ShowProfessorsWindow aw = new ShowProfessorsWindow(ShowProfessorsWindow.State.DOWNLOADING);
+            //if (aw.ShowDialog() == true)
+            //{
+            //    lesson.Professor = aw.SelectedProfessor;
+
+        }
 }
+}
+    
+

@@ -47,21 +47,24 @@
                        Content="Address:"
                        HorizontalAlignment="Left" Width="62" Grid.ColumnSpan="2" Margin="124,0,0,28" Grid.RowSpan="2"/>
 
-                <ComboBox SelectedItem ="{Binding Path=Address}" Grid.Column="1" Grid.Row="2" Name="cbAddress" Margin="5,5,344,5" ></ComboBox>
+            <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbAddress" Text="Address" VerticalAlignment="Top" Width="60" />
+            <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path= Address, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbAddress" VerticalAlignment="Top" Width="269" IsReadOnly="True" />
+            <Button Content="..."  Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="289,2,0,0" Name="btnPickAddress" VerticalAlignment="Top" Width="30" Click="btnPickAddress_Click" RenderTransformOrigin="0.671,-0.023" />
 
-                <Label Grid.Column="0" Grid.Row="3" 
+        <Label Grid.Column="0" Grid.Row="3" 
                        Name="lblLanguage" 
                        Content="Language:"
                        HorizontalAlignment="Left" Width="62" Grid.ColumnSpan="2" Margin="124,0,0,28" Grid.RowSpan="2"/>
 
-                <ComboBox SelectedItem ="{Binding Path=Language}" Grid.Column="1" Grid.Row="3" Name="cbLanguage" Margin="5,5,344,5" ></ComboBox>
+        <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbLanguage" Text="Language" VerticalAlignment="Top" Width="60" />
+        <TextBox  Grid.Column="1" Grid.Row="3" Text="{Binding Path= Language, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbLanguage" VerticalAlignment="Top" Width="269" IsReadOnly="True" />
+        <Button Content="..."  Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Margin="289,2,0,0" Name="btnPickLanguage" VerticalAlignment="Top" Width="30" Click="btnPickLanguage_Click" RenderTransformOrigin="0.671,-0.023" />
 
-      
-                
 
 
-              
-                <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="btnCancel_Click">Cancel</Button>
+
+
+            <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="btnCancel_Click">Cancel</Button>
                 <Button Name="btnSave" Grid.Column="1" Grid.Row="9" Width="100" Margin= "214,31,300,73" Click="btnSave_Click">Save</Button>
 
 

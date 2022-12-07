@@ -31,7 +31,7 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
             this.address = address.Clone() as Address;
 
-            DataContext = this.address;
+            DataContext = address;
 
             isAddMode = false;
             txtId.IsReadOnly = true;
@@ -69,8 +69,9 @@ namespace SR46_2021_POP2022.Views
                 DialogResult = true;
                 Close();
             }
-        }
 
+        }
+      
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

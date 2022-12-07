@@ -10,7 +10,7 @@ namespace SR46_2021_POP2022.Models
     [Serializable]
     public class School : ICloneable, IDataErrorInfo
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public Address Address { get; set; } 
         public Language Language { get; set; }
@@ -38,7 +38,11 @@ namespace SR46_2021_POP2022.Models
         {
             get
             {
-                if (string.IsNullOrEmpty(Name))
+                if (string.IsNullOrEmpty(Id))
+                {
+                    return "Id cannot be empty!";
+                }
+                else if (string.IsNullOrEmpty(Name))
                 {
                     return "Name cannot be empty!";
                 }
@@ -54,7 +58,12 @@ namespace SR46_2021_POP2022.Models
             get
             {
                 IsValid = true;
-                if (columnName == "Name" && string.IsNullOrEmpty(Name))
+                if (columnName == "Id" && string.IsNullOrEmpty(Id))
+                {
+                    IsValid = false;
+                    return "Id cannot be empty!";
+                }
+                else if (columnName == "Name" && string.IsNullOrEmpty(Name))
                 {
                     IsValid = false;
                     return "Name cannot be empty!";
@@ -70,5 +79,44 @@ namespace SR46_2021_POP2022.Models
         {
             return $"{Name} {Address}, {Language}";
         }
-    }
+
+      
+        //public Address address
+        //{
+        //    get
+        //    {
+        //        return address;
+        //    }
+        //    set
+        //    {
+        //        address = value;
+        //        OnPropertyChanged("Address");
+        //    }
+
+        //}
+     
+        //public Language language
+        //{
+        //    get
+        //    {
+        //        return language;
+        //    }
+        //    set
+        //    {
+        //        language = value;
+        //        OnPropertyChanged("Language");
+        //    }
+
+        //}
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //protected void OnPropertyChanged(String propertyName)
+        //{
+        //    if (PropertyChanged != null)
+        //    {
+        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        //    }
+        //}
+    
+}
 }

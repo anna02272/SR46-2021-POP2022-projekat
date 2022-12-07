@@ -22,6 +22,7 @@
             <MenuItem Name="miAddProfessor" Height="30" Header="Add professor" Click="miAddProfessor_Click"></MenuItem>
             <MenuItem Name="miUpdateProfessor" Height="30" Header="Update professor" Click="miUpdateProfessor_Click"></MenuItem>
             <MenuItem Name="miDeleteProfessor" Height="30" Header="Delete professor" Click="miDeleteProfessor_Click"></MenuItem>
+            <MenuItem Name="miPickProfessor" Height="30" Header="Pick professor" Click="miPickProfessor_Click"></MenuItem>
         </Menu>
 
         <!--<TextBox Name="txtSearch" Grid.Column="0" 

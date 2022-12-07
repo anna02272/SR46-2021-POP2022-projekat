@@ -31,7 +31,7 @@ namespace SR46_2021_POP2022.Repositories
             Data.Instance.Schools = newSchools;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
            School school = GetById(id);
 
@@ -50,12 +50,12 @@ namespace SR46_2021_POP2022.Repositories
             return Data.Instance.Schools;
         }
 
-        public School GetById(int id)
+        public School GetById(string id)
         {
             return Data.Instance.Schools.Find(u => u.Id == id);
         }
 
-        public void Update(int id,School updatedSchool)
+        public void Update(string id,School updatedSchool)
         {
             Data.Instance.Save();
         }

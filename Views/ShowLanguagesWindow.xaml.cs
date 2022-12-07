@@ -23,10 +23,44 @@ namespace SR46_2021_POP2022.Views
     {
         private LanguageService languageService = new LanguageService();
 
+        //public enum State { ADMINISTRATION, DOWNLOADING };
+        //State state;
+        //public Language SelectedLanguage = null;
+
+        //public ShowLanguagesWindow(State state = State.ADMINISTRATION)
+        //{
+        //    InitializeComponent();
+        //    this.state = state;
+
+        //    if (state == State.DOWNLOADING)
+        //    {
+        //        miAddLanguage.Visibility = Visibility.Collapsed;
+        //        miUpdateLanguage.Visibility = Visibility.Collapsed;
+        //        miDeleteLanguage.Visibility = Visibility.Collapsed;
+        //    }
+        //    else
+        //    {
+        //        miPickLanguage.Visibility = Visibility.Hidden;
+        //    }
+
+        //    dgLanguages.ItemsSource = Data.Instance.Languages;
+
+        //    dgLanguages.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+        //}
+       
+
+      
+
         public ShowLanguagesWindow()
         {
             InitializeComponent();
             RefreshDataGrid();
+        }
+        private void miPickLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            //SelectedLanguage = dgLanguages.SelectedItem as Language;
+            //this.DialogResult = true;
+            //this.Close();
         }
 
         private void miAddLanguage_Click(object sender, RoutedEventArgs e)
@@ -73,7 +107,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<Language> languages = languageService.GetAll().Select(p => p).ToList();
+            List<Language> languages = languageService.GetActiveLanguages().Select(p => p).ToList();
             dgLanguages.ItemsSource = languages;
         }
 

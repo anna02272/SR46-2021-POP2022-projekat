@@ -31,7 +31,7 @@ namespace SR46_2021_POP2022.Repositories
             Data.Instance.Languages = newLanguages;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             Language language = GetById(id);
 
@@ -48,12 +48,12 @@ namespace SR46_2021_POP2022.Repositories
             return Data.Instance.Languages;
         }
 
-        public Language GetById(int id)
+        public Language GetById(string id)
         {
             return Data.Instance.Languages.Find(u => u.Id == id);
         }
 
-        public void Update(int id, Language updatedLanguage)
+        public void Update(string id, Language updatedLanguage)
         {
             Data.Instance.Save();
         }

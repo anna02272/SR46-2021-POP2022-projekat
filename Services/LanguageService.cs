@@ -18,7 +18,7 @@ namespace SR46_2021_POP2022.Services
 
         }
 
-        public Language GetById(int id)
+        public Language GetById(string id)
         {
             return languageRepository.GetById(id);
         }
@@ -47,12 +47,12 @@ namespace SR46_2021_POP2022.Services
              languageRepository.Set(languages);
         }
 
-        public void Update(int id, Language language)
+        public void Update(string id, Language language)
         {
             languageRepository.Update(id, language);
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
 
             languageRepository.Delete(id);

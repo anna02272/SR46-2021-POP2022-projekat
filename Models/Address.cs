@@ -10,7 +10,7 @@ namespace SR46_2021_POP2022.Models
     [Serializable]
     public class Address : ICloneable, IDataErrorInfo
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Street { get; set; }
         public string StreetNumber { get; set; }
         public string City { get; set; }
@@ -39,8 +39,11 @@ namespace SR46_2021_POP2022.Models
         {
             get
             {
-               
-                if (string.IsNullOrEmpty(Street))
+                if (string.IsNullOrEmpty(Id))
+                {
+                    return "Id cannot be empty!";
+                }
+                else if (string.IsNullOrEmpty(Street))
                 {
                     return "Street cannot be empty!";
                 }
@@ -67,7 +70,12 @@ namespace SR46_2021_POP2022.Models
             get
             {
                 IsValid = true;
-                if (columnName == "Street" && string.IsNullOrEmpty(Street))
+                if (columnName == "Id" && string.IsNullOrEmpty(Id))
+                {
+                    IsValid = false;
+                    return "Id cannot be empty!";
+                }
+                else if (columnName == "Street" && string.IsNullOrEmpty(Street))
                 {
                     IsValid = false;
                     return "Street cannot be empty!";

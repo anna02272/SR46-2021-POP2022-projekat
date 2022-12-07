@@ -74,7 +74,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<Lesson> lessons = lessonService.GetAll().Select(p => p).ToList();
+            List<Lesson> lessons = lessonService.GetAvailableLessons().Select(p => p).ToList();
             dgLessons.ItemsSource = lessons;
         }
 

@@ -72,15 +72,15 @@
             <ComboBoxItem Content="OTHER"></ComboBoxItem>
         </ComboBox>
 
-
-        <Label Grid.Column="0" Grid.Row="6" 
+        <Label Grid.Row="6" 
                Name="lblAddress" 
                Content="Address:"
                HorizontalAlignment="Left" Width="62" Margin="124,1,0,55" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
 
-        <!--<TextBox Grid.Column="1" Grid.Row="6" Name="txtAddress"  Margin="5,5,344,5" Text="{Binding Path= User.Address}"></TextBox>-->
+        <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbAddress" Text="Address" VerticalAlignment="Top" Width="60" />
 
-        <ComboBox SelectedItem ="{Binding Path=User.Address}" Grid.Column="1" Grid.Row="6" Name="cbAddress" Margin="5,5,344,5" ></ComboBox>
+        <TextBox  Grid.Column="1" Grid.Row="6" Text="{Binding Path= User.Address, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbAddress" VerticalAlignment="Top" Width="269" IsReadOnly="True" />
+        <Button Content="..."  Grid.Column="1" Grid.Row="6" Height="23" HorizontalAlignment="Left" Margin="289,2,0,0" Name="btnPickAddress" VerticalAlignment="Top" Width="30" Click="btnPickAddress_Click" RenderTransformOrigin="0.671,-0.023" />
 
         <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="btnCancel_Click">Cancel</Button>
         <Button Name="btnSave" Grid.Column="1" Grid.Row="9" Width="100" Margin= "214,31,300,73" Click="btnSave_Click">Save</Button>

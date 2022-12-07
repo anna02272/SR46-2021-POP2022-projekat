@@ -30,7 +30,7 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
             this.school = school.Clone() as School;
 
-            DataContext = this.school;
+            DataContext = school;
 
             isAddMode = false;
             txtId.IsReadOnly = true;
@@ -67,13 +67,33 @@ namespace SR46_2021_POP2022.Views
 
                 DialogResult = true;
                 Close();
-            }
-        }
 
+            }
+         
+        }
+       
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
             Close();
+        }
+        private void btnPickAddress_Click(object sender, RoutedEventArgs e)
+        {
+            //ShowAddressesWindow aw = new ShowAddressesWindow(ShowAddressesWindow.State.DOWNLOADING);
+            //if (aw.ShowDialog() == true)
+            //{
+            //    school.Address = aw.SelectedAddress;
+
+            //}
+        }
+        private void btnPickLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            //ShowLanguagesWindow aw = new ShowLanguagesWindow(ShowLanguagesWindow.State.DOWNLOADING);
+            //if (aw.ShowDialog() == true)
+            //{
+            //    school.Language = aw.SelectedLanguage;
+
+            //}
         }
     }
 }

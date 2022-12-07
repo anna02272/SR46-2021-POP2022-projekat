@@ -19,6 +19,7 @@
             <MenuItem Name="miAddStudent" Height="30" Header="Add student" Click="miAddStudent_Click"></MenuItem>
             <MenuItem Name="miUpdateStudent" Height="30" Header="Update student" Click="miUpdateStudent_Click"></MenuItem>
             <MenuItem Name="miDeleteStudent" Height="30" Header="Delete student" Click="miDeleteStudent_Click"></MenuItem>
+            <MenuItem Name="miPickStudent" Height="30" Header="Pick student" Click="miPickStudent_Click"></MenuItem>
         </Menu>
 
         <DataGrid CanUserAddRows="False" 

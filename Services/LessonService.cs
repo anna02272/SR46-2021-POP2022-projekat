@@ -18,7 +18,7 @@ namespace SR46_2021_POP2022.Services
            
         }
 
-        public Lesson GetById(int id)
+        public Lesson GetById(string id)
         {
             return lessonRepository.GetById(id);
         }
@@ -46,13 +46,13 @@ namespace SR46_2021_POP2022.Services
             lessonRepository.Set(lessons);
         }
 
-        public void Update(int id, Lesson lesson)
+        public void Update(string id, Lesson lesson)
         {
             lessonRepository.Update(id, lesson);
          
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
            
             lessonRepository.Delete(id);

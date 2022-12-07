@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static SR46_2021_POP2022.Views.AddEditStudentsWindow;
 
 namespace SR46_2021_POP2022.Views
 {
@@ -24,6 +25,8 @@ namespace SR46_2021_POP2022.Views
         private Student student;
         private IStudentService studentService = new StudentService();
         private bool isAddMode;
+
+    
 
         public AddEditStudentsWindow(Student student)
         {
@@ -82,6 +85,16 @@ namespace SR46_2021_POP2022.Views
         {
             DialogResult = false;
             Close();
+        }
+
+        private void btnPickAddress_Click(object sender, RoutedEventArgs e)
+        {
+            //ShowAddressesWindow aw = new ShowAddressesWindow(ShowAddressesWindow.State.DOWNLOADING);
+            //if (aw.ShowDialog() == true)
+            //{
+            //    student.User.Address = aw.SelectedAddress;
+
+            //}
         }
     }
 }

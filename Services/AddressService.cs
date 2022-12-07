@@ -2,6 +2,7 @@
 using SR46_2021_POP2022.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace SR46_2021_POP2022.Services
 
         }
 
-        public Address GetById(int id)
+        public Address GetById(string id)
         {
             return addressRepository.GetById(id);
         }
@@ -38,13 +39,14 @@ namespace SR46_2021_POP2022.Services
         {
             addressRepository.Set(addresses);
         }
+       
 
-        public void Update(int id, Address address)
+        public void Update(string id, Address address)
         {
             addressRepository.Update(id, address);
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
 
             addressRepository.Delete(id);
@@ -64,6 +66,7 @@ namespace SR46_2021_POP2022.Services
         {
             return addressRepository.GetAll().Where(p => !p.IsDeleted).OrderBy(p => p.Country).ToList();
         }
+
     }
 }
 

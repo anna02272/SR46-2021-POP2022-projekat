@@ -10,12 +10,12 @@ namespace SR46_2021_POP2022.Repositories
     interface ILessonRepository
     {
         List<Lesson> GetAll();
-        Lesson GetById(int id);
+        Lesson GetById(string id);
         void Add(Lesson lesson);
         void Add(List<Lesson> lessons);
         void Set(List<Lesson> lessons);
-        void Update(int id, Lesson lesson);
-        void Delete(int id);
+        void Update(string id, Lesson lesson);
+        void Delete(string id);
 
     }
 }

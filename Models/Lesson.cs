@@ -12,7 +12,7 @@ namespace SR46_2021_POP2022.Models
     public class Lesson :ICloneable, IDataErrorInfo
 
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public Professor Professor { get; set; }
         public DateTime Date { get; set; }
@@ -66,7 +66,16 @@ namespace SR46_2021_POP2022.Models
             get
             {
                 IsValid = true;
-                if (columnName == "Name" && string.IsNullOrEmpty(Name))
+                if (columnName == "Id" && string.IsNullOrEmpty(Id))
+                {
+                    IsValid = false;
+                    return "Id cannot be empty!";
+                }
+                else if (string.IsNullOrEmpty(Id))
+                {
+                    return "Id cannot be empty!";
+                }
+                else if (columnName == "Name" && string.IsNullOrEmpty(Name))
                 {
                     IsValid = false;
                     return "Name cannot be empty!";
@@ -80,6 +89,44 @@ namespace SR46_2021_POP2022.Models
         {
            return $"{Name}, {Professor}  {Date}, {Time}, {Duration}, {Status}, {Student}";
         }
+
+      
+        //public Student student
+        //{
+        //    get
+        //    {
+        //        return student;
+        //    }
+        //    set
+        //    {
+        //        student = value;
+        //        OnPropertyChanged("Student");
+        //    }
+
+        //}
+       
+        //public Professor professor
+        //{
+        //    get
+        //    {
+        //        return professor;
+        //    }
+        //    set
+        //    {
+        //        professor = value;
+        //        OnPropertyChanged("Professor");
+        //    }
+
+        //}
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //protected void OnPropertyChanged(String propertyName)
+        //{
+        //    if (PropertyChanged != null)
+        //    {
+        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        //    }
+        //}
     }
 }
 
