@@ -7,66 +7,189 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace SR46_2021_POP2022.Repositories
 {
     class SchoolRepository : ISchoolRepository
     {
-        //private static List<School> schools = new List<School>();
-
-        public void Add(School school)
+        public int Add(School school)
         {
-            Data.Instance.Schools.Add(school);
-            Data.Instance.Save();
-        }
-
-        public void Add(List<School> newSchools)
-        {
-            Data.Instance.Schools.AddRange(newSchools);
-            Data.Instance.Save();
-        }
-
-        public void Set(List<School> newSchools)
-        {
-            Data.Instance.Schools = newSchools;
-        }
-
-        public void Delete(string id)
-        {
-           School school = GetById(id);
-
-            if (school != null)
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                school.IsDeleted = true;
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    insert into dbo.Schools (Name, AddressId, LanguageId, IsDeleted)
+                    output inserted.Id
+                    values (@Name, @AddressId, @LanguageId, @IsDeleted)";
+
+                command.Parameters.Add(new SqlParameter("Name", school.Name));
+                command.Parameters.Add(new SqlParameter("AddressId", (object)school.AddressId ?? DBNull.Value));
+                command.Parameters.Add(new SqlParameter("LanguageId", (object)school.LanguageId ?? DBNull.Value));
+                command.Parameters.Add(new SqlParameter("IsDeleted", school.IsDeleted));
+
+
+                return (int)command.ExecuteScalar();
             }
+        }
 
-            Data.Instance.Save();
+        public void Add(List<School> schools)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void Delete(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                conn.Open();
 
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = "update dbo.Schools set IsDeleted=1 where Id=@id";
+
+                command.Parameters.Add(new SqlParameter("id", id));
+                command.ExecuteNonQuery();
+            }
         }
 
         public List<School> GetAll()
         {
-            return Data.Instance.Schools;
+            List<School> schools = new List<School>();
+
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                string commandText = "select * from dbo.Schools";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
+
+                DataSet ds = new DataSet();
+
+                dataAdapter.Fill(ds, "Schools");
+
+                foreach (DataRow row in ds.Tables["Schools"].Rows)
+                {
+                    var school = new School
+                    {
+                        Id = (int)row["Id"],
+                        Name = row["Name"] as string,
+                        IsDeleted = (bool)row["IsDeleted"]
+                    };
+
+                    schools.Add(school);
+                }
+            }
+
+            return schools;
         }
 
-        public School GetById(string id)
+        public School GetById(int id)
         {
-            return Data.Instance.Schools.Find(u => u.Id == id);
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                string commandText = $"select * from dbo.Schools where Id={id}";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
+
+                DataSet ds = new DataSet();
+
+                dataAdapter.Fill(ds, "Schools");
+                if (ds.Tables["Schools"].Rows.Count > 0)
+                {
+                    var row = ds.Tables["Schools"].Rows[0];
+
+                    var school = new School
+                    {
+                        Id = (int)row["Id"],
+                        Name = row["Name"] as string,
+                        IsDeleted = (bool)row["IsDeleted"]
+                    };
+
+                    return school;
+                }
+            }
+
+            return null;
         }
 
-        public void Update(string id,School updatedSchool)
+        public void Set(List<School> schools)
         {
-            Data.Instance.Save();
+            throw new NotImplementedException();
         }
 
-        //public void Save()
-        //{
-            //IFormatter formatter = new BinaryFormatter();
-            //using (Stream stream = new FileStream(Config.schoolsFilePath, FileMode.Create, FileAccess.Write))
-            //{
-            //    formatter.Serialize(stream, schools);
-            //}
-        //}
+        public void Update(int id, School school)
+        {
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"update dbo.Schools set 
+                        Name = @Name,
+                        where Id=@id";
+
+                command.Parameters.Add(new SqlParameter("id", id));
+                command.Parameters.Add(new SqlParameter("Name", school.Name));
+             
+                command.ExecuteScalar();
+            }
+        }
     }
+    
 }
+//private static List<School> schools = new List<School>();
+
+//public void Add(School school)
+//{
+//    Data.Instance.Schools.Add(school);
+//    Data.Instance.Save();
+//}
+
+//public void Add(List<School> newSchools)
+//{
+//    Data.Instance.Schools.AddRange(newSchools);
+//    Data.Instance.Save();
+//}
+
+//public void Set(List<School> newSchools)
+//{
+//    Data.Instance.Schools = newSchools;
+//}
+
+//public void Delete(string id)
+//{
+//   School school = GetById(id);
+
+//    if (school != null)
+//    {
+//        school.IsDeleted = true;
+//    }
+
+//    Data.Instance.Save();
+
+
+//}
+
+//public List<School> GetAll()
+//{
+//    return Data.Instance.Schools;
+//}
+
+//public School GetById(string id)
+//{
+//    return Data.Instance.Schools.Find(u => u.Id == id);
+//}
+
+//public void Update(string id,School updatedSchool)
+//{
+//    Data.Instance.Save();
+//}
+
+//public void Save()
+//{
+//IFormatter formatter = new BinaryFormatter();
+//using (Stream stream = new FileStream(Config.schoolsFilePath, FileMode.Create, FileAccess.Write))
+//{
+//    formatter.Serialize(stream, schools);
+//}
+//}

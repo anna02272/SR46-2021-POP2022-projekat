@@ -13,7 +13,7 @@ namespace SR46_2021_POP2022.Models
     public class Language: ICloneable, IDataErrorInfo
 
     {
-        public string Id { get; set; } 
+        public int Id { get; set; } 
         public string NameOfLanguage { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsValid { get; set; }
@@ -36,11 +36,11 @@ namespace SR46_2021_POP2022.Models
         {
             get
             {
-                if (string.IsNullOrEmpty(Id))
-                {
-                    return "Id cannot be empty!";
-                }
-                else if (string.IsNullOrEmpty(NameOfLanguage))
+                //if (string.IsNullOrEmpty(Id))
+                //{
+                //    return "Id cannot be empty!";
+                //}
+                if (string.IsNullOrEmpty(NameOfLanguage))
                 {
                     return "Name cannot be empty!";
                 }
@@ -56,12 +56,12 @@ namespace SR46_2021_POP2022.Models
             get
             {
                 IsValid = true;
-                if (columnName == "Id" && string.IsNullOrEmpty(Id))
-                {
-                    IsValid = false;
-                    return "Id cannot be empty!";
-                }
-                else if (columnName == "NameOfLanguage" && string.IsNullOrEmpty(NameOfLanguage))
+                //if (columnName == "Id" && string.IsNullOrEmpty(Id))
+                //{
+                //    IsValid = false;
+                //    return "Id cannot be empty!";
+                //}
+                if (columnName == "NameOfLanguage" && string.IsNullOrEmpty(NameOfLanguage))
                 {
                     IsValid = false;
                     return "Name cannot be empty!";

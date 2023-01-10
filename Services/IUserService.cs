@@ -13,7 +13,7 @@ namespace SR46_2021_POP2022.Services
         List<User> GetActiveUsers();
         void Add(User user);
         void Set(List<User> users);
-        void Update(string email, User user);
-        void Delete(string email);
+        void Update(int id, User user);
+        void Delete(int id);
     }
 }

@@ -10,12 +10,12 @@ namespace SR46_2021_POP2022.Repositories
     interface IProfessorRepository
     {
         List<Professor> GetAll();
-        Professor GetById(string email);
-        void Add(Professor professor);
+        Professor GetById(int id);
+        int Add(Professor professor);
         void Add(List<Professor> professors);
         void Set(List<Professor> professors);
-        void Update(string email, Professor professor);
-        void Delete(string email);
+        void Update(int id, Professor professor);
+        void Delete(int id);
         //List<Professor> Search(string search);
     }
 }

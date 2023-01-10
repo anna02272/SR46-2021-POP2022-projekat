@@ -1,4 +1,5 @@
 ﻿using SR46_2021_POP2022.Models;
+using SR46_2021_POP2022.Repositories;
 using SR46_2021_POP2022.Services;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowAddressesWindow : Window
     {
         private AddressService addressService = new AddressService();
+       
 
         public enum State { ADMINISTRATION, DOWNLOADING };
         State state;
@@ -44,7 +46,8 @@ namespace SR46_2021_POP2022.Views
                 miPickAddress.Visibility = Visibility.Hidden;
             }
 
-            dgAddresses.ItemsSource = Data.Instance.Addresses;
+            //dgAddresses.ItemsSource = Data.Instance.Addresses;
+            dgAddresses.ItemsSource = addressService.GetActiveAddresses();
 
             dgAddresses.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
@@ -79,7 +82,7 @@ namespace SR46_2021_POP2022.Views
 
             if (selectedIndex >= 0)
             {
-                var addresses = addressService.GetAll();
+                var addresses = addressService.GetActiveAddresses();
 
                 var addEditAddressWindow = new AddEditAddressesWindow(addresses[selectedIndex]);
 
@@ -106,7 +109,7 @@ namespace SR46_2021_POP2022.Views
        
         private void RefreshDataGrid()
         {
-            List<Address> addresses = addressService.GetAll().Select(p => p).ToList();
+            List<Address> addresses = addressService.GetActiveAddresses().Select(p => p).ToList();
             dgAddresses.ItemsSource = addresses;
         }
 

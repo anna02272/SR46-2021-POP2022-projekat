@@ -10,7 +10,10 @@ namespace SR46_2021_POP2022.Models
     [Serializable]
     public class Professor : ICloneable
     {
+
+        public int Id { get; set; }
         private User user;
+        public int UserId { get; set; }
 
         public User User
         {
@@ -18,15 +21,16 @@ namespace SR46_2021_POP2022.Models
             set
             {
                 user = value;
-                UserId = user.Email; // kada se setuje User tada se setuje i UserId, tako ne moramo kasnije da ih setujemo zasebno
+                UserId = user.Id; // kada se setuje User tada se setuje i UserId, tako ne moramo kasnije da ih setujemo zasebno
             }
         }
-        public string UserId { get; set; }
+       
 
         public object Clone()
         {
             return new Professor
             {
+                Id = Id,
                 User = User.Clone() as User
             };
         }

@@ -19,7 +19,7 @@ namespace SR46_2021_POP2022.Services
 
         }
 
-        public Address GetById(string id)
+        public Address GetById(int id)
         {
             return addressRepository.GetById(id);
         }
@@ -41,12 +41,12 @@ namespace SR46_2021_POP2022.Services
         }
        
 
-        public void Update(string id, Address address)
+        public void Update(int id, Address address)
         {
             addressRepository.Update(id, address);
         }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
 
             addressRepository.Delete(id);

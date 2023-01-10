@@ -10,10 +10,37 @@ namespace SR46_2021_POP2022.Models
     [Serializable]
     public class School : ICloneable, IDataErrorInfo
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public Address Address { get; set; } 
-        public Language Language { get; set; }
+
+        private Address address;
+
+        public Address Address
+        {
+            get => address;
+            set
+            {
+                address = value;
+                AddressId = address?.Id;
+            }
+        }
+
+        public int? AddressId { get; set; }
+
+        private Language language;
+
+        public Language Language
+        {
+            get => language;
+            set
+            {
+                language = value;
+                LanguageId = language?.Id;
+            }
+        }
+
+        public int? LanguageId { get; set; }
+
         public bool IsDeleted { get; set; }
         public bool IsValid { get; set; }
 
@@ -38,11 +65,11 @@ namespace SR46_2021_POP2022.Models
         {
             get
             {
-                if (string.IsNullOrEmpty(Id))
-                {
-                    return "Id cannot be empty!";
-                }
-                else if (string.IsNullOrEmpty(Name))
+                //if (string.IsNullOrEmpty(Id))
+                //{
+                //    return "Id cannot be empty!";
+                //}
+                if (string.IsNullOrEmpty(Name))
                 {
                     return "Name cannot be empty!";
                 }
@@ -58,12 +85,12 @@ namespace SR46_2021_POP2022.Models
             get
             {
                 IsValid = true;
-                if (columnName == "Id" && string.IsNullOrEmpty(Id))
-                {
-                    IsValid = false;
-                    return "Id cannot be empty!";
-                }
-                else if (columnName == "Name" && string.IsNullOrEmpty(Name))
+                //if (columnName == "Id" && string.IsNullOrEmpty(Id))
+                //{
+                //    IsValid = false;
+                //    return "Id cannot be empty!";
+                //}
+                 if (columnName == "Name" && string.IsNullOrEmpty(Name))
                 {
                     IsValid = false;
                     return "Name cannot be empty!";

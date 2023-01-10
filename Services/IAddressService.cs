@@ -12,14 +12,14 @@ namespace SR46_2021_POP2022.Services
 
     {
         List<Address> GetAll();
-        Address GetById(string id);
+        Address GetById(int id);
         List<Address> GetActiveAddresses();
         List<Address> GetActiveAddressesByCountry(string country);
         List<Address> GetActiveAddressesOrderedByCountry();
         void Add(Address address);
         void Set(List<Address> addresses);
-        void Update(string id, Address address);
-        void Delete(string id);
+        void Update(int id, Address address);
+        void Delete(int id);
        
     }
 }

@@ -10,12 +10,12 @@ namespace SR46_2021_POP2022.Repositories
     interface IUserRepository
     {
         List<User> GetAll();
-        User GetById(string email);
-        void Add(User user);
+        User GetById(int id);
+        int Add(User user);
         void Add(List<User> users);
         void Set(List<User> users);
-        void Update(string email, User user);
-        void Delete(string email);
+        void Update(int id, User user);
+        void Delete(int id);
         
     }
 }

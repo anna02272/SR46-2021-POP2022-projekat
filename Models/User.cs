@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace SR46_2021_POP2022.Models
     [Serializable]
     public class User : ICloneable, IDataErrorInfo
     {
+        public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
@@ -17,7 +19,18 @@ namespace SR46_2021_POP2022.Models
         public string JMBG { get; set; }
         public EGender Gender { get; set; }
         public EUserType UserType { get; set; }
-        public Address Address { get; set; }
+
+        private Address address;
+        public Address Address
+        {
+            get => address;
+            set
+            {
+                address = value;
+                AddressId = address?.Id;
+            }
+        }
+        public int? AddressId { get; set; }
 
         public bool IsActive { get; set; }
         public bool IsValid { get; set; }
@@ -36,6 +49,7 @@ namespace SR46_2021_POP2022.Models
         {
             return new User
             {
+                Id = Id,
                 Email = Email,
                 Password = Password,
                 FirstName = FirstName,

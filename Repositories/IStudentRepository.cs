@@ -10,11 +10,11 @@ namespace SR46_2021_POP2022.Repositories
     interface IStudentRepository
     {
         List<Student> GetAll();
-        Student GetById(string email);
-        void Add(Student student);
+        Student GetById(int id);
+        int Add(Student student);
         void Add(List<Student> students);
         void Set(List<Student> students);
-        void Update(string email, Student student);
-        void Delete(string email);
+        void Update(int id, Student student);
+        void Delete(int id);
     }
 }

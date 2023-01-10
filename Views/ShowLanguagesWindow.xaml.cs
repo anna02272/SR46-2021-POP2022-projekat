@@ -1,4 +1,5 @@
 ﻿using SR46_2021_POP2022.Models;
+using SR46_2021_POP2022.Repositories;
 using SR46_2021_POP2022.Services;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowLanguagesWindow : Window
     {
         private LanguageService languageService = new LanguageService();
+           
 
         public enum State { ADMINISTRATION, DOWNLOADING };
         State state;
@@ -43,7 +45,7 @@ namespace SR46_2021_POP2022.Views
                 miPickLanguage.Visibility = Visibility.Hidden;
             }
 
-            dgLanguages.ItemsSource = Data.Instance.Languages;
+            dgLanguages.ItemsSource = languageService.GetActiveLanguages();
 
             dgLanguages.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
@@ -81,7 +83,7 @@ namespace SR46_2021_POP2022.Views
 
             if (selectedIndex >= 0)
             {
-                var languages = languageService.GetAll();
+                var languages = languageService.GetActiveLanguages();
 
                 var addEditLanguageWindow = new AddEditLanguagesWindow(languages[selectedIndex]);
 
@@ -107,7 +109,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<Language> languages = languageService.GetAll().Select(p => p).ToList();
+            List<Language> languages = languageService.GetActiveLanguages().Select(p => p).ToList();
             dgLanguages.ItemsSource = languages;
         }
 

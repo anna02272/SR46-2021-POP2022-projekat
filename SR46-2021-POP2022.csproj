@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="Config.cs" />
     <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\School.cs" />
@@ -191,7 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\EGender.cs" />
     <Compile Include="Models\EUserType.cs" />
     <Compile Include="Models\Professor.cs" />
@@ -224,6 +224,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\create_table.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

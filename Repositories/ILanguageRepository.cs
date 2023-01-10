@@ -11,12 +11,12 @@ namespace SR46_2021_POP2022.Repositories
     {
 
         List<Language> GetAll();
-        Language GetById(string id);
-        void Add(Language language);
+        Language GetById(int id);
+        int Add(Language language);
         void Add(List<Language> languages);
         void Set(List<Language> languages);
-        void Update(string id, Language language);
-        void Delete(string id);
+        void Update(int id, Language language);
+        void Delete(int id);
 
 
     }

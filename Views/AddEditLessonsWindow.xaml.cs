@@ -34,7 +34,7 @@ namespace SR46_2021_POP2022.Views
             DataContext = lesson;
 
             isAddMode = false;
-            txtId.IsReadOnly = true;
+            //txtId.IsReadOnly = true;
 
         }
 

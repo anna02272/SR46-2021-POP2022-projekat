@@ -33,7 +33,7 @@ namespace SR46_2021_POP2022.Views
         private void miAddSchool_Click(object sender, RoutedEventArgs e)
         {
             var addEditSchoolWindow = new AddEditSchoolsWindow();
-
+       
             var successeful = addEditSchoolWindow.ShowDialog();
 
             if ((bool)successeful)
@@ -48,7 +48,7 @@ namespace SR46_2021_POP2022.Views
 
             if (selectedIndex >= 0)
             {
-                var schools = schoolService.GetAll();
+                var schools = schoolService.GetActiveSchools();
 
                 var addEditSchoolWindow = new AddEditSchoolsWindow(schools[selectedIndex]);
 
@@ -74,7 +74,7 @@ namespace SR46_2021_POP2022.Views
 
         private void RefreshDataGrid()
         {
-            List<School> schools = schoolService.GetAll().Select(p => p).ToList();
+            List<School> schools = schoolService.GetActiveSchools().Select(p => p).ToList();
             dgSchools.ItemsSource = schools;
         }
 

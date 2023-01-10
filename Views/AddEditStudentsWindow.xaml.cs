@@ -68,7 +68,7 @@ namespace SR46_2021_POP2022.Views
                 }
                 else
                 {
-                    studentService.Update(student.User.Email, student);
+                    studentService.Update(student.Id, student);
                 }
 
                 DialogResult = true;

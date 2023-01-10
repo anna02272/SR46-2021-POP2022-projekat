@@ -67,7 +67,7 @@ namespace SR46_2021_POP2022.Views
                 }
                 else
                 {
-                    professorService.Update(professor.User.Email, professor);
+                    professorService.Update(professor.Id, professor);
                 }
 
                 DialogResult = true;
@@ -124,9 +124,6 @@ namespace SR46_2021_POP2022.Views
 //            Close();
 //        }
 
-//        private void Button_Click(object sender, RoutedEventArgs e)
-//        {
-
-//        }
+//       
 //    }
 //}

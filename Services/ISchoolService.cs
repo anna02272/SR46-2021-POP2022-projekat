@@ -10,14 +10,14 @@ namespace SR46_2021_POP2022.Services
     interface ISchoolService
     {
         List<School> GetAll();
-        School GetById(string id);
+        School GetById(int id);
         List<School> GetActiveSchools();
         List<School> GetActiveSchoolsByName(string name);
         List<School> GetActiveSchoolsOrderedByName();
         void Add(School school);
         void Set(List<School> schools);
-        void Update(string id, School school);
-        void Delete(string id);
+        void Update(int id, School school);
+        void Delete(int id);
        
     }
 }

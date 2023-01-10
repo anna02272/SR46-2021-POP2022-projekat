@@ -19,9 +19,9 @@ namespace SR46_2021_POP2022.Services
             userRepository = new UserRepository();
         }
 
-        public Professor GetById(string email)
+        public Professor GetById(int id)
         {
-            return professorRepository.GetById(email);
+            return professorRepository.GetById(id);
         }
 
         public List<Professor> GetAll()
@@ -45,7 +45,8 @@ namespace SR46_2021_POP2022.Services
 
         public void Add(Professor professor)
         {
-            userRepository.Add(professor.User);
+            var userId = userRepository.Add(professor.User);
+            professor.UserId = userId;
             professorRepository.Add(professor);
         }
 
@@ -54,16 +55,16 @@ namespace SR46_2021_POP2022.Services
             professorRepository.Set(professors);
         }
 
-        public void Update(string email, Professor professor)
+        public void Update(int id, Professor professor)
         {
-            userRepository.Update(email, professor.User);
-            professorRepository.Update(email, professor);
+            userRepository.Update(professor.UserId, professor.User);
+            professorRepository.Update(id, professor);
         }
 
-        public void Delete(string email)
+        public void Delete(int id)
         {
-            userRepository.Delete(email);
-            professorRepository.Delete(email);
+            userRepository.Delete(id);
+            professorRepository.Delete(id);
         }
 
         public List<User> ListAllStudents()

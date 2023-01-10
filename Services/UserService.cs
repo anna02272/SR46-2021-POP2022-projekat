@@ -37,14 +37,14 @@ namespace SR46_2021_POP2022.Services
             repostory.Set(users);
         }
 
-        public void Update(string email, User user)
+        public void Update(int id, User user)
         {
-            repostory.Update(email, user);
+            repostory.Update(id, user);
         }
 
-        public void Delete(string email)
+        public void Delete(int id)
         {
-            repostory.Delete(email);
+            repostory.Delete(id);
         }
     }
 }

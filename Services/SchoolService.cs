@@ -18,7 +18,7 @@ namespace SR46_2021_POP2022.Services
           
         }
 
-        public School GetById(string id)
+        public School GetById(int id)
         {
             return schoolRepository.GetById(id);
         }
@@ -39,12 +39,12 @@ namespace SR46_2021_POP2022.Services
             schoolRepository.Set(schools);
         }
 
-        public void Update(string id, School school)
+        public void Update(int id, School school)
         {
             schoolRepository.Update(id, school);
         }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
         
             schoolRepository.Delete(id);

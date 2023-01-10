@@ -1,7 +1,9 @@
 ﻿using SR46_2021_POP2022.Models;
+using SR46_2021_POP2022.Repositories;
 using SR46_2021_POP2022.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +12,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SR46_2021_POP2022.Views
 {
@@ -23,6 +27,7 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowProfessorsWindow : Window
     {
         private ProfessorService professorService = new ProfessorService();
+       
 
         public enum State { ADMINISTRATION, DOWNLOADING };
         State state;
@@ -31,6 +36,7 @@ namespace SR46_2021_POP2022.Views
         public ShowProfessorsWindow(State state = State.ADMINISTRATION)
         {
             InitializeComponent();
+            RefreshDataGrid();
             this.state = state;
 
             if (state == State.DOWNLOADING)
@@ -44,7 +50,9 @@ namespace SR46_2021_POP2022.Views
                 miPickProfessor.Visibility = Visibility.Hidden;
             }
 
-            dgProfessors.ItemsSource = Data.Instance.Professors;
+            dgProfessors.ItemsSource = professorService.GetActiveProfessors();
+
+            //dgProfessors.ItemsSource = Data.Instance.Professors;
 
             dgProfessors.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
@@ -80,7 +88,7 @@ namespace SR46_2021_POP2022.Views
 
             if (selectedIndex >= 0)
             {
-                var professors = professorService.GetAll();
+                var professors = professorService.GetActiveProfessors();
 
                 var addEditProfessorWindow = new AddEditProfessorsWindow(professors[selectedIndex]);
 
@@ -99,14 +107,14 @@ namespace SR46_2021_POP2022.Views
 
             if (selectedUser != null)
             {
-                professorService.Delete(selectedUser.Email);
+                professorService.Delete(selectedUser.Id);
                 RefreshDataGrid();
             }
         }
 
         private void RefreshDataGrid()
         {
-            List<User> users = professorService.GetAll().Select(p => p.User).ToList();
+            List<User> users = professorService.GetActiveProfessors().Select(p => p.User).ToList();
             dgProfessors.ItemsSource = users;
         }
 

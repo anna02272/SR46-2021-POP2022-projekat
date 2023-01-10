@@ -33,7 +33,7 @@ namespace SR46_2021_POP2022.Views
             DataContext = school;
 
             isAddMode = false;
-            txtId.IsReadOnly = true;
+            //txtId.IsReadOnly = true;
            
         }
 

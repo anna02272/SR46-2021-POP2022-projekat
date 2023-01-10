@@ -1,4 +1,5 @@
 ﻿using SR46_2021_POP2022.Models;
+using SR46_2021_POP2022.Repositories;
 using SR46_2021_POP2022.Services;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowStudentsWindow : Window
     {
         private StudentService studentService = new StudentService();
+       
+
         public enum State { ADMINISTRATION, DOWNLOADING };
         State state;
         public Student SelectedStudent = null;
@@ -42,7 +45,7 @@ namespace SR46_2021_POP2022.Views
                 miPickStudent.Visibility = Visibility.Hidden;
             }
 
-            dgStudents.ItemsSource = Data.Instance.Students;
+            dgStudents.ItemsSource = studentService.GetActiveStudents();
 
             dgStudents.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
@@ -85,7 +88,7 @@ namespace SR46_2021_POP2022.Views
             var selectedIndex = dgStudents.SelectedIndex;
             if (selectedIndex >= 0)
             {
-                var students = studentService.GetAll();
+                var students = studentService.GetActiveStudents();
                 var addEditStudentsWindow = new AddEditStudentsWindow(students[selectedIndex]);
                 var succesful = addEditStudentsWindow.ShowDialog();
 
@@ -102,14 +105,14 @@ namespace SR46_2021_POP2022.Views
 
             if (selectedUser != null)
             {
-                studentService.Delete(selectedUser.Email);
+                studentService.Delete(selectedUser.Id);
                 RefreshDataGrid();
             }
         }
 
         private void RefreshDataGrid()
         {
-            List<User> users = studentService.GetAll().Select(s => s.User).ToList();
+            List<User> users = studentService.GetActiveStudents().Select(s => s.User).ToList();
             dgStudents.ItemsSource = users;
 
            
