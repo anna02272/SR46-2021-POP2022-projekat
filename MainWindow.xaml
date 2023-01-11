@@ -7,22 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Name="btnProfessors"
-                Click="btnProfessors_Click" Margin="280,42,336,306">Professors</Button>
+        <Button Name="btnStart"
+                Click="btnStart_Click" Margin="315,324,340,60">
+            Access without logging in
+        </Button>
+        <Button Name ="btnLogin" Click="btnLogin_Click" Content="Log in" HorizontalAlignment="Left" Height="50" Margin="140,109,0,0" VerticalAlignment="Top" Width="175" />
 
-        <Button Name="btnStudents"
-                Click="btnStudents_Click" Margin="31,42,585,306">Students</Button>
 
-        <Button Name="btnSchools"
-                Click="btnSchools_Click" Margin="516,42,100,306">Schools</Button>
-
-        <Button Name="btnLessons"
-                Click="btnLessons_Click" Margin="31,217,585,131">Lessons</Button>
-
-        <Button Name="btnLanguages"
-                Click="btnLanguages_Click" Margin="516,207,100,141">Languages</Button>
-
-        <Button Name="btnAddresses"
-                Click="btnAddresses_Click" Margin="280,217,336,131">Addresses</Button>
+        <Button Name ="btnRegister" Click="btnRegister_Click"  Content="Register" HorizontalAlignment="Left" Height="50" Margin="480,109,0,0" VerticalAlignment="Top" Width="160" />
+        <Label Content="Don't have an account?" HorizontalAlignment="Left" Height="25" Margin="490,84,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
     </Grid>
 </Window>

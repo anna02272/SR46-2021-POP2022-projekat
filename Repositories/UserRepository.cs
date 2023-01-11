@@ -146,7 +146,8 @@ namespace SR46_2021_POP2022.Repositories
                         LastName = @LastName,
                         Password = @Password,
                         Gender = @Gender,
-                        UserType = @UserType
+                        UserType = @UserType, 
+                        AddressId = @AddressId
                         where Id=@id";
 
                 command.Parameters.Add(new SqlParameter("id", id));
@@ -155,6 +156,8 @@ namespace SR46_2021_POP2022.Repositories
                 command.Parameters.Add(new SqlParameter("Password", user.Password));
                 command.Parameters.Add(new SqlParameter("Gender", user.Gender));
                 command.Parameters.Add(new SqlParameter("UserType", user.UserType));
+                command.Parameters.Add(new SqlParameter("AddressId", user.AddressId));
+
 
                 command.ExecuteScalar();
             }

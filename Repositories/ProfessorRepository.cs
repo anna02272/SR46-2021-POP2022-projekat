@@ -141,10 +141,24 @@ namespace SR46_2021_POP2022.Repositories
 
         public void Update(int id, Professor professor)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"update dbo.Professors 
+                        set UserId = @UserId
+                        where Id=@id";
+
+                command.Parameters.Add(new SqlParameter("id", id));
+                command.Parameters.Add(new SqlParameter("UserId", professor.UserId));
+
+                command.ExecuteScalar();
+            }
         }
     }
-}
+    }
+
 
 //        public void Add(Professor professor)
 //        {

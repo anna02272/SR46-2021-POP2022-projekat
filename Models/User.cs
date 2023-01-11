@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -125,6 +127,43 @@ namespace SR46_2021_POP2022.Models
                 return "";
             }
         }
+        public bool Login(string email, string password)
+        {
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                string commandText = $"select * from dbo.Users where Email='{email}' and Password='{password}'";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
+
+                DataSet ds = new DataSet();
+
+                dataAdapter.Fill(ds, "Users");
+                if (ds.Tables["Users"].Rows.Count > 0)
+                {
+                    var row = ds.Tables["Users"].Rows[0];
+                    var user = new User
+                    {
+                        Id = (int)row["Id"],
+                        FirstName = row["FirstName"] as string,
+                        LastName = row["LastName"] as string,
+                        Email = row["Email"] as string,
+                        Password = row["Password"] as string,
+                        JMBG = row["Jmbg"] as string,
+                        Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
+                        UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
+                        IsActive = (bool)row["IsActive"]
+                    };
+                    if (user.IsActive)
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
     }
     //[Serializable]
     //class User

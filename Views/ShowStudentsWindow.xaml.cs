@@ -61,7 +61,8 @@ namespace SR46_2021_POP2022.Views
         {
             InitializeComponent();
             RefreshDataGrid();
-            //InitializeComponent();
+           
+
             //List<User> users = Data.Instance.StudentService.GetAll()
             //    .Select(p => p.User).ToList();
             //dgStudents.ItemsSource = users;

@@ -1,5 +1,4 @@
-﻿select * from addresses
-
+﻿
 CREATE TABLE dbo.Addresses (
 	Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	Street VARCHAR(50),
@@ -10,16 +9,13 @@ CREATE TABLE dbo.Addresses (
 )
 
 
-CREATE TABLE dbo.Administrators (
-	Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	UserName VARCHAR(50) NOT NULL,
-	Password VARCHAR(50) NOT NULL
+CREATE TABLE dbo.Administrators
+(
+ Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+ UserId INT NOT NULL UNIQUE,
+ CONSTRAINT FK_USERS_ADMINISTRATORS
+ FOREIGN KEY (UserId) REFERENCES dbo.Users (Id)
 )
-
-SET IDENTITY_INSERT Administrators ON
-Insert into Administrators(id, username, Password) values (1, 'Admin', 'Admin123')
-
-
 
 CREATE TABLE dbo.Languages
 (
@@ -45,6 +41,7 @@ CREATE TABLE dbo.Users
 	CONSTRAINT FK_ADDRESSES_USERS
 	FOREIGN KEY (AddressId) REFERENCES dbo.Addresses (Id)
 )
+
 
 CREATE TABLE dbo.Professors
 (
@@ -92,6 +89,14 @@ CREATE TABLE dbo.Schools
  FOREIGN KEY(LanguageId) REFERENCES dbo.Languages (Id)
 )
 
+
+Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, isActive, AddressId) values 
+('Admin','Adminko', 1234565383919, 'admin@gmail.com', 'Admin123', 1, 0, 1, 5)
+
+set identity_insert administrators on
+insert into administrators(id, userId) values (1, 23);
+
+
 select * from users
 select * from professors
 select * from students
@@ -99,3 +104,4 @@ select * from Addresses
 select * from schools
 select * from lessons
 select * from languages
+select * from Administrators

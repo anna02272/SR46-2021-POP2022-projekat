@@ -10,24 +10,32 @@ namespace SR46_2021_POP2022.Models
     public class Administrator : ICloneable
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-      
+        private User user;
+        public int UserId { get; set; }
+
+        public User User
+        {
+            get => user;
+            set
+            {
+                user = value;
+                UserId = user.Id;
+            }
+        }
 
         public object Clone()
         {
             return new Administrator
             {
                 Id = Id,
-                UserName = UserName,
-                Password = Password
-               
+                User = User.Clone() as User
             };
         }
 
         public override string ToString()
         {
-            return $"{UserName} ";
+            return $"[Administrator] {User.FirstName} {User.LastName}, {User.Email}";
         }
+
     }
 }

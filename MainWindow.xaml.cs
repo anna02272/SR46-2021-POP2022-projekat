@@ -22,53 +22,32 @@ namespace SR46_2021_POP2022
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+ 
+            public MainWindow()
+            {
+                InitializeComponent();
+            }
+
+            private void btnStart_Click(object sender, RoutedEventArgs e)
+            {
+                var homeWindow = new HomeWindow();
+                homeWindow.Show();
+               
+            }
+
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-         
-            InitializeComponent();
+            var loginWindow = new LoginWindow();
+            loginWindow.Show();
            
-         
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            var addEditStudentsWindow = new AddEditStudentsWindow();
+            addEditStudentsWindow.Show();
            
-        }
-
-        private void btnProfessors_Click(object sender, RoutedEventArgs e)
-        {
-            var professorsWindow = new ShowProfessorsWindow();
-            professorsWindow.ShowDialog();
-            //professorsWindow.Show();
-            //this.Close();
-        }
-
-        private void btnStudents_Click(object sender, RoutedEventArgs e)
-        {
-            var studentsWindow = new ShowStudentsWindow();
-            studentsWindow.ShowDialog();
-            //this.Hide();
-        }
-
-        private void btnSchools_Click(object sender, RoutedEventArgs e)
-        {
-            var schoolsWindow = new ShowSchoolsWindow();
-            schoolsWindow.ShowDialog();
-            //this.Hide();
-        }
-        private void btnLanguages_Click(object sender, RoutedEventArgs e)
-        {
-            var languagesWindow = new ShowLanguagesWindow();
-            languagesWindow.ShowDialog();
-            //this.Hide();
-        }
-        private void btnLessons_Click(object sender, RoutedEventArgs e)
-        {
-            var lessonsWindow = new ShowLessonsWindow();
-            lessonsWindow.ShowDialog();
-            /*this.Hide();*/
-        }
-        private void btnAddresses_Click(object sender, RoutedEventArgs e)
-        {
-            var addressesWindow = new ShowAddressesWindow();
-            addressesWindow.ShowDialog();
-            //this.Hide();
         }
     }
-}
+    }

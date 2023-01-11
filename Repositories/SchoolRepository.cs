@@ -126,11 +126,15 @@ namespace SR46_2021_POP2022.Repositories
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = @"update dbo.Schools set 
                         Name = @Name,
+                        AddressId = @AddressId,
+                        LanguageId = @LanguageId
                         where Id=@id";
 
                 command.Parameters.Add(new SqlParameter("id", id));
                 command.Parameters.Add(new SqlParameter("Name", school.Name));
-             
+                command.Parameters.Add(new SqlParameter("AddressId", school.AddressId));
+                command.Parameters.Add(new SqlParameter("LanguageId", school.LanguageId));
+
                 command.ExecuteScalar();
             }
         }

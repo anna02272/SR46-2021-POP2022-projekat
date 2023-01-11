@@ -1,0 +1,30 @@
+﻿<Window x:Class="SR46_2021_POP2022.Views.HomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SR46_2021_POP2022.Views"
+        mc:Ignorable="d"
+        Title="HomeWindow" Height="450" Width="800">
+    
+    <Grid>
+        <Button Name="btnProfessors"
+                Click="btnProfessors_Click" Margin="280,42,336,306">Professors</Button>
+
+        <Button Name="btnStudents"
+                Click="btnStudents_Click" Margin="31,42,585,306">Students</Button>
+
+        <Button Name="btnSchools"
+                Click="btnSchools_Click" Margin="516,42,100,306">Schools</Button>
+
+        <Button Name="btnLessons"
+                Click="btnLessons_Click" Margin="31,217,585,131">Lessons</Button>
+
+        <Button Name="btnLanguages"
+                Click="btnLanguages_Click" Margin="516,207,100,141">Languages</Button>
+
+        <Button Name="btnAddresses"
+                Click="btnAddresses_Click" Margin="280,217,336,131">Addresses</Button>
+    </Grid>
+</Window>
+

@@ -144,7 +144,7 @@ namespace SR46_2021_POP2022.Repositories
 
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = @"update dbo.Students 
-                        UserId = @UserId
+                        set UserId = @UserId
                         where Id=@id";
 
                 command.Parameters.Add(new SqlParameter("id", id));
