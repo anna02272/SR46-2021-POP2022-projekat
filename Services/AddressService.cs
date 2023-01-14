@@ -39,11 +39,12 @@ namespace SR46_2021_POP2022.Services
         {
             addressRepository.Set(addresses);
         }
-       
+
+        
 
         public void Update(int id, Address address)
         {
-            addressRepository.Update(id, address);
+            addressRepository.Update(address.Id, address);
         }
 
         public void Delete(int id)

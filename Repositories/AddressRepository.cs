@@ -147,7 +147,7 @@ namespace SR46_2021_POP2022.Repositories
                 command.Parameters.Add(new SqlParameter("Country", address.Country));
              
 
-                command.ExecuteNonQuery();
+                command.ExecuteScalar();
             }
         }
     }

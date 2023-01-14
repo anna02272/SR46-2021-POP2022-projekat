@@ -36,10 +36,7 @@ namespace SR46_2021_POP2022.Models
         {
             get
             {
-                //if (string.IsNullOrEmpty(Id))
-                //{
-                //    return "Id cannot be empty!";
-                //}
+              
                 if (string.IsNullOrEmpty(NameOfLanguage))
                 {
                     return "Name cannot be empty!";
@@ -56,11 +53,7 @@ namespace SR46_2021_POP2022.Models
             get
             {
                 IsValid = true;
-                //if (columnName == "Id" && string.IsNullOrEmpty(Id))
-                //{
-                //    IsValid = false;
-                //    return "Id cannot be empty!";
-                //}
+               
                 if (columnName == "NameOfLanguage" && string.IsNullOrEmpty(NameOfLanguage))
                 {
                     IsValid = false;

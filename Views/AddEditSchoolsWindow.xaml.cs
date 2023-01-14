@@ -30,7 +30,7 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
             this.school = school.Clone() as School;
 
-            DataContext = school;
+            DataContext = this.school;
 
             isAddMode = false;
             //txtId.IsReadOnly = true;

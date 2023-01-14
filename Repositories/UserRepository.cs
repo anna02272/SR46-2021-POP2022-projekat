@@ -85,7 +85,8 @@ namespace SR46_2021_POP2022.Repositories
                         JMBG = row["Jmbg"] as string,
                         Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
-                        IsActive = (bool)row["IsActive"]
+                        IsActive = (bool)row["IsActive"],
+                         AddressId = (int)row["AddressId"]
                     };
 
                     users.Add(user);
@@ -119,7 +120,8 @@ namespace SR46_2021_POP2022.Repositories
                         JMBG = row["Jmbg"] as string,
                         Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
-                        IsActive = (bool)row["IsActive"]
+                        IsActive = (bool)row["IsActive"],
+                        AddressId = (int)row["AddressId"]
                     };
 
                     return user;

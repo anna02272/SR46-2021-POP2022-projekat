@@ -24,8 +24,11 @@ namespace SR46_2021_POP2022.Views
         private LessonService lessonService = new LessonService();
         private AddEditLessonsWindow addEditLessonWindow;
 
+     
+
         public ShowLessonsWindow()
         {
+       
             InitializeComponent();
             RefreshDataGrid();
         }
@@ -60,7 +63,8 @@ namespace SR46_2021_POP2022.Views
                 }
             }
         }
-
+     
+     
         private void miDeleteLesson_Click(object sender, RoutedEventArgs e)
         {
             var selectedLesson = dgLessons.SelectedItem as Lesson;

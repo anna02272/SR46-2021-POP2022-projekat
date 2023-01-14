@@ -94,6 +94,7 @@ namespace SR46_2021_POP2022.Views
                     RefreshDataGrid();
                 }
             }
+
         }
 
         private void miDeleteLanguage_Click(object sender, RoutedEventArgs e)

@@ -74,6 +74,9 @@ namespace SR46_2021_POP2022.Repositories
                     {
                         Id = (int)row["Id"],
                         Name = row["Name"] as string,
+                        AddressId = (int)row["AddressId"],
+                        LanguageId = (int)row["LanguageId"],
+
                         IsDeleted = (bool)row["IsDeleted"]
                     };
 
@@ -102,6 +105,8 @@ namespace SR46_2021_POP2022.Repositories
                     {
                         Id = (int)row["Id"],
                         Name = row["Name"] as string,
+                        AddressId = (int)row["AddressId"],
+                        LanguageId = (int)row["LanguageId"],
                         IsDeleted = (bool)row["IsDeleted"]
                     };
 

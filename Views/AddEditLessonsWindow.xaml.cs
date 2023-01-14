@@ -31,7 +31,8 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
             this.lesson = lesson.Clone() as Lesson;
 
-            DataContext = lesson;
+            DataContext = this.lesson;
+          
 
             isAddMode = false;
             //txtId.IsReadOnly = true;
@@ -56,8 +57,8 @@ namespace SR46_2021_POP2022.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (lesson.IsValid)
-            {
+            //if (lesson.IsValid)
+            //{
                 if (isAddMode)
                 {
                     lessonService.Add(lesson);
@@ -69,7 +70,7 @@ namespace SR46_2021_POP2022.Views
 
                 DialogResult = true;
                 Close();
-            }
+            //}
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

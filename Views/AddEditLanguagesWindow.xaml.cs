@@ -24,9 +24,9 @@ namespace SR46_2021_POP2022.Views
     public partial class AddEditLanguagesWindow : Window
     {
         private Language language;
-            
+
         private ILanguageService languageService = new LanguageService();
-       
+
         private bool isAddMode;
 
         public AddEditLanguagesWindow(Language language)
@@ -34,11 +34,11 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
             this.language = language.Clone() as Language;
 
-            DataContext = language;
-
+            DataContext = this.language;
+          
             isAddMode = false;
             //txtId.IsReadOnly = true;
-           
+
         }
 
         public AddEditLanguagesWindow()
@@ -47,12 +47,13 @@ namespace SR46_2021_POP2022.Views
 
             language = new Language
             {
-             
+
                 IsDeleted = false,
-               
+                IsValid = true,
+
             };
 
-         
+
 
             isAddMode = true;
             DataContext = language;
@@ -60,6 +61,8 @@ namespace SR46_2021_POP2022.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+
+
             if (language.IsValid)
             {
                 if (isAddMode)
@@ -68,13 +71,17 @@ namespace SR46_2021_POP2022.Views
                 }
                 else
                 {
-                    languageService.Update(language.Id, this.language);
+                    languageService.Update(language.Id, language);
                 }
 
                 DialogResult = true;
                 Close();
             }
-        } 
+
+
+        }
+
+
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -82,8 +89,4 @@ namespace SR46_2021_POP2022.Views
             Close();
         }
     }
-   
-
-   
-
-        }
+}

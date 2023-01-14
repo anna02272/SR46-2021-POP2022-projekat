@@ -125,18 +125,20 @@ namespace SR46_2021_POP2022.Repositories
                 conn.Open();
 
                 SqlCommand command = conn.CreateCommand();
-                command.CommandText = @"update dbo.Languages set 
+                command.CommandText = @"update dbo.Languages set
                        NameOfLanguage = @NameOfLanguage
-                        where Id=@id";
+                        where Id = @id";
 
                 command.Parameters.Add(new SqlParameter("id", id));
                 command.Parameters.Add(new SqlParameter("NameOfLanguage", language.NameOfLanguage));
-             
-                command.ExecuteNonQuery();
+               
+
+                command.ExecuteScalar();
             }
         }
+
     }
-    }
+}
     //private static List<Language> languages = new List<Language>();
 
     //public void Add(Language language)

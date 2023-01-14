@@ -31,7 +31,7 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
             this.address = address.Clone() as Address;
 
-            DataContext = address;
+            DataContext = this.address;
 
             isAddMode = false;
             //txtId.IsReadOnly = true;

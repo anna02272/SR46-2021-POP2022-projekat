@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 namespace SR46_2021_POP2022.Models
 {
     [Serializable]
-    public class Lesson :ICloneable, IDataErrorInfo
+    public class Lesson :ICloneable, IDataErrorInfo, INotifyPropertyChanged
 
     {
         public int Id { get; set; }
@@ -28,6 +28,7 @@ namespace SR46_2021_POP2022.Models
             {
                 professor = value;
                ProfessorId = professor?.Id;
+                OnPropertyChanged("Professor");
             }
         }
         public int? ProfessorId { get; set; }
@@ -37,6 +38,7 @@ namespace SR46_2021_POP2022.Models
         public TimeSpan Duration { get; set; }
         public bool Status {get; set;}
 
+          
         private Student student;
         public Student Student
         {
@@ -45,6 +47,7 @@ namespace SR46_2021_POP2022.Models
             {
                 student = value;
                 StudentId = student?.Id;
+                OnPropertyChanged("StudentId");
             }
         }
         public int? StudentId { get; set; }
@@ -82,14 +85,14 @@ namespace SR46_2021_POP2022.Models
                 {
                     return "Name cannot be empty!";
                 }
-                if (Professor == null)
-                {
-                    return "Professor cannot be empty!";
-                }
-                if (Student == null)
-                {
-                    return "Student cannot be empty!";
-                }
+                //if (Professor == null)
+                //{
+                //    return "Professor cannot be empty!";
+                //}
+                //if (Student == null)
+                //{
+                //    return "Student cannot be empty!";
+                //}
                 if (Date == null)
                 {
                     return "Date cannot be empty!";
@@ -114,16 +117,16 @@ namespace SR46_2021_POP2022.Models
                     IsValid = false;
                     return "Name cannot be empty!";
                 }
-                if (columnName == "Professor" && Professor == null)
-                {
-                    IsValid = false;
-                    return "Professor cannot be empty!";
-                }
-                if (columnName == "Student" && Student == null)
-                {
-                    IsValid = false;
-                    return "Student cannot be empty!";
-                }
+                //if (columnName == "Professor" && Professor == null)
+                //{
+                //    IsValid = false;
+                //    return "Professor cannot be empty!";
+                //}
+                //if (columnName == "Student" && Student == null)
+                //{
+                //    IsValid = false;
+                //    return "Student cannot be empty!";
+                //}
                 if (columnName == "Date" && Date == null)
                 {
                     IsValid = false;
@@ -137,45 +140,7 @@ namespace SR46_2021_POP2022.Models
                 return "";
             }
         }
-
-    
-       
-   
-
-    public override string ToString()
-        {
-           return $"{Name}, {Professor}  {Date}, {Duration}, {Status}, {Student}";
-        }
-
-      
-        //public Student student
-        //{
-        //    get
-        //    {
-        //        return student;
-        //    }
-        //    set
-        //    {
-        //        student = value;
-        //        OnPropertyChanged("Student");
-        //    }
-
-        //}
-       
-        //public Professor professor
-        //{
-        //    get
-        //    {
-        //        return professor;
-        //    }
-        //    set
-        //    {
-        //        professor = value;
-        //        OnPropertyChanged("Professor");
-        //    }
-
-        //}
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         //protected void OnPropertyChanged(String propertyName)
         //{
@@ -184,6 +149,33 @@ namespace SR46_2021_POP2022.Models
         //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         //    }
         //}
+
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        }
+
+
+
+
+        public override string ToString()
+        {
+           return $"{Name}, {Professor}  {Date}, {Duration}, {Status}, {Student}";
+        }
+
+      
+    
+       
+       
+
+    
     }
 }
 

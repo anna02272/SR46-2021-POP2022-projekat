@@ -80,11 +80,14 @@ namespace SR46_2021_POP2022.Repositories
                     {
                         Id = (int)row["Id"],
                         Name = row["Name"] as string,
+                        ProfessorId = (int)row["ProfessorId"],
                         Date = (DateTime)row["Date"] ,
                         //Time = (DateTime)row["Time"],
                         Duration = (TimeSpan)row["Duration"],
                         Status = (bool)row["Status"],
-                         IsDeleted = (bool)row["IsDeleted"]
+                        StudentId = (int)row["StudentId"],
+
+                        IsDeleted = (bool)row["IsDeleted"]
 
                     };
 
@@ -113,10 +116,13 @@ namespace SR46_2021_POP2022.Repositories
                     {
                         Id = (int)row["Id"],
                         Name = row["Name"] as string,
+                        ProfessorId = (int)row["ProfessorId"],
                         Date = (DateTime)row["Date"],
                         //Time = (DateTime)row["Time"],
                         Duration = (TimeSpan)row["Duration"],
                         Status = (bool)row["Status"],
+                        StudentId = (int)row["StudentId"],
+
                         IsDeleted = (bool)row["IsDeleted"]
                     };
 
@@ -141,10 +147,11 @@ namespace SR46_2021_POP2022.Repositories
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = @"update dbo.Lessons set 
                         Name = @Name,
+                        ProfessorId = @ProfessorId,
                         Date = @Date,
-          
                         Duration = @Duration,
-                        Status = @Status
+                        Status = @Status,
+                        StudentId = @StudentId
                         where Id=@id";
 
                 command.Parameters.Add(new SqlParameter("id", id));
@@ -155,7 +162,7 @@ namespace SR46_2021_POP2022.Repositories
                 command.Parameters.Add(new SqlParameter("Status", lesson.Status));
 
 
-                command.ExecuteNonQuery();
+                command.ExecuteScalar();
             }
         }
     }

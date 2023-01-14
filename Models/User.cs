@@ -30,6 +30,7 @@ namespace SR46_2021_POP2022.Models
             {
                 address = value;
                 AddressId = address?.Id;
+
             }
         }
         public int? AddressId { get; set; }
@@ -63,6 +64,8 @@ namespace SR46_2021_POP2022.Models
                 Address = Address?.Clone() as Address
             };
         }
+
+
         public string Error
         {
             get
@@ -87,17 +90,27 @@ namespace SR46_2021_POP2022.Models
                 {
                     return "JMBG cannot be empty!";
                 }
-
+                else if (!AddressId.HasValue)
+                {
+                    return "AddressId cannot be empty!";
+                }
+                //if (!IsUnique(Email, JMBG))
+                //{
+                //    return "Email or JMBG already exist!";
+                //}
                 return "";
             }
         }
+
+
+      
 
         public string this[string columnName]
         {
 
             get
             {
-                IsValid = true;
+               
                 if (columnName == "Email" && string.IsNullOrEmpty(Email))
                 {
                     IsValid = false;
@@ -123,10 +136,37 @@ namespace SR46_2021_POP2022.Models
                     IsValid = false;
                     return "JMBG cannot be empty!";
                 }
+                //else if (columnName == "Email" && !IsUnique(Email, JMBG))
+                //{
+                //    IsValid = false;
+                //    return "Email or JMBG already exists!";
+                //}
+                else
+                {
+                    IsValid = true;
+                }
 
                 return "";
             }
         }
+
+
+      
+
+        //public bool IsUnique(string email, string jmbg)
+        //{
+        //    using (var connection = new SqlConnection(Config.CONNECTION_STRING))
+        //    {
+        //        connection.Open();
+        //        using (var command = new SqlCommand("SELECT COUNT(*) FROM dbo.Users WHERE Email = @Email OR Jmbg = @Jmbg ", connection))
+        //        {
+        //            command.Parameters.AddWithValue("Email", email);
+        //            command.Parameters.AddWithValue("@Jmbg", jmbg);
+        //            return (int)command.ExecuteScalar() == 0;
+        //        }
+        //    }
+        //}
+
         public bool Login(string email, string password)
         {
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
@@ -163,6 +203,8 @@ namespace SR46_2021_POP2022.Models
                 }
             }
         }
+       
+
 
     }
     //[Serializable]
