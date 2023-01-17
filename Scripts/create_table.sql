@@ -50,6 +50,11 @@ CREATE TABLE dbo.Professors
  CONSTRAINT FK_USERS_PROFESSORS
  FOREIGN KEY (UserId) REFERENCES dbo.Users (Id)
 )
+ALTER TABLE dbo.Professors
+ADD SchoolId INT,
+    CONSTRAINT FK_SCHOOLS_PROFESSORS
+    FOREIGN KEY (SchoolId) REFERENCES dbo.Schools (Id);
+
 
 CREATE TABLE dbo.Students
 (
@@ -104,4 +109,5 @@ select * from schools
 select * from lessons
 select * from languages
 select * from Administrators
+
 

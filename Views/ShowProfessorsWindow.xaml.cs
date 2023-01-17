@@ -198,8 +198,8 @@ namespace SR46_2021_POP2022.Views
                     .Where(prof => prof.User.FirstName.ToLower().Contains(searchTerm.ToLower())
                                  || prof.User.LastName.ToLower().Contains(searchTerm.ToLower())
                                  || prof.User.Email.ToLower().Contains(searchTerm.ToLower())
-                             || prof.User.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
-
+                             || prof.User.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase)
+                               || prof.School.Name.ToLower().Contains(searchTerm.ToLower()))
 
                     .ToList();
 

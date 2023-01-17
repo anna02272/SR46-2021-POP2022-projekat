@@ -68,7 +68,7 @@ namespace SR46_2021_POP2022.Repositories
 
                 DataSet ds = new DataSet();
 
-                dataAdapter.Fill(ds, "Schools");
+                dataAdapter.Fill(ds, "Schools"); 
 
                 foreach (DataRow row in ds.Tables["Schools"].Rows)
                 {

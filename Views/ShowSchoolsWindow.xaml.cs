@@ -22,26 +22,49 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowSchoolsWindow : Window
     {
         private SchoolService schoolService = new SchoolService();
+        public enum State { ADMINISTRATION, DOWNLOADING };
+        State state;
+        public School SelectedSchool = null;
 
         private bool isRegistered;
 
-        public ShowSchoolsWindow(bool isRegistered = true)
+        public ShowSchoolsWindow(State state = State.ADMINISTRATION, bool isRegistered = true)
         {
             InitializeComponent();
             RefreshDataGrid();
-            this.isRegistered = isRegistered;
-            if (!isRegistered)
+            this.state = state;
+
+            if (state == State.DOWNLOADING)
             {
                 miAddSchool.Visibility = Visibility.Collapsed;
                 miUpdateSchool.Visibility = Visibility.Collapsed;
                 miDeleteSchool.Visibility = Visibility.Collapsed;
             }
+            else if (!isRegistered)
+            {
+                miAddSchool.Visibility = Visibility.Collapsed;
+                miUpdateSchool.Visibility = Visibility.Collapsed;
+                miDeleteSchool.Visibility = Visibility.Collapsed;
+                miPickSchool.Visibility = Visibility.Collapsed;
+            }
+            else if (state == State.ADMINISTRATION)
+            {
+                miPickSchool.Visibility = Visibility.Hidden;
+            }
+
 
             dgSchools.ItemsSource = schoolService.GetActiveSchools();
             dgSchools.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
-        
 
+
+
+        private void miPickSchool_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedSchool = dgSchools.SelectedItem as School;
+            this.DialogResult = true;
+            this.Close();
+        }
 
         private void miAddSchool_Click(object sender, RoutedEventArgs e)
         {
@@ -99,22 +122,87 @@ namespace SR46_2021_POP2022.Views
             }
         }
 
+        //private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Enter)
+        //    {
+        //        string searchTerm = txtSearch.Text;
+        //        SchoolService schoolService = new SchoolService();
+        //        List<School> filteredSchool = schoolService.GetActiveSchools()
+        //            .Where(school =>
+        //            //school.Name.ToLower().Contains(searchTerm.ToLower())
+        //                          //||
+        //                          school.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+        //                     //|| school.Language.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+
+
+        //            .ToList();
+
+        //        dgSchools.ItemsSource = filteredSchool;
+        //    }
+        //}
+
+        List<School> filteredSchoolByAddress = new List<School>();
+        List<School> filteredSchoolByLanguage = new List<School>();
+        List<School> filteredSchoolByName = new List<School>();
+
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 string searchTerm = txtSearch.Text;
-                SchoolService schoolService = new SchoolService();
-                List<School> filteredSchool = schoolService.GetActiveSchools()
-                    .Where(school => school.Name.ToLower().Contains(searchTerm.ToLower())
-                                  || school.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase)
-                             || school.Language.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
-
-
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    SchoolService schoolService = new SchoolService();
+                    filteredSchoolByAddress = schoolService.GetActiveSchools();
+                    dgSchools.ItemsSource = filteredSchoolByAddress;
+                    return;
+                }
+                filteredSchoolByAddress = schoolService.GetActiveSchools()
+                    .Where(school => school.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
                     .ToList();
 
-                dgSchools.ItemsSource = filteredSchool;
+                dgSchools.ItemsSource = filteredSchoolByAddress;
             }
         }
+
+        private void txtSearch2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchTerm = txtSearch2.Text;
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    dgSchools.ItemsSource = filteredSchoolByLanguage;
+                    return;
+                }
+                filteredSchoolByLanguage = schoolService.GetActiveSchools()
+                    .Where(school => school.Language.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                dgSchools.ItemsSource = filteredSchoolByLanguage;
+            }
+        }
+
+        private void txtSearch3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchTerm = txtSearch3.Text;
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    dgSchools.ItemsSource = filteredSchoolByName;
+                    return;
+                }
+                filteredSchoolByName = schoolService.GetActiveSchools()
+                    .Where(school => school.Name.ToLower().Contains(searchTerm.ToLower()))
+                    .ToList();
+
+                dgSchools.ItemsSource = filteredSchoolByName;
+            }
+        }
+
+
+
     }
 }

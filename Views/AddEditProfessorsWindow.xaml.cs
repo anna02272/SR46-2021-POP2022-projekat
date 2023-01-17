@@ -36,6 +36,7 @@ namespace SR46_2021_POP2022.Views
 
             DataContext = this.professor;
             tbAddress.DataContext = professor;
+            tbSchool.DataContext = professor;
 
             isAddMode = false;
             txtJMBG.IsReadOnly = true;
@@ -95,6 +96,15 @@ namespace SR46_2021_POP2022.Views
             {
                 professor.User.Address = aw.SelectedAddress;
               
+            }
+        }
+        private void btnPickSchool_Click(object sender, RoutedEventArgs e)
+        {
+            ShowSchoolsWindow aw = new ShowSchoolsWindow(ShowSchoolsWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                professor.School = aw.SelectedSchool;
+
             }
         }
     }

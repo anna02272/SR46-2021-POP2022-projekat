@@ -9,29 +9,61 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+           
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" 
+        <Menu Grid.Row="1" 
               VerticalAlignment="Top" 
               Height="30">
             <MenuItem Name="miAddSchool" Height="30" Header="Add school" Click="miAddSchool_Click"></MenuItem>
             <MenuItem Name="miUpdateSchool" Height="30" Header="Update school" Click="miUpdateSchool_Click"></MenuItem>
             <MenuItem Name="miDeleteSchool" Height="30" Header="Delete school" Click="miDeleteSchool_Click"></MenuItem>
+            <MenuItem Name="miPickSchool" Height="30" Header="Pick school" Click="miPickSchool_Click"></MenuItem>
+
         </Menu>
 
+        <Label Grid.Column="0" Grid.Row="0" 
+               Name="lblAddress" 
+               Content="Address:"
+               HorizontalAlignment="Left" Width="62" Margin="23,-1,0,1"/>
+
         <TextBox Name="txtSearch"  Grid.Column="0" 
-                 Margin="5,0,0,0" Width="350" Height="18" 
-                 HorizontalAlignment="Left" VerticalAlignment="Center"
-                  KeyDown="txtSearch_KeyDown" 
+                 Margin="95,4,0,0" Width="225" Height="18" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top"
+                  KeyDown="txtSearch_KeyDown" Grid.Row="0" 
                   />
+        <Label Grid.Row="0" 
+               Name="lblLang" 
+               Content="Language:"
+               HorizontalAlignment="Left" Width="62" Margin="358,-1,0,1"/>
+        <TextBox Name="txtSearch2"  Grid.Column="0" 
+                 Margin="425,0,0,0" Width="185" Height="18" 
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                  KeyDown="txtSearch2_KeyDown" 
+                  />
+        <Label Grid.Row="0" 
+               Name="lblName" 
+               Content="Name of school:"
+               HorizontalAlignment="Left" Width="97" Margin="670,-2,0,2" RenderTransformOrigin="0.5,0.5">
+          
+        </Label>
+        <TextBox Name="txtSearch3"  Grid.Column="0" 
+                 Margin="780,0,0,0" Width="185" Height="18" 
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                  KeyDown="txtSearch3_KeyDown" 
+                  />
+
         <DataGrid CanUserAddRows="False" 
                   IsReadOnly="True" 
-                  Grid.Row="1" 
+                  Grid.Row="2" 
                   Name="dgSchools" 
                   Width="1000" 
                   Margin="0,0,-8,0"
                   AutoGeneratingColumn="dgSchools_AutoGeneratingColumn"/>
+
+      
 
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SR46_2021_POP2022.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,7 @@ namespace SR46_2021_POP2022.Views
 
         private void btnSchools_Click(object sender, RoutedEventArgs e)
         {
-            var schoolsWindow = new ShowSchoolsWindow( false);
+            var schoolsWindow = new ShowSchoolsWindow(ShowSchoolsWindow.State.ADMINISTRATION, false);
             schoolsWindow.ShowDialog();
 
         }

@@ -22,11 +22,12 @@ namespace SR46_2021_POP2022.Repositories
 
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = @"
-                    insert into dbo.Professors (UserId)
+                    insert into dbo.Professors (UserId, SchoolId)
                     output inserted.Id
-                    values (@UserId)";
+                    values (@UserId, @SchoolId)";
 
                 command.Parameters.Add(new SqlParameter("UserId", professor.UserId));
+                command.Parameters.Add(new SqlParameter("SchoolId", (object)professor.SchoolId ?? DBNull.Value));
 
                 return (int)command.ExecuteScalar();
             }
@@ -57,9 +58,10 @@ namespace SR46_2021_POP2022.Repositories
 
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                string commandText = "select p.*, u.*, a.* from dbo.Professors p join dbo.Users u " +
-                    "on p.UserId = u.id  join dbo.Addresses a on u.AddressId = a.Id";
-                                        
+                string commandText = "select p.*, u.*, a.*, s.* from dbo.Professors p join dbo.Users u " +
+                 "on p.UserId = u.id  join dbo.Addresses a on u.AddressId = a.Id " +
+                 "left join dbo.Schools s on p.SchoolId = s.Id";
+
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
 
                 DataSet ds = new DataSet();
@@ -79,24 +81,44 @@ namespace SR46_2021_POP2022.Repositories
                         Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
                         IsActive = (bool)row["IsActive"],
-                        AddressId = (int)row["AddressId"]
-
+                        AddressId = (int)row["AddressId"],
+                        Address = new Address
+                        {
+                            Id = (int)row["AddressId"],
+                            Street = row["Street"] as string,
+                            StreetNumber = row["StreetNumber"] as string,
+                            City = row["City"] as string,
+                            Country = row["Country"] as string
+                        }
+                      
 
                     };
 
                     var professor = new Professor
                     {
                         Id = (int)row["id"],
-                        User = user
+                        User = user,
+                        SchoolId = (int)row["SchoolId"], 
+                        School = new School
+                        {
+                            Id = (int)row["SchoolId"],
+                            Name = row["Name"] as string
+                        }
                     };
-                    user.Address = new Address
-                    {
-                        Id = (int)row["AddressId"],
-                        Street = row["Street"] as string,
-                        StreetNumber = row["StreetNumber"] as string,
-                        City = row["City"] as string,
-                        Country = row["Country"] as string
-                    };
+                    //user.Address = new Address
+                    //{
+                    //    Id = (int)row["AddressId"],
+                    //    Street = row["Street"] as string,
+                    //    StreetNumber = row["StreetNumber"] as string,
+                    //    City = row["City"] as string,
+                    //    Country = row["Country"] as string
+                    //};
+                    //professor.School = new School
+                    //{
+                    //    Id = (int)row["SchoolId"],
+                    //    Name = row["Name"] as string
+
+                    //};
 
                     professors.Add(professor);
                 }
@@ -137,7 +159,8 @@ namespace SR46_2021_POP2022.Repositories
 
                     var professor = new Professor
                     {
-                        User = user
+                        User = user,
+                        SchoolId = (int)row["SchoolId"]
                     };
 
                     return professor;
@@ -160,66 +183,20 @@ namespace SR46_2021_POP2022.Repositories
 
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = @"update dbo.Professors 
-                        set UserId = @UserId
+                        set UserId = @UserId, 
+                        SchoolId = @SchoolId
                         where Id=@id";
 
                 command.Parameters.Add(new SqlParameter("id", id));
                 command.Parameters.Add(new SqlParameter("UserId", professor.UserId));
+                command.Parameters.Add(new SqlParameter("SchoolId", professor.SchoolId));
 
                 command.ExecuteScalar();
             }
         }
 
 
-        //public List<Professor> Search(string search)
-        //{
-        //    List<Professor> professors = new List<Professor>();
-
-        //    using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
-        //    {
-        //        string commandText = @"
-        //    select * 
-        //    from dbo.Professors p 
-        //    inner join dbo.Users u on p.UserId = u.Id
-        //    where u.FirstName like @search
-        //    or u.LastName like @search
-        //    or u.Email like @search";
-
-        //        SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
-        //        dataAdapter.SelectCommand.Parameters.AddWithValue("@search", "%" + search + "%");
-
-        //        DataSet ds = new DataSet();
-
-        //        dataAdapter.Fill(ds, "Professors");
-
-        //        foreach (DataRow row in ds.Tables["Professors"].Rows)
-        //        {
-        //            var user = new User
-        //            {
-        //                Id = (int)row["UserId"],
-        //                FirstName = row["FirstName"] as string,
-        //                LastName = row["LastName"] as string,
-        //                Email = row["Email"] as string,
-        //                Password = row["Password"] as string,
-        //                JMBG = row["Jmbg"] as string,
-        //                Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
-        //                UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
-        //                IsActive = (bool)row["IsActive"],
-        //                AddressId = (int)row["AddressId"]
-        //            };
-
-        //            var professor = new Professor
-        //            {
-        //                Id = (int)row["id"],
-        //                User = user
-        //            };
-
-        //            professors.Add(professor);
-        //        }
-        //    }
-
-        //    return professors;
-        //}
+    
 
     }
 }

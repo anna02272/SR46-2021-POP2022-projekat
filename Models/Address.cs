@@ -102,7 +102,7 @@ namespace SR46_2021_POP2022.Models
         }
         public override string ToString()
         {
-            return $"{Street}, {StreetNumber}, {City}, {Country}";
+            return $"{Street}, {City}";
         }
 
      
