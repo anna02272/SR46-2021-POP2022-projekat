@@ -7,49 +7,49 @@
         mc:Ignorable="d"
         Title="AddEditSchoolsWindow" Height="450" Width="800">
     <Grid>
-       
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="23*"></ColumnDefinition>
-                    <ColumnDefinition Width="76*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
 
-                    <RowDefinition Height="170*"></RowDefinition>
-                </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="23*"></ColumnDefinition>
+            <ColumnDefinition Width="76*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
 
-                <!--<Label Grid.Column="0" Grid.Row="0" 
+            <RowDefinition Height="170*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--<Label Grid.Column="0" Grid.Row="0" 
                Name="lblId" 
                Content="Id:"
                HorizontalAlignment="Right" Width="41"></Label>
 
                 <TextBox Grid.Column="1" Grid.Row="0" Name="txtId" Margin="5,5,344,5" Text="{Binding Path = Id, ValidatesOnDataErrors=True}"></TextBox>-->
 
-                <Label Grid.Column="0" Grid.Row="1" 
+        <Label Grid.Column="0" Grid.Row="1" 
                Name="lblName" 
                Content="Name:"
                HorizontalAlignment="Right" Width="62"></Label>
 
-               
-                <TextBox Grid.Column="1" Grid.Row="1" Name="txtName"  Margin="5,5,344,5" Text="{Binding Path=Name, ValidatesOnDataErrors=True}"></TextBox>
-       
-                <Label Grid.Column="0" Grid.Row="2" 
+
+        <TextBox Grid.Column="1" Grid.Row="1" Name="txtName"  Margin="5,5,344,5" Text="{Binding Path=Name, ValidatesOnDataErrors=True}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="2" 
                        Name="lblAddress" 
                        Content="Address:"
                        HorizontalAlignment="Left" Width="62" Grid.ColumnSpan="2" Margin="124,0,0,28" Grid.RowSpan="2"/>
 
-            <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbAddress" Text="Address" VerticalAlignment="Top" Width="60" />
-            <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path= AddressId, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbAddress" VerticalAlignment="Top" Width="269" IsReadOnly="True" />
-            <Button Content="..."  Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="289,2,0,0" Name="btnPickAddress" VerticalAlignment="Top" Width="30" Click="btnPickAddress_Click" RenderTransformOrigin="0.671,-0.023" />
+        <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbAddress" Text="Address" VerticalAlignment="Top" Width="60" />
+        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path= AddressId, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbAddress" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+        <Button Content="..."  Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="79,2,0,0" Name="btnPickAddress" VerticalAlignment="Top" Width="30" Click="btnPickAddress_Click" RenderTransformOrigin="0.671,-0.023" />
 
         <Label Grid.Column="0" Grid.Row="3" 
                        Name="lblLanguage" 
@@ -57,19 +57,19 @@
                        HorizontalAlignment="Left" Width="62" Grid.ColumnSpan="2" Margin="124,0,0,28" Grid.RowSpan="2"/>
 
         <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbLanguage" Text="Language" VerticalAlignment="Top" Width="60" />
-        <TextBox  Grid.Column="1" Grid.Row="3" Text="{Binding Path= LanguageId, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbLanguage" VerticalAlignment="Top" Width="269" IsReadOnly="True" />
-        <Button Content="..."  Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Margin="289,2,0,0" Name="btnPickLanguage" VerticalAlignment="Top" Width="30" Click="btnPickLanguage_Click" RenderTransformOrigin="0.671,-0.023" />
+        <TextBox  Grid.Column="1" Grid.Row="3" Text="{Binding Path= LanguageId, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbLanguage" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+        <Button Content="..."  Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Margin="79,3,0,0" Name="btnPickLanguage" VerticalAlignment="Top" Width="30" Click="btnPickLanguage_Click" RenderTransformOrigin="0.671,-0.023" />
 
 
 
 
 
-            <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="btnCancel_Click">Cancel</Button>
-                <Button Name="btnSave" Grid.Column="1" Grid.Row="9" Width="100" Margin= "214,31,300,73" Click="btnSave_Click">Save</Button>
+        <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="btnCancel_Click">Cancel</Button>
+        <Button Name="btnSave" Grid.Column="1" Grid.Row="9" Width="100" Margin= "214,31,300,73" Click="btnSave_Click">Save</Button>
 
 
 
-         
+
 
     </Grid>
 </Window>

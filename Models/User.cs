@@ -7,6 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using SR46_2021_POP2022.Validations;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace SR46_2021_POP2022.Models
 {
@@ -37,15 +40,18 @@ namespace SR46_2021_POP2022.Models
 
         public bool IsActive { get; set; }
         public bool IsValid { get; set; }
+      
 
         public User()
         {
             IsActive = true;
+           
         }
+
 
         public override string ToString()
         {
-            return $"[User] {FirstName} {LastName}, {Email}";
+            return $" {FirstName} {LastName}, {Email},  {Address}";
         }
 
         public object Clone()
@@ -65,15 +71,41 @@ namespace SR46_2021_POP2022.Models
             };
         }
 
+        
+
 
         public string Error
         {
             get
             {
-                if (string.IsNullOrEmpty(Email) )
+
+                if (string.IsNullOrEmpty(Email))
                 {
                     return "Email cannot be empty!";
                 }
+                //if (!IsUniqueEmail(Email))
+                //{
+                //    return "Email already exist!";
+                //}
+
+                EMailValidationRule validator = new EMailValidationRule();
+                if (validator.Validate(Email, null) != ValidationResult.ValidResult)
+                {
+                    return "Wrong e-mail format or email already exists";
+                }
+                else if (string.IsNullOrEmpty(JMBG))
+                {
+                    return "JMBG cannot be empty!";
+                }
+                //if (!IsUniqueJmbg(JMBG))
+                //{
+                //    return "JMBG already exist!";
+                //}
+                if (JMBG.Length != 13)
+                {
+                    return "JMBG has to be 13 characters!";
+                }
+
                 else if (string.IsNullOrEmpty(Password))
                 {
                     return "Password cannot be empty!";
@@ -86,18 +118,13 @@ namespace SR46_2021_POP2022.Models
                 {
                     return "Last name cannot be empty!";
                 }
-                else if (string.IsNullOrEmpty(JMBG))
-                {
-                    return "JMBG cannot be empty!";
-                }
-                else if (!AddressId.HasValue)
-                {
-                    return "AddressId cannot be empty!";
-                }
-                //if (!IsUnique(Email, JMBG))
+
+                //else if (!AddressId.HasValue)
                 //{
-                //    return "Email or JMBG already exist!";
+                //    return "AddressId cannot be empty!";
                 //}
+               
+
                 return "";
             }
         }
@@ -110,12 +137,47 @@ namespace SR46_2021_POP2022.Models
 
             get
             {
-               
-                if (columnName == "Email" && string.IsNullOrEmpty(Email))
+
+
+
+                if (columnName == "Email")
                 {
-                    IsValid = false;
-                    return "Email cannot be empty!";
+                    EMailValidationRule validator = new EMailValidationRule();
+                    if (string.IsNullOrEmpty(Email))
+                    {
+                        return "Email cannot be empty!";
+                    }
+
+                    //if (!IsUniqueEmail(Email))
+                    //{
+                    //    return "Email already exist!";
+                    //}
+
+                    if (validator.Validate(Email, null) != ValidationResult.ValidResult)
+                    {
+                        return "Wrong e-mail format or email already exists";
+                    }
                 }
+                if (columnName == "JMBG")
+                {
+                  
+                    if (string.IsNullOrEmpty(JMBG))
+                    {
+                        return "JMBG cannot be empty!";
+                    }
+
+                    //if (!IsUniqueJmbg(JMBG))
+                    //{
+                    //    return "JMBG already exist!";
+                    //}
+                    if (JMBG.Length != 13)
+                    {
+                        return "JMBG has to be 13 characters!";
+                    }
+
+
+                  }
+            
                 else if (columnName == "Password" && string.IsNullOrEmpty(Password))
                 {
                     IsValid = false;
@@ -131,41 +193,52 @@ namespace SR46_2021_POP2022.Models
                     IsValid = false;
                     return "Last name cannot be empty!";
                 }
-                else if (columnName == "JMBG" && string.IsNullOrEmpty(JMBG))
-                {
-                    IsValid = false;
-                    return "JMBG cannot be empty!";
-                }
-                //else if (columnName == "Email" && !IsUnique(Email, JMBG))
+               
+
+                //else if (columnName == "AddressId" && !AddressId.HasValue)
                 //{
                 //    IsValid = false;
-                //    return "Email or JMBG already exists!";
+                //    return "Address cannot be empty!";
                 //}
-                else
-                {
-                    IsValid = true;
-                }
+
+
+                IsValid = true;
+
 
                 return "";
             }
         }
 
 
-      
 
-        //public bool IsUnique(string email, string jmbg)
-        //{
-        //    using (var connection = new SqlConnection(Config.CONNECTION_STRING))
-        //    {
-        //        connection.Open();
-        //        using (var command = new SqlCommand("SELECT COUNT(*) FROM dbo.Users WHERE Email = @Email OR Jmbg = @Jmbg ", connection))
-        //        {
-        //            command.Parameters.AddWithValue("Email", email);
-        //            command.Parameters.AddWithValue("@Jmbg", jmbg);
-        //            return (int)command.ExecuteScalar() == 0;
-        //        }
-        //    }
-        //}
+
+        public bool IsUniqueEmail(string email)
+        {
+            using (var connection = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                connection.Open();
+                using (var command = new SqlCommand("SELECT COUNT(*) FROM dbo.Users WHERE Email = @Email  ", connection))
+                {
+                    command.Parameters.AddWithValue("Email", email);
+                
+                    return (int)command.ExecuteScalar() == 0;
+                }
+            }
+        }
+
+        public bool IsUniqueJmbg(string jmbg)
+        {
+            using (var connection = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                connection.Open();
+                using (var command = new SqlCommand("SELECT COUNT(*) FROM dbo.Users WHERE Jmbg = @Jmbg ", connection))
+                {
+                 
+                    command.Parameters.AddWithValue("@Jmbg", jmbg);
+                    return (int)command.ExecuteScalar() == 0;
+                }
+            }
+        }
 
         public bool Login(string email, string password)
         {
@@ -192,6 +265,7 @@ namespace SR46_2021_POP2022.Models
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
                         IsActive = (bool)row["IsActive"]
                     };
+                   
                     if (user.IsActive)
                         return true;
                     else
@@ -201,6 +275,8 @@ namespace SR46_2021_POP2022.Models
                 {
                     return false;
                 }
+               
+
             }
         }
        

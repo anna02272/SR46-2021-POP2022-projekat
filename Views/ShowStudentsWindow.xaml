@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR46_2021_POP2022.Views"
         mc:Ignorable="d"
-        Title="ShowStudentsWindow" Height="450" Width="800">
+        Title="ShowStudentsWindow" Height="450" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -26,7 +26,7 @@
                   IsReadOnly="True" 
                   Grid.Row="1" 
                   Name="dgStudents" 
-                  Width="800" 
+                  Width="1000" 
                   Margin="0,0,-8,0"
                   AutoGeneratingColumn="dgStudents_AutoGeneratingColumn"/>
 

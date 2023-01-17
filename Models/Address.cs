@@ -104,5 +104,7 @@ namespace SR46_2021_POP2022.Models
         {
             return $"{Street}, {StreetNumber}, {City}, {Country}";
         }
+
+     
     }
 }

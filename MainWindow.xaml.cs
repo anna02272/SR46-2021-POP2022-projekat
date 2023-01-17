@@ -28,20 +28,24 @@ namespace SR46_2021_POP2022
                 InitializeComponent();
             }
 
-            private void btnStart_Click(object sender, RoutedEventArgs e)
-            {
-                var homeWindow = new HomeWindow();
-                homeWindow.Show();
-               
-            }
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            var norRegisteredHomeWindow = new NotRegisteredHomeWindow();
+            norRegisteredHomeWindow.Show();
 
+        }
 
+       
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             var loginWindow = new LoginWindow();
             loginWindow.Show();
+            this.Hide();
+         
+
            
         }
+
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {

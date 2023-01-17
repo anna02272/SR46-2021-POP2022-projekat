@@ -34,6 +34,9 @@ namespace SR46_2021_POP2022.Models
         public int? ProfessorId { get; set; }
 
         public DateTime Date { get; set; }
+
+       
+
         //public DateTime Time { get; set; }
         public TimeSpan Duration { get; set; }
         public bool Status {get; set;}
@@ -47,7 +50,7 @@ namespace SR46_2021_POP2022.Models
             {
                 student = value;
                 StudentId = student?.Id;
-                OnPropertyChanged("StudentId");
+                OnPropertyChanged("Student");
             }
         }
         public int? StudentId { get; set; }
@@ -85,28 +88,29 @@ namespace SR46_2021_POP2022.Models
                 {
                     return "Name cannot be empty!";
                 }
-                //if (Professor == null)
-                //{
-                //    return "Professor cannot be empty!";
-                //}
-                //if (Student == null)
-                //{
-                //    return "Student cannot be empty!";
-                //}
-                if (Date == null)
+              
+                if (Date == null && Date < DateTime.Now)
                 {
-                    return "Date cannot be empty!";
+                    return "Date must be in the future.";
                 }
+            
                 if (Duration == null)
                 {
                     return "Duration cannot be empty!";
                 }
+                //else if (!StudentId.HasValue)
+                //{
+                //    return "Student cannot be empty!";
+                //}
+                //else if (!ProfessorId.HasValue)
+                //{
+                //    return "Professor cannot be empty!";
+                //}
                 return "";
             }
 
 
         }
-
         public string this[string columnName]
         {
             get
@@ -117,38 +121,39 @@ namespace SR46_2021_POP2022.Models
                     IsValid = false;
                     return "Name cannot be empty!";
                 }
-                //if (columnName == "Professor" && Professor == null)
-                //{
-                //    IsValid = false;
-                //    return "Professor cannot be empty!";
-                //}
-                //if (columnName == "Student" && Student == null)
-                //{
-                //    IsValid = false;
-                //    return "Student cannot be empty!";
                 //}
                 if (columnName == "Date" && Date == null)
                 {
                     IsValid = false;
                     return "Date cannot be empty!";
                 }
-                if (columnName == "Duration" && Duration == null)
+                else if (columnName == "Date" && Date < DateTime.Now)
+                {
+                    IsValid = false;
+                    return "Date must be in the future.";
+                }
+                else if (columnName == "Duration" && Duration == null)
                 {
                     IsValid = false;
                     return "Duration cannot be empty!";
                 }
+                //else if (columnName == "ProfessorId" && !ProfessorId.HasValue)
+                   
+                //{
+                //    IsValid = false;
+                //    return "Professor cannot be empty!";
+                //}
+                //else if (columnName == "StudentId" && !StudentId.HasValue)
+                //{
+                //    IsValid = false;
+                //    return "Student cannot be empty!";
+                //}
                 return "";
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //protected void OnPropertyChanged(String propertyName)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
+
 
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {

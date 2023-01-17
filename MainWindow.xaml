@@ -11,6 +11,8 @@
                 Click="btnStart_Click" Margin="315,324,340,60">
             Access without logging in
         </Button>
+
+      
         <Button Name ="btnLogin" Click="btnLogin_Click" Content="Log in" HorizontalAlignment="Left" Height="50" Margin="140,109,0,0" VerticalAlignment="Top" Width="175" />
 
 

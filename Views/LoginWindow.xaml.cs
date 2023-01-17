@@ -2,6 +2,7 @@
 using SR46_2021_POP2022.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,67 +22,90 @@ namespace SR46_2021_POP2022.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private User user;
-        private IUserService userService = new UserService();
-        private bool isAddMode;
-
-        public LoginWindow(User user)
-        {
-            InitializeComponent();
-            this.user = user.Clone() as User;
-
-            DataContext = user;
-
-            isAddMode = false;
-        }
-
 
         public LoginWindow()
         {
             InitializeComponent();
 
-            user = new User
-            {
-
-                IsActive = true
-            };
-
-
-
-            isAddMode = true;
-            DataContext = user;
+           
         }
+        public User _loggedInUser;
+        public EUserType _loggedInUserType;
+        private HomeWindow homeWindow = new HomeWindow();
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-                string email = txtEmail.Text;
-                string password = txtPassword.Text;
+           
+            string email = txtEmail.Text;
+            string password = txtPassword.Text;
 
-                User user = new User();
-                if (user.Login(email, password))
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+              
+                string commandText = $"select * from dbo.Users where Email='{email}' and Password='{password}'";
+                SqlCommand command = new SqlCommand(commandText, conn);
+
+                 conn.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
                 {
-                    // Login successful
+                    
+                    reader.Read();
+                    int id = (int)reader["Id"];
+                    string firstName = (string)reader["FirstName"];
+                    string lastName = (string)reader["LastName"];
+                    EUserType userType = (EUserType)Enum.Parse(typeof(EUserType), reader["UserType"] as string);
+                 
+                    _loggedInUser = new User
+                    {
+                        Id = id,
+                        Email = email,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        UserType = userType
+                    };
+
                    
-                    HomeWindow homeWindow = new HomeWindow();
-                   homeWindow.Show();
-                    Close();
+                    _loggedInUserType = userType;
+
+                  
+                    this.Hide();
+
+
+                    var homeWindow = new HomeWindow(_loggedInUser, _loggedInUserType);
+                   
+
+                    homeWindow.lblLoggedInUser.Content = $"Logged in as {firstName} {lastName}";
+
+                  
+                    homeWindow.UpdateUI();
+
+                 
+                    homeWindow.Show();
                 }
                 else
                 {
-                    // Login failed
-                    // Show an error message
-                    MessageBox.Show("Invalid email or password.");
+                    
+                    MessageBox.Show("Invalid email or password. Please try again.");
                 }
-                Close();
-            }
 
+             
+
+                reader.Close();
+                conn.Close();
+
+            }
+        }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
-            Close();
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
-
+       
 
     }  
 }

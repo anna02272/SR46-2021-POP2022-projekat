@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR46_2021_POP2022.Views"
         mc:Ignorable="d"
-        Title="ShowProfessorsWindow" Height="450" Width="800">
+        Title="ShowProfessorsWindow" Height="450" Width="1000">
     <Grid>
 
         <Grid.RowDefinitions>
-            <!--<RowDefinition Height="88"></RowDefinition>-->
             <RowDefinition Height="30"></RowDefinition>
-            <!--<RowDefinition Height="331"></RowDefinition>-->
+            <RowDefinition Height="30"></RowDefinition>
+
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" 
+        <Menu Grid.Row="1" 
               VerticalAlignment="Top" 
               Height="30" 
               >
@@ -25,17 +25,18 @@
             <MenuItem Name="miPickProfessor" Height="30" Header="Pick professor" Click="miPickProfessor_Click"></MenuItem>
         </Menu>
 
-        <!--<TextBox Name="txtSearch" Grid.Column="0" 
-                 Margin="5,5,5,5" Width="350" Grid.RowSpan="2" Height="30" 
+        <TextBox Name="txtSearch"  Grid.Column="0" 
+                 Margin="5,0,0,0" Width="350" Height="18" 
                  HorizontalAlignment="Left" VerticalAlignment="Center"
-                  KeyUp="txtSearch_KeyDown" 
-                  ></TextBox>-->
-        
+                  KeyDown="txtSearch_KeyDown" 
+                  />
+
+
         <DataGrid CanUserAddRows="False" 
                   IsReadOnly="True" 
-                  Grid.Row="1" 
+                  Grid.Row="2" 
                   Name="dgProfessors" 
-                  Width="800" 
+                  Width="1000" 
                   Margin="0,0,-8,0"
                   AutoGeneratingColumn="dgProfessors_AutoGeneratingColumn"/>
 

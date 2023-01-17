@@ -23,12 +23,25 @@ namespace SR46_2021_POP2022.Views
     {
         private SchoolService schoolService = new SchoolService();
 
+        private bool isRegistered;
 
-        public ShowSchoolsWindow()
+        public ShowSchoolsWindow(bool isRegistered = true)
         {
             InitializeComponent();
             RefreshDataGrid();
+            this.isRegistered = isRegistered;
+            if (!isRegistered)
+            {
+                miAddSchool.Visibility = Visibility.Collapsed;
+                miUpdateSchool.Visibility = Visibility.Collapsed;
+                miDeleteSchool.Visibility = Visibility.Collapsed;
+            }
+
+            dgSchools.ItemsSource = schoolService.GetActiveSchools();
+            dgSchools.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
+        
+
 
         private void miAddSchool_Click(object sender, RoutedEventArgs e)
         {
@@ -83,6 +96,24 @@ namespace SR46_2021_POP2022.Views
             if (e.PropertyName == "Error" || e.PropertyName == "IsValid")
             {
                 e.Column.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchTerm = txtSearch.Text;
+                SchoolService schoolService = new SchoolService();
+                List<School> filteredSchool = schoolService.GetActiveSchools()
+                    .Where(school => school.Name.ToLower().Contains(searchTerm.ToLower())
+                                  || school.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase)
+                             || school.Language.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+
+
+                    .ToList();
+
+                dgSchools.ItemsSource = filteredSchool;
             }
         }
     }

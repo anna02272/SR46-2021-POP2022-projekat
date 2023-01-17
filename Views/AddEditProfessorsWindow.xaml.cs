@@ -26,12 +26,16 @@ namespace SR46_2021_POP2022.Views
         private IProfessorService professorService = new ProfessorService();
         private bool isAddMode;
 
+     
+
         public AddEditProfessorsWindow(Professor professor)
         {
+          
             InitializeComponent();
             this.professor = professor.Clone() as Professor;
 
             DataContext = this.professor;
+            tbAddress.DataContext = professor;
 
             isAddMode = false;
             txtJMBG.IsReadOnly = true;
@@ -45,16 +49,20 @@ namespace SR46_2021_POP2022.Views
             var user = new User
             {
                 UserType = EUserType.PROFESSOR,
-                IsActive = true
+                IsActive = true,
+                
             };
 
             professor = new Professor
             {
                 User = user
+               
             };
 
             isAddMode = true;
             DataContext = professor;
+            tbAddress.DataContext = professor;
+
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -86,7 +94,7 @@ namespace SR46_2021_POP2022.Views
             if (aw.ShowDialog() == true)
             {
                 professor.User.Address = aw.SelectedAddress;
-
+              
             }
         }
     }

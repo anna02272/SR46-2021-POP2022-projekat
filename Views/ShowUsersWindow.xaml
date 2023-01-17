@@ -1,37 +1,33 @@
-﻿<Window x:Class="SR46_2021_POP2022.Views.ShowSchoolsWindow"
+﻿<Window x:Class="SR46_2021_POP2022.Views.ShowUsersWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR46_2021_POP2022.Views"
         mc:Ignorable="d"
-        Title="ShowSchoolsWindow" Height="450" Width="1000">
+        Title="ShowUsersWindow" Height="450" Width="1000">
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
+           
+
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-
-        <Menu Grid.Row="0" 
-              VerticalAlignment="Top" 
-              Height="30">
-            <MenuItem Name="miAddSchool" Height="30" Header="Add school" Click="miAddSchool_Click"></MenuItem>
-            <MenuItem Name="miUpdateSchool" Height="30" Header="Update school" Click="miUpdateSchool_Click"></MenuItem>
-            <MenuItem Name="miDeleteSchool" Height="30" Header="Delete school" Click="miDeleteSchool_Click"></MenuItem>
-        </Menu>
 
         <TextBox Name="txtSearch"  Grid.Column="0" 
                  Margin="5,0,0,0" Width="350" Height="18" 
                  HorizontalAlignment="Left" VerticalAlignment="Center"
                   KeyDown="txtSearch_KeyDown" 
                   />
+
         <DataGrid CanUserAddRows="False" 
                   IsReadOnly="True" 
-                  Grid.Row="1" 
-                  Name="dgSchools" 
+                  Grid.Row="2" 
+                  Name="dgUsers" 
                   Width="1000" 
                   Margin="0,0,-8,0"
-                  AutoGeneratingColumn="dgSchools_AutoGeneratingColumn"/>
+                  AutoGeneratingColumn="dgUsers_AutoGeneratingColumn"/>
 
     </Grid>
 </Window>

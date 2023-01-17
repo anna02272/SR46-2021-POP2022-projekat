@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SR46_2021_POP2022.Views"
+        xmlns:local="clr-namespace:SR46_2021_POP2022.Views" xmlns:models="clr-namespace:SR46_2021_POP2022.Models" d:DataContext="{d:DesignInstance Type=models:Lesson}"
         mc:Ignorable="d"
         Title="AddEditLessonsWindow" Height="450" Width="800">
     <Grid>
@@ -47,8 +47,8 @@
                HorizontalAlignment="Right" Width="62"></Label>
 
         <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbProfessor" Text="Professor" VerticalAlignment="Top" Width="60" />
-        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path= ProfessorId, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="txtProfessor" VerticalAlignment="Top" Width="269" IsReadOnly="True" />
-        <Button Content="..."  Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="289,2,0,0" Name="btnPickProfessor" VerticalAlignment="Top" Width="30" Click="btnPickProfessor_Click" RenderTransformOrigin="0.671,-0.023" />
+        <TextBox  Grid.Column="1" Grid.Row="2" Text="{Binding Path= ProfessorId, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="txtProfessor" VerticalAlignment="Top" Width="55" IsReadOnly="True" />
+        <Button Content="..."  Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="74,3,0,0" Name="btnPickProfessor" VerticalAlignment="Top" Width="30" Click="btnPickProfessor_Click" RenderTransformOrigin="0.671,-0.023" />
 
         <Label Grid.Column="0" Grid.Row="3" 
                Name="lblStudent" 
@@ -56,8 +56,8 @@
                HorizontalAlignment="Right" Width="62"></Label>
 
         <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbStudent" Text="Student" VerticalAlignment="Top" Width="60" />
-        <TextBox  Grid.Column="1" Grid.Row="3" Text="{Binding Path= Student, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="txtStudent" VerticalAlignment="Top" Width="269" IsReadOnly="True" />
-        <Button Content="..."  Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Margin="289,2,0,0" Name="btnPickStudent" VerticalAlignment="Top" Width="30" Click="btnPickStudent_Click" RenderTransformOrigin="0.671,-0.023" />
+        <TextBox  Grid.Column="1" Grid.Row="3" Text="{Binding Path= StudentId, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="txtStudent" VerticalAlignment="Top" Width="55" IsReadOnly="True" />
+        <Button Content="..."  Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Margin="74,4,0,0" Name="btnPickStudent" VerticalAlignment="Top" Width="30" Click="btnPickStudent_Click" RenderTransformOrigin="0.671,-0.023" />
 
         <!--<Label Grid.Column="0" Grid.Row="4" 
                Name="lblDate" 
@@ -71,7 +71,7 @@
                Name="lblDate" 
                Content="Date and time:"
                HorizontalAlignment="Left" Width="91" Grid.ColumnSpan="2" Margin="95,0,0,0"></Label>
-        <TextBox Grid.Column="1" Grid.Row="4" Name="txtDate" Margin="5,5,344,5" Text="{Binding Path = Date, ValidatesOnDataErrors=True}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="4" Name="txtDate" Margin="5,5,344,5" Text="{Binding Path = Date,  ValidatesOnDataErrors=True}"></TextBox>
 
 
 

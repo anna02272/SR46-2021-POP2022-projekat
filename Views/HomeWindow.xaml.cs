@@ -1,19 +1,10 @@
 ﻿using SR46_2021_POP2022.Models;
-using SR46_2021_POP2022.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Data;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Web;
+using SR46_2021_POP2022.Services;
 
 namespace SR46_2021_POP2022.Views
 {
@@ -45,25 +36,88 @@ namespace SR46_2021_POP2022.Views
         {
             var schoolsWindow = new ShowSchoolsWindow();
             schoolsWindow.ShowDialog();
-            //this.Hide();
+
         }
         private void btnLanguages_Click(object sender, RoutedEventArgs e)
         {
             var languagesWindow = new ShowLanguagesWindow();
             languagesWindow.ShowDialog();
-            //this.Hide();
+
         }
         private void btnLessons_Click(object sender, RoutedEventArgs e)
         {
             var lessonsWindow = new ShowLessonsWindow();
             lessonsWindow.ShowDialog();
-            /*this.Hide();*/
+
         }
         private void btnAddresses_Click(object sender, RoutedEventArgs e)
         {
             var addressesWindow = new ShowAddressesWindow();
             addressesWindow.ShowDialog();
-            //this.Hide();
+
         }
+        private void btnUsers_Click(object sender, RoutedEventArgs e)
+        {
+            var usersWindow = new ShowUsersWindow();
+            usersWindow.ShowDialog();
+
+        }
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            _loggedInUser = null;
+            _loggedInUserType = default(EUserType);
+
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
+
+        private User _loggedInUser;
+        private EUserType _loggedInUserType;
+        public HomeWindow(EUserType loggedInUserType)
+        {
+            _loggedInUserType = loggedInUserType;
+            InitializeComponent();
+        }
+        public HomeWindow(User loggedInUser, EUserType loggedInUserType)
+        {
+            InitializeComponent();
+            _loggedInUser = loggedInUser;
+            _loggedInUserType = loggedInUserType;
+            UpdateUI();
+        }
+
+        public void UpdateUI()
+        {
+          
+            if (_loggedInUser == null || _loggedInUserType == default(EUserType))
+            {
+              
+            }
+            else if (_loggedInUserType == EUserType.STUDENT)
+            {
+             
+                btnUsers.Visibility = Visibility.Collapsed;
+                btnStudents.Visibility = Visibility.Collapsed;
+
+                btnLanguages.Visibility = Visibility.Collapsed;
+
+                btnAddresses.Visibility = Visibility.Collapsed;
+            }
+            else if (_loggedInUserType == EUserType.PROFESSOR)
+            {
+                btnUsers.Visibility = Visibility.Collapsed;
+                btnStudents.Visibility = Visibility.Collapsed;
+                btnProfessors.Visibility = Visibility.Collapsed;
+                btnSchools.Visibility = Visibility.Collapsed;
+                btnLanguages.Visibility = Visibility.Collapsed;
+
+                btnAddresses.Visibility = Visibility.Collapsed;
+            }
+        }
+
+    
     }
+
 }

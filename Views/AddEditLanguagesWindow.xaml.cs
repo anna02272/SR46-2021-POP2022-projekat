@@ -35,6 +35,7 @@ namespace SR46_2021_POP2022.Views
             this.language = language.Clone() as Language;
 
             DataContext = this.language;
+
           
             isAddMode = false;
             //txtId.IsReadOnly = true;

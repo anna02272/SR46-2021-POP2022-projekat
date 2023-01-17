@@ -31,6 +31,8 @@ namespace SR46_2021_POP2022.Views
             this.school = school.Clone() as School;
 
             DataContext = this.school;
+            tbLanguage.DataContext = school;
+            tbAddress.DataContext = school;
 
             isAddMode = false;
             //txtId.IsReadOnly = true;

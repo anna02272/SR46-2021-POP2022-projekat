@@ -57,7 +57,9 @@ namespace SR46_2021_POP2022.Repositories
 
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                string commandText = "select * from dbo.Professors p, dbo.Users u where p.UserId=u.id";
+                string commandText = "select p.*, u.*, a.* from dbo.Professors p join dbo.Users u " +
+                    "on p.UserId = u.id  join dbo.Addresses a on u.AddressId = a.Id";
+                                        
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
 
                 DataSet ds = new DataSet();
@@ -87,9 +89,18 @@ namespace SR46_2021_POP2022.Repositories
                         Id = (int)row["id"],
                         User = user
                     };
+                    user.Address = new Address
+                    {
+                        Id = (int)row["AddressId"],
+                        Street = row["Street"] as string,
+                        StreetNumber = row["StreetNumber"] as string,
+                        City = row["City"] as string,
+                        Country = row["Country"] as string
+                    };
 
                     professors.Add(professor);
                 }
+
             }
 
             return professors;
@@ -158,8 +169,60 @@ namespace SR46_2021_POP2022.Repositories
                 command.ExecuteScalar();
             }
         }
+
+
+        //public List<Professor> Search(string search)
+        //{
+        //    List<Professor> professors = new List<Professor>();
+
+        //    using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+        //    {
+        //        string commandText = @"
+        //    select * 
+        //    from dbo.Professors p 
+        //    inner join dbo.Users u on p.UserId = u.Id
+        //    where u.FirstName like @search
+        //    or u.LastName like @search
+        //    or u.Email like @search";
+
+        //        SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
+        //        dataAdapter.SelectCommand.Parameters.AddWithValue("@search", "%" + search + "%");
+
+        //        DataSet ds = new DataSet();
+
+        //        dataAdapter.Fill(ds, "Professors");
+
+        //        foreach (DataRow row in ds.Tables["Professors"].Rows)
+        //        {
+        //            var user = new User
+        //            {
+        //                Id = (int)row["UserId"],
+        //                FirstName = row["FirstName"] as string,
+        //                LastName = row["LastName"] as string,
+        //                Email = row["Email"] as string,
+        //                Password = row["Password"] as string,
+        //                JMBG = row["Jmbg"] as string,
+        //                Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
+        //                UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
+        //                IsActive = (bool)row["IsActive"],
+        //                AddressId = (int)row["AddressId"]
+        //            };
+
+        //            var professor = new Professor
+        //            {
+        //                Id = (int)row["id"],
+        //                User = user
+        //            };
+
+        //            professors.Add(professor);
+        //        }
+        //    }
+
+        //    return professors;
+        //}
+
     }
-    }
+}
 
 
 //        public void Add(Professor professor)

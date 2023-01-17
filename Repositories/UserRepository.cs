@@ -66,7 +66,7 @@ namespace SR46_2021_POP2022.Repositories
 
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                string commandText = "select * from dbo.Users";
+                string commandText = "select u.*, a.* from dbo.Users u left join dbo.Addresses a on u.AddressId = a.Id ";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
 
                 DataSet ds = new DataSet();
@@ -88,6 +88,15 @@ namespace SR46_2021_POP2022.Repositories
                         IsActive = (bool)row["IsActive"],
                          AddressId = (int)row["AddressId"]
                     };
+                    user.Address = new Address
+                    {
+                        Id = (int)row["AddressId"],
+                        Street = row["Street"] as string,
+                        StreetNumber = row["StreetNumber"] as string,
+                        City = row["City"] as string,
+                        Country = row["Country"] as string
+                    };
+
 
                     users.Add(user);
                 }

@@ -70,7 +70,15 @@ namespace SR46_2021_POP2022.Models
                 {
                     return "Name cannot be empty!";
                 }
-               
+                //else if (!AddressId.HasValue)
+                //{
+                //    return "Address cannot be empty!";
+                //}
+                //else if (!LanguageId.HasValue)
+                //{
+                //    return "Language cannot be empty!";
+                //}
+
 
                 return "";
             }
@@ -88,8 +96,19 @@ namespace SR46_2021_POP2022.Models
                     IsValid = false;
                     return "Name cannot be empty!";
                 }
-              
-               
+
+                //else if (columnName == "AddressId" && !AddressId.HasValue)
+                //{
+                //    IsValid = false;
+                //    return "Address cannot be empty!";
+                //}
+                //else if (columnName == "LanguageId" && !LanguageId.HasValue)
+                //{
+                //    IsValid = false;
+                //    return "Language cannot be empty!";
+                //}
+
+
 
                 return "";
             }
@@ -101,42 +120,6 @@ namespace SR46_2021_POP2022.Models
         }
 
       
-        //public Address address
-        //{
-        //    get
-        //    {
-        //        return address;
-        //    }
-        //    set
-        //    {
-        //        address = value;
-        //        OnPropertyChanged("Address");
-        //    }
-
-        //}
-     
-        //public Language language
-        //{
-        //    get
-        //    {
-        //        return language;
-        //    }
-        //    set
-        //    {
-        //        language = value;
-        //        OnPropertyChanged("Language");
-        //    }
-
-        //}
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //protected void OnPropertyChanged(String propertyName)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
-    
+       
 }
 }

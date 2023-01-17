@@ -19,7 +19,7 @@ namespace SR46_2021_POP2022.Services
         void Update(int id, Professor professor);
         void Delete(int id);
         List<User> ListAllStudents();
-
-        //List<Professor> Search(string search);
+     
+       
     }
 }

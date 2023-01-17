@@ -34,6 +34,7 @@ namespace SR46_2021_POP2022.Views
             this.student = student.Clone() as Student;
 
             DataContext = this.student;
+            tbAddress.DataContext = student;
 
             isAddMode = false;
             txtJMBG.IsReadOnly = true;

@@ -157,9 +157,12 @@ namespace SR46_2021_POP2022.Repositories
                 command.Parameters.Add(new SqlParameter("id", id));
                 command.Parameters.Add(new SqlParameter("Name", lesson.Name));
                 command.Parameters.Add(new SqlParameter("Date", lesson.Date));
+                command.Parameters.Add(new SqlParameter("ProfessorId", lesson.ProfessorId));
                 //command.Parameters.Add(new SqlParameter("Time", lesson.Time));
                 command.Parameters.Add(new SqlParameter("Duration", lesson.Duration));
+                command.Parameters.Add(new SqlParameter("StudentId", lesson.StudentId));
                 command.Parameters.Add(new SqlParameter("Status", lesson.Status));
+
 
 
                 command.ExecuteScalar();

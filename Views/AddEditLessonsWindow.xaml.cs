@@ -3,6 +3,7 @@ using SR46_2021_POP2022.Services;
 using SR46_2021_POP2022.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,17 +27,22 @@ namespace SR46_2021_POP2022.Views
         private ILessonService lessonService = new LessonService();
         private bool isAddMode;
 
+       
+        public DateTime CurrentDate { get { return DateTime.Now; } }
+
         public AddEditLessonsWindow(Lesson lesson)
         {
             InitializeComponent();
             this.lesson = lesson.Clone() as Lesson;
 
             DataContext = this.lesson;
-          
+            txtProfessor.DataContext = lesson;
+            txtStudent.DataContext = lesson;
+
+         
 
             isAddMode = false;
-            //txtId.IsReadOnly = true;
-
+        
         }
 
         public AddEditLessonsWindow()
@@ -53,12 +59,16 @@ namespace SR46_2021_POP2022.Views
 
             isAddMode = true;
             DataContext = lesson;
+            txtStudent.DataContext = lesson;
+            txtProfessor.DataContext = lesson;
+
+
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            //if (lesson.IsValid)
-            //{
+            if (lesson.IsValid)
+            {
                 if (isAddMode)
                 {
                     lessonService.Add(lesson);
@@ -70,7 +80,7 @@ namespace SR46_2021_POP2022.Views
 
                 DialogResult = true;
                 Close();
-            //}
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -85,6 +95,7 @@ namespace SR46_2021_POP2022.Views
             if (aw.ShowDialog() == true)
             {
                 lesson.Student = aw.SelectedStudent;
+               
 
             }
         }
@@ -97,6 +108,8 @@ namespace SR46_2021_POP2022.Views
 
             }
         }
+      
+
     }
 }
 

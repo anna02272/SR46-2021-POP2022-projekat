@@ -11,12 +11,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace SR46_2021_POP2022.Views
 {
@@ -27,13 +29,11 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowProfessorsWindow : Window
     {
         private ProfessorService professorService = new ProfessorService();
-       
-
         public enum State { ADMINISTRATION, DOWNLOADING };
         State state;
         public Professor SelectedProfessor = null;
 
-        public ShowProfessorsWindow(State state = State.ADMINISTRATION)
+        public ShowProfessorsWindow(State state = State.ADMINISTRATION, bool isRegistered = true)
         {
             InitializeComponent();
             RefreshDataGrid();
@@ -45,20 +45,25 @@ namespace SR46_2021_POP2022.Views
                 miUpdateProfessor.Visibility = Visibility.Collapsed;
                 miDeleteProfessor.Visibility = Visibility.Collapsed;
             }
-            else
+            else if (!isRegistered)
+            {
+                miAddProfessor.Visibility = Visibility.Collapsed;
+                miUpdateProfessor.Visibility = Visibility.Collapsed;
+                miDeleteProfessor.Visibility = Visibility.Collapsed;
+                miPickProfessor.Visibility = Visibility.Collapsed;
+            }
+            else if (state == State.ADMINISTRATION)
             {
                 miPickProfessor.Visibility = Visibility.Hidden;
             }
 
             dgProfessors.ItemsSource = professorService.GetActiveProfessors();
-
-            //dgProfessors.ItemsSource = Data.Instance.Professors;
-
             dgProfessors.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
+    
 
 
-        private void miPickProfessor_Click(object sender, RoutedEventArgs e)
+    private void miPickProfessor_Click(object sender, RoutedEventArgs e)
         {
             SelectedProfessor = dgProfessors.SelectedItem as Professor;
             this.DialogResult = true;
@@ -125,7 +130,32 @@ namespace SR46_2021_POP2022.Views
                 e.Column.Visibility = Visibility.Collapsed;
             }
         }
+
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchTerm = txtSearch.Text;
+                ProfessorService profService = new ProfessorService();
+                List<Professor> filteredProfesors = profService.GetActiveProfessors()
+                    .Where(prof => prof.User.FirstName.ToLower().Contains(searchTerm.ToLower())
+                                 || prof.User.LastName.ToLower().Contains(searchTerm.ToLower())
+                                 || prof.User.Email.ToLower().Contains(searchTerm.ToLower())
+                             || prof.User.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+
+
+                    .ToList();
+
+                dgProfessors.ItemsSource = filteredProfesors;
+            }
+        }
+
     }
+
+
+
+
 }
 //    public partial class ShowProfessorsWindow : Window
 //    {

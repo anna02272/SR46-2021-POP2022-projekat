@@ -55,13 +55,15 @@ namespace SR46_2021_POP2022.Repositories
             }
         }
 
+       
         public List<School> GetAll()
         {
             List<School> schools = new List<School>();
 
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                string commandText = "select * from dbo.Schools";
+                string commandText = "select s.*, a.*, l.* from dbo.Schools s left join dbo.Addresses a" +
+                    " on s.AddressId = a.Id left join dbo.Languages l on s.LanguageId = l.Id";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
 
                 DataSet ds = new DataSet();
@@ -76,16 +78,29 @@ namespace SR46_2021_POP2022.Repositories
                         Name = row["Name"] as string,
                         AddressId = (int)row["AddressId"],
                         LanguageId = (int)row["LanguageId"],
-
-                        IsDeleted = (bool)row["IsDeleted"]
+                     
+                    };
+                    school.Address = new Address
+                    {
+                        Id = (int)row["AddressId"],
+                        Street = row["Street"] as string,
+                        StreetNumber = row["StreetNumber"] as string,
+                        City = row["City"] as string,
+                        Country = row["Country"] as string
+                    };
+                    school.Language = new Language
+                    {
+                        Id = (int)row["LanguageId"],
+                        NameOfLanguage = row["NameOfLanguage"] as string,
+                        
                     };
 
                     schools.Add(school);
                 }
             }
-
             return schools;
         }
+
 
         public School GetById(int id)
         {
