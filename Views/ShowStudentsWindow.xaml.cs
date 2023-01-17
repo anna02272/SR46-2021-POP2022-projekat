@@ -23,15 +23,36 @@ namespace SR46_2021_POP2022.Views
     public partial class ShowStudentsWindow : Window
     {
         private StudentService studentService = new StudentService();
-       
+     
 
         public enum State { ADMINISTRATION, DOWNLOADING };
         State state;
         public Student SelectedStudent = null;
 
-        public ShowStudentsWindow(State state = State.ADMINISTRATION)
+        private User _loggedInUser;
+        private EUserType _loggedInUserType;
+
+        public ShowStudentsWindow(EUserType loggedInUserType)
+        {
+            _loggedInUserType = loggedInUserType;
+            InitializeComponent();
+        }
+
+        public ShowStudentsWindow(User loggedInUser)
         {
             InitializeComponent();
+            _loggedInUser = loggedInUser;
+            //var showStudentWindow = new ShowStudentsWindow(_loggedInUser);
+            
+            RefreshDataGrid();
+        }
+
+
+        public ShowStudentsWindow(State state = State.ADMINISTRATION)
+        {
+           
+            InitializeComponent();
+            RefreshDataGrid();
             this.state = state;
 
             if (state == State.DOWNLOADING)
@@ -84,15 +105,20 @@ namespace SR46_2021_POP2022.Views
         }
 
 
+
         private void miUpdateStudent_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = dgStudents.SelectedIndex;
-            if (selectedIndex >= 0)
+            if (dgStudents.SelectedIndex >= 0)
             {
-                var students = studentService.GetActiveStudents();
-                var addEditStudentsWindow = new AddEditStudentsWindow(students[selectedIndex]);
+                var selected_id = (dgStudents.SelectedItem as User).Id;
+                var students = studentService.GetActiveStudents().Where(s => s.User.Id == selected_id);
+                if (_loggedInUserType == EUserType.STUDENT)
+                {
+                    students = students.Where(s => s.User.Id == _loggedInUser.Id);
+                }
+                var selectedStudent = students.FirstOrDefault();
+                var addEditStudentsWindow = new AddEditStudentsWindow(selectedStudent);
                 var succesful = addEditStudentsWindow.ShowDialog();
-
                 if ((bool)succesful)
                 {
                     RefreshDataGrid();
@@ -100,7 +126,7 @@ namespace SR46_2021_POP2022.Views
             }
         }
 
-        private void miDeleteStudent_Click(object sender, RoutedEventArgs e)
+    private void miDeleteStudent_Click(object sender, RoutedEventArgs e)
         {
             var selectedUser = dgStudents.SelectedItem as User;
 
@@ -111,13 +137,38 @@ namespace SR46_2021_POP2022.Views
             }
         }
 
+        //private void RefreshDataGrid()
+        //{
+        //    List<User> users = studentService.GetActiveStudents().Select(s => s.User).ToList();
+        //    dgStudents.ItemsSource = users;
+
+
+        //}
         private void RefreshDataGrid()
         {
-            List<User> users = studentService.GetActiveStudents().Select(s => s.User).ToList();
-            dgStudents.ItemsSource = users;
-
-           
+            if (_loggedInUser == null)
+            {
+                List<User> users = studentService.GetActiveStudents().Select(s => s.User).ToList();
+                dgStudents.ItemsSource = users;
+            }
+            else if (_loggedInUser.UserType == EUserType.STUDENT)
+            {
+                List<User> students = studentService.GetActiveStudents()
+                                                    .Where(s => s.User.Id == _loggedInUser.Id)
+                                                    .Select(s => s.User)
+                                                    .ToList();
+                dgStudents.ItemsSource = students;
+            }
+            else
+            {
+                List<User> users = studentService.GetActiveStudents().Select(s => s.User).ToList();
+                dgStudents.ItemsSource = users;
+            }
         }
+
+
+
+
         private void dgStudents_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyName == "Error" || e.PropertyName == "IsValid")

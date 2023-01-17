@@ -5,6 +5,8 @@ using System.Data;
 using System.Windows;
 using System.Web;
 using SR46_2021_POP2022.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SR46_2021_POP2022.Views
 {
@@ -19,7 +21,7 @@ namespace SR46_2021_POP2022.Views
 
         private void btnProfessors_Click(object sender, RoutedEventArgs e)
         {
-            var professorsWindow = new ShowProfessorsWindow();
+            var professorsWindow = new ShowProfessorsWindow(_loggedInUser);
             professorsWindow.ShowDialog();
             //professorsWindow.Show();
             //this.Close();
@@ -27,7 +29,7 @@ namespace SR46_2021_POP2022.Views
 
         private void btnStudents_Click(object sender, RoutedEventArgs e)
         {
-            var studentsWindow = new ShowStudentsWindow();
+            var studentsWindow = new ShowStudentsWindow(_loggedInUser);
             studentsWindow.ShowDialog();
             //this.Hide();
         }
@@ -80,12 +82,18 @@ namespace SR46_2021_POP2022.Views
             _loggedInUserType = loggedInUserType;
             InitializeComponent();
         }
+
+
+        private StudentService studentService = new StudentService();
+        private ShowStudentsWindow stWindow = new ShowStudentsWindow();
+        private ShowProfessorsWindow prWindow = new ShowProfessorsWindow();
+
         public HomeWindow(User loggedInUser, EUserType loggedInUserType)
         {
             InitializeComponent();
             _loggedInUser = loggedInUser;
             _loggedInUserType = loggedInUserType;
-            UpdateUI();
+             UpdateUI();
         }
 
         public void UpdateUI()
@@ -99,7 +107,7 @@ namespace SR46_2021_POP2022.Views
             {
              
                 btnUsers.Visibility = Visibility.Collapsed;
-                btnStudents.Visibility = Visibility.Collapsed;
+                //btnStudents.Visibility = Visibility.Collapsed;
 
                 btnLanguages.Visibility = Visibility.Collapsed;
 
@@ -109,7 +117,7 @@ namespace SR46_2021_POP2022.Views
             {
                 btnUsers.Visibility = Visibility.Collapsed;
                 btnStudents.Visibility = Visibility.Collapsed;
-                btnProfessors.Visibility = Visibility.Collapsed;
+                //btnProfessors.Visibility = Visibility.Collapsed;
                 btnSchools.Visibility = Visibility.Collapsed;
                 btnLanguages.Visibility = Visibility.Collapsed;
 

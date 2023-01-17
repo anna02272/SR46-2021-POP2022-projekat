@@ -32,7 +32,7 @@ namespace SR46_2021_POP2022.Views
         public User _loggedInUser;
         public EUserType _loggedInUserType;
         private HomeWindow homeWindow = new HomeWindow();
-
+     
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
            
@@ -67,31 +67,23 @@ namespace SR46_2021_POP2022.Views
                         UserType = userType
                     };
 
-                   
+
                     _loggedInUserType = userType;
 
-                  
                     this.Hide();
 
-
                     var homeWindow = new HomeWindow(_loggedInUser, _loggedInUserType);
-                   
-
                     homeWindow.lblLoggedInUser.Content = $"Logged in as {firstName} {lastName}";
-
-                  
                     homeWindow.UpdateUI();
-
-                 
                     homeWindow.Show();
+                    var showStudentWindow = new ShowStudentsWindow(_loggedInUser);
+                    var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser);
                 }
                 else
                 {
                     
                     MessageBox.Show("Invalid email or password. Please try again.");
                 }
-
-             
 
                 reader.Close();
                 conn.Close();

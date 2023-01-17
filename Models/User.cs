@@ -41,7 +41,6 @@ namespace SR46_2021_POP2022.Models
         public bool IsActive { get; set; }
         public bool IsValid { get; set; }
       
-
         public User()
         {
             IsActive = true;

@@ -33,6 +33,21 @@ namespace SR46_2021_POP2022.Views
         State state;
         public Professor SelectedProfessor = null;
 
+        private User _loggedInUser;
+        private EUserType _loggedInUserType;
+
+        public ShowProfessorsWindow(EUserType loggedInUserType)
+        {
+            _loggedInUserType = loggedInUserType;
+            InitializeComponent();
+        }
+
+        public ShowProfessorsWindow(User loggedInUser)
+        {
+            InitializeComponent();
+            _loggedInUser = loggedInUser;
+            RefreshDataGrid();
+        }
         public ShowProfessorsWindow(State state = State.ADMINISTRATION, bool isRegistered = true)
         {
             InitializeComponent();
@@ -56,6 +71,7 @@ namespace SR46_2021_POP2022.Views
             {
                 miPickProfessor.Visibility = Visibility.Hidden;
             }
+
 
             dgProfessors.ItemsSource = professorService.GetActiveProfessors();
             dgProfessors.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
@@ -89,24 +105,43 @@ namespace SR46_2021_POP2022.Views
 
         private void miUpdateProfessor_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = dgProfessors.SelectedIndex;
-
-            if (selectedIndex >= 0)
+            if (dgProfessors.SelectedIndex >= 0)
             {
-                var professors = professorService.GetActiveProfessors();
-
-                var addEditProfessorWindow = new AddEditProfessorsWindow(professors[selectedIndex]);
-
-                var successeful = addEditProfessorWindow.ShowDialog();
-
-                if ((bool)successeful)
+                var selected_id = (dgProfessors.SelectedItem as User).Id;
+                var professors = professorService.GetActiveProfessors().Where(s => s.User.Id == selected_id);
+                if (_loggedInUserType == EUserType.PROFESSOR)
+                {
+                    professors = professors.Where(s => s.User.Id == _loggedInUser.Id);
+                }
+                var selectedProfessor = professors.FirstOrDefault();
+                var addEditProfessorsWindow = new AddEditProfessorsWindow(selectedProfessor);
+                var succesful = addEditProfessorsWindow.ShowDialog();
+                if ((bool)succesful)
                 {
                     RefreshDataGrid();
                 }
             }
         }
+            //private void miUpdateProfessor_Click(object sender, RoutedEventArgs e)
+            //{
+            //    var selectedIndex = dgProfessors.SelectedIndex;
 
-        private void miDeleteProfessor_Click(object sender, RoutedEventArgs e)
+            //    if (selectedIndex >= 0)
+            //    {
+            //        var professors = professorService.GetActiveProfessors();
+
+            //        var addEditProfessorWindow = new AddEditProfessorsWindow(professors[selectedIndex]);
+
+            //        var successeful = addEditProfessorWindow.ShowDialog();
+
+            //        if ((bool)successeful)
+            //        {
+            //            RefreshDataGrid();
+            //        }
+            //    }
+            //}
+
+            private void miDeleteProfessor_Click(object sender, RoutedEventArgs e)
         {
             var selectedUser = dgProfessors.SelectedItem as User;
 
@@ -117,10 +152,31 @@ namespace SR46_2021_POP2022.Views
             }
         }
 
+        //private void RefreshDataGrid()
+        //{
+        //    List<User> users = professorService.GetActiveProfessors().Select(p => p.User).ToList();
+        //    dgProfessors.ItemsSource = users;
+        //}
         private void RefreshDataGrid()
         {
-            List<User> users = professorService.GetActiveProfessors().Select(p => p.User).ToList();
-            dgProfessors.ItemsSource = users;
+            if (_loggedInUser == null)
+            {
+                List<User> users = professorService.GetActiveProfessors().Select(s => s.User).ToList();
+                dgProfessors.ItemsSource = users;
+            }
+            else if (_loggedInUser.UserType == EUserType.PROFESSOR)
+            {
+                List<User> professors = professorService.GetActiveProfessors()
+                                                    .Where(s => s.User.Id == _loggedInUser.Id)
+                                                    .Select(s => s.User)
+                                                    .ToList();
+                dgProfessors.ItemsSource = professors;
+            }
+            else
+            {
+                List<User> users = professorService.GetActiveProfessors().Select(s => s.User).ToList();
+                dgProfessors.ItemsSource = users;
+            }
         }
 
         private void dgProfessors_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)

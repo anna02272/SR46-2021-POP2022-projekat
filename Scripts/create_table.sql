@@ -17,6 +17,7 @@ CREATE TABLE dbo.Languages
 
 
 
+
 CREATE TABLE dbo.Users
 (
 	Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -90,11 +91,10 @@ CREATE TABLE dbo.Schools
 
 
 Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, isActive) values 
-('Admin','Adminko', 1234565383919, 'admin@gmail.com', 'Admin123', 1, 0, 1)
+('Admin','Adminko', 1234565383919, 'admin@gmail.com', 'admin123', 1, 0, 1)
 
 set identity_insert administrators on
 insert into administrators(id, userId) values (1, 1);
-
 
 select * from users
 select * from professors
