@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 namespace SR46_2021_POP2022.Models
 {
     [Serializable]
-    public class Lesson :ICloneable, IDataErrorInfo, INotifyPropertyChanged
+    public class Lesson :ICloneable, IDataErrorInfo
 
     {
         public int Id { get; set; }
@@ -28,7 +28,7 @@ namespace SR46_2021_POP2022.Models
             {
                 professor = value;
                ProfessorId = professor?.Id;
-                OnPropertyChanged("Professor");
+                //OnPropertyChanged("Professor");
             }
         }
         public int? ProfessorId { get; set; }
@@ -50,7 +50,7 @@ namespace SR46_2021_POP2022.Models
             {
                 student = value;
                 StudentId = student?.Id;
-                OnPropertyChanged("Student");
+                //OnPropertyChanged("Student");
             }
         }
         public int? StudentId { get; set; }
@@ -111,6 +111,9 @@ namespace SR46_2021_POP2022.Models
 
 
         }
+
+        
+
         public string this[string columnName]
         {
             get

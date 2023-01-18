@@ -109,5 +109,3 @@ select * from schools
 select * from lessons
 select * from languages
 select * from Administrators
-
-

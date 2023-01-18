@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Net;
 using System.Data;
+using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SR46_2021_POP2022.Repositories
 {
@@ -60,6 +64,71 @@ namespace SR46_2021_POP2022.Repositories
                 command.ExecuteNonQuery();
             }
         }
+        //public void Delete(int id)
+        //{
+        //    using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+        //    {
+        //        conn.Open();
+
+        //        SqlCommand command = conn.CreateCommand();
+        //        command.CommandText = "SELECT Status FROM dbo.Lessons WHERE Id=@id";
+
+        //        command.Parameters.Add(new SqlParameter("id", id));
+        //        var status = command.ExecuteScalar();
+
+        //        if ((bool)(status = false))
+        //        {
+        //            command.CommandText = "update dbo.Lessons set IsDeleted=1 where Id=@id";
+        //            command.ExecuteNonQuery();
+        //        }
+        //        else
+        //        {
+        //            System.Windows.MessageBox.Show("Lesson is reserved , Cant be deleted.");
+
+        //        }
+
+        //    }
+    
+
+
+        //public List<Lesson> GetAll()
+        //{
+        //    List<Lesson> lessons = new List<Lesson>();
+
+        //    using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+        //    {
+        //        string commandText = "select * from dbo.Lessons";
+        //        SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
+
+        //        DataSet ds = new DataSet();
+
+        //        dataAdapter.Fill(ds, "Lessons");
+
+        //        foreach (DataRow row in ds.Tables["Lessons"].Rows)
+        //        {
+        //            var lesson = new Lesson
+        //            {
+        //                Id = (int)row["Id"],
+        //                Name = row["Name"] as string,
+        //                ProfessorId = (int)row["ProfessorId"],
+        //                Date = (DateTime)row["Date"] ,
+        //                //Time = (DateTime)row["Time"],
+        //                Duration = (TimeSpan)row["Duration"],
+        //                Status = (bool)row["Status"],
+        //                StudentId = (int)row["StudentId"],
+
+        //                IsDeleted = (bool)row["IsDeleted"]
+
+        //            };
+
+        //            lessons.Add(lesson);
+        //        }
+        //    }
+
+        //    return lessons;
+        //}
+
+
 
         public List<Lesson> GetAll()
         {
@@ -67,34 +136,58 @@ namespace SR46_2021_POP2022.Repositories
 
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                string commandText = "select * from dbo.Lessons";
+                string commandText = "SELECT l.Id as LessonId, l.Name as LessonName, l.Date as LessonDate, l.Duration as LessonDuration, " +
+                    "l.Status as LessonStatus, l.IsDeleted as LessonIsDeleted, u1.FirstName as ProfessorFirstName, u1.LastName as ProfessorLastName, u1.Email as ProfessorEmail, " +
+                    "u2.FirstName as StudentFirstName, u2.LastName as StudentLastName, u2.Email as StudentEmail," +
+                    " p.Id as ProfessorId, s.Id as StudentId FROM dbo.Lessons l JOIN dbo.Professors p ON l.ProfessorId = p.Id " +
+                    "JOIN dbo.Users u1 ON p.UserId = u1.Id JOIN dbo.Students s ON l.StudentId = s.Id JOIN dbo.Users u2 ON s.UserId = u2.Id";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
-
                 DataSet ds = new DataSet();
-
                 dataAdapter.Fill(ds, "Lessons");
 
                 foreach (DataRow row in ds.Tables["Lessons"].Rows)
                 {
+
                     var lesson = new Lesson
                     {
-                        Id = (int)row["Id"],
-                        Name = row["Name"] as string,
+                        Id = (int)row["LessonId"],
+                        Name = row["LessonName"] as string,
                         ProfessorId = (int)row["ProfessorId"],
-                        Date = (DateTime)row["Date"] ,
-                        //Time = (DateTime)row["Time"],
-                        Duration = (TimeSpan)row["Duration"],
-                        Status = (bool)row["Status"],
-                        StudentId = (int)row["StudentId"],
+                        Professor = new Professor
+                        {
+                            Id = (int)row["ProfessorId"],
+                            User = new User
+                            {
+                                FirstName = row["ProfessorFirstName"] as string,
+                                LastName = row["ProfessorLastName"] as string,
+                                Email = row["ProfessorEmail"] as string
 
-                        IsDeleted = (bool)row["IsDeleted"]
+                            }
+                        },
+                        Date = (DateTime)row["LessonDate"],
+                        Duration = (TimeSpan)row["LessonDuration"],
+                        Status = (bool)row["LessonStatus"],
+                        StudentId = (int)row["StudentId"],
+                        Student = new Student
+                        {
+                            Id = (int)row["StudentId"],
+                            User = new User
+                            {
+                                FirstName = row["StudentFirstName"] as string,
+                                LastName = row["StudentLastName"] as string,
+                                Email = row["StudentEmail"] as string
+
+                            }
+                        },
+                         IsDeleted = (bool)row["LessonIsDeleted"]
+
 
                     };
+
 
                     lessons.Add(lesson);
                 }
             }
-
             return lessons;
         }
 

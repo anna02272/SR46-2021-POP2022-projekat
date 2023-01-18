@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR46_2021_POP2022.Views"
         mc:Ignorable="d"
-        Title="ShowLessonsWindow" Height="450" Width="800">
+        Title="ShowLessonsWindow" Height="450" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" 
+        <Menu Grid.Row="1" 
               VerticalAlignment="Top" 
               Height="30">
             <MenuItem Name="miAddLesson" Height="30" Header="Add lesson" Click="miAddLesson_Click"></MenuItem>
@@ -20,11 +21,22 @@
             <MenuItem Name="miDeleteLesson" Height="30" Header="Delete lesson" Click="miDeleteLesson_Click"></MenuItem>
         </Menu>
 
+        <Label Grid.Column="0" 
+               Name="lblDate" 
+               Content="Find by date: [mm/dd/yy]"
+               HorizontalAlignment="Left" Width="160" Margin="15,-1,0,1"></Label>
+
+        <TextBox Name="txtSearch"  Grid.Column="0" 
+                 Margin="175,4,0,0" Width="155" Height="18" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top"
+                  KeyDown="txtSearch_KeyDown" 
+                  />
+
         <DataGrid CanUserAddRows="False" 
                   IsReadOnly="True" 
-                  Grid.Row="1" 
+                  Grid.Row="2" 
                   Name="dgLessons" 
-                  Width="800" 
+                  Width="1000" 
                   Margin="0,0,-8,0"
                   AutoGeneratingColumn="dgLessons_AutoGeneratingColumn"/>
 

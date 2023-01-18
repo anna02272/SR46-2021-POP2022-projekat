@@ -32,32 +32,29 @@ namespace SR46_2021_POP2022.Views
         public User _loggedInUser;
         public EUserType _loggedInUserType;
         private HomeWindow homeWindow = new HomeWindow();
-     
+        private Professor _loggedInProfessorId;
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-           
+
             string email = txtEmail.Text;
             string password = txtPassword.Text;
-
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-              
                 string commandText = $"select * from dbo.Users where Email='{email}' and Password='{password}'";
                 SqlCommand command = new SqlCommand(commandText, conn);
 
-                 conn.Open();
-
+                conn.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.HasRows)
                 {
-                    
                     reader.Read();
                     int id = (int)reader["Id"];
                     string firstName = (string)reader["FirstName"];
                     string lastName = (string)reader["LastName"];
                     EUserType userType = (EUserType)Enum.Parse(typeof(EUserType), reader["UserType"] as string);
-                 
+
                     _loggedInUser = new User
                     {
                         Id = id,
@@ -67,29 +64,69 @@ namespace SR46_2021_POP2022.Views
                         UserType = userType
                     };
 
-
                     _loggedInUserType = userType;
 
-                    this.Hide();
+                    reader.Close();
 
-                    var homeWindow = new HomeWindow(_loggedInUser, _loggedInUserType);
-                    homeWindow.lblLoggedInUser.Content = $"Logged in as {firstName} {lastName}";
-                    homeWindow.UpdateUI();
-                    homeWindow.Show();
-                    var showStudentWindow = new ShowStudentsWindow(_loggedInUser);
-                    var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser);
+                    if (_loggedInUserType == EUserType.PROFESSOR)
+                    {
+                        string professorCommandText = $"select * from dbo.Professors where UserId = {id}";
+                        SqlCommand professorCommand = new SqlCommand(professorCommandText, conn);
+
+                        SqlDataReader professorReader = professorCommand.ExecuteReader();
+
+                        if (professorReader.HasRows)
+                        {
+                            professorReader.Read();
+                            int profId = (int)professorReader["Id"];
+
+                            _loggedInProfessorId = new Professor
+                            {
+                                Id = profId
+
+                            };
+
+
+                            professorReader.Close();
+                        }
+
+                        this.Hide();
+                        var homeWindow = new HomeWindow(_loggedInUser, _loggedInUserType, _loggedInProfessorId);
+                        homeWindow.lblLoggedInUser.Content = $"Logged in as {firstName} {lastName}";
+                        homeWindow.UpdateUI();
+                        homeWindow.Show();
+                        var showStudentWindow = new ShowStudentsWindow(_loggedInUser);
+                        var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser);
+                        var showLessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInProfessorId);
+                       
+                    }
+
+                    else if (_loggedInUserType == EUserType.STUDENT || _loggedInUserType == EUserType.ADMINISTRATOR)
+                    {
+                        this.Hide();
+                        var homeWindow2 = new HomeWindow(_loggedInUser, _loggedInUserType);
+                        homeWindow2.lblLoggedInUser.Content = $"Logged in as {firstName} {lastName}";
+                        homeWindow2.UpdateUI();
+                        homeWindow2.Show();
+                        var showStudentWindow = new ShowStudentsWindow(_loggedInUser);
+                        var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser);
+                        var showLessonsWindow = new ShowLessonsWindow(_loggedInUser);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid email or password. Please try again.");
+                    }
+
+
+
+                    }
+                  
+
+
+                    conn.Close();
                 }
-                else
-                {
-                    
-                    MessageBox.Show("Invalid email or password. Please try again.");
-                }
-
-                reader.Close();
-                conn.Close();
-
             }
-        }
+
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {

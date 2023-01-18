@@ -36,7 +36,7 @@ namespace SR46_2021_POP2022.Models
 
         public override string ToString()
         {
-            return $"[Student] {User.FirstName} {User.LastName}, {User.Email}";
+            return $"{User.FirstName} {User.LastName}, {User.Email}";
         }
 
 

@@ -14,6 +14,7 @@ namespace SR46_2021_POP2022.Services
         List<Lesson> GetAvailableLessons();
         List<Lesson> GetAvailableLessonsByName(string name);
         List<Lesson> GetAvailableLessonsOrderedByName();
+       
         void Add(Lesson lesson);
         void Set(List<Lesson> lessons);
         void Update(int id,Lesson lesson);

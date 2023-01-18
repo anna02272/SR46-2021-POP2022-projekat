@@ -72,6 +72,8 @@ namespace SR46_2021_POP2022.Services
         {
             return lessonRepository.GetAll().Where(p => !p.IsDeleted).OrderBy(p => p.Name).ToList();
         }
+
+        
     }
 }
 

@@ -48,10 +48,11 @@ namespace SR46_2021_POP2022.Views
         }
 
 
-        public ShowStudentsWindow(State state = State.ADMINISTRATION)
+        public ShowStudentsWindow( State state = State.ADMINISTRATION)
         {
            
             InitializeComponent();
+          
             RefreshDataGrid();
             this.state = state;
 

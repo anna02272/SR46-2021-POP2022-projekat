@@ -24,11 +24,36 @@ namespace SR46_2021_POP2022.Views
         private LessonService lessonService = new LessonService();
         private AddEditLessonsWindow addEditLessonWindow;
 
-     
+      
+        private Professor _loggedInProfessorId;
+        private User _loggedInUser;
+        private EUserType _loggedInUserType;
 
+        public ShowLessonsWindow(EUserType loggedInUserType)
+        {
+            _loggedInUserType = loggedInUserType;
+            InitializeComponent();
+        }
+
+        public ShowLessonsWindow(User loggedInUser, Professor loggedInProfessorId)
+        {
+            InitializeComponent();
+            _loggedInProfessorId = loggedInProfessorId;
+            _loggedInUser = loggedInUser;
+            RefreshDataGrid();
+
+        }
+        public ShowLessonsWindow(User loggedInUser)
+        {
+            InitializeComponent();
+          
+            _loggedInUser = loggedInUser;
+            RefreshDataGrid();
+
+        }
         public ShowLessonsWindow()
         {
-       
+
             InitializeComponent();
             RefreshDataGrid();
         }
@@ -47,40 +72,92 @@ namespace SR46_2021_POP2022.Views
 
         private void miUpdateLesson_Click(object sender, RoutedEventArgs e)
         {
-            var selectedIndex = dgLessons.SelectedIndex;
-
-            if (selectedIndex >= 0)
+            if (dgLessons.SelectedIndex >= 0)
             {
-                var lessons = lessonService.GetAvailableLessons();
-
-                addEditLessonWindow = new AddEditLessonsWindow(lessons[selectedIndex]);
-
-                var successeful = addEditLessonWindow.ShowDialog();
-
-                if ((bool)successeful)
+                var selected_id = (dgLessons.SelectedItem as Lesson).Id;
+                var lessons = lessonService.GetAvailableLessons().Where(s => s.Id == selected_id);
+                if (_loggedInUserType == EUserType.PROFESSOR)
+                {
+                    lessons = lessons.Where(s => s.ProfessorId == _loggedInProfessorId.Id);
+                }
+                var selectedLesson = lessons.FirstOrDefault();
+                var addEditLessonsWindow = new AddEditLessonsWindow(selectedLesson);
+                var succesful = addEditLessonsWindow.ShowDialog();
+                if ((bool)succesful)
                 {
                     RefreshDataGrid();
                 }
             }
+
+            //var selectedIndex = dgLessons.SelectedIndex;
+
+            //if (selectedIndex >= 0)
+            //{
+            //    var lessons = lessonService.GetAvailableLessons();
+
+            //    addEditLessonWindow = new AddEditLessonsWindow(lessons[selectedIndex]);
+
+            //    var successeful = addEditLessonWindow.ShowDialog();
+
+            //    if ((bool)successeful)
+            //    {
+            //        RefreshDataGrid();
+            //    }
+            //}
         }
-     
-     
+
+
+        //private void miDeleteLesson_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var selectedLesson = dgLessons.SelectedItem as Lesson;
+
+        //    if (selectedLesson != null)
+        //    {
+        //        lessonService.Delete(selectedLesson.Id);
+        //        RefreshDataGrid();
+        //    }
+        //}
+
+
         private void miDeleteLesson_Click(object sender, RoutedEventArgs e)
         {
             var selectedLesson = dgLessons.SelectedItem as Lesson;
 
-            if (selectedLesson != null)
+            if (selectedLesson != null && _loggedInUser.UserType == EUserType.PROFESSOR && selectedLesson.Status == true)
+            {
+                MessageBox.Show("You cannot delete a reserved lesson.");
+            }
+            else if (selectedLesson != null && _loggedInUser.UserType == EUserType.PROFESSOR && selectedLesson.ProfessorId == _loggedInProfessorId.Id)
+            {
+                lessonService.Delete(selectedLesson.Id);
+                RefreshDataGrid();
+            }
+            else if (selectedLesson != null && _loggedInUser.UserType == EUserType.ADMINISTRATOR)
             {
                 lessonService.Delete(selectedLesson.Id);
                 RefreshDataGrid();
             }
         }
 
+
+
         private void RefreshDataGrid()
         {
-            List<Lesson> lessons = lessonService.GetAvailableLessons().Select(p => p).ToList();
-            dgLessons.ItemsSource = lessons;
+            if (_loggedInUser.UserType == EUserType.PROFESSOR)
+            {
+                List<Lesson> lessons = lessonService.GetAvailableLessons()
+                                                    .Where(s => s.ProfessorId == _loggedInProfessorId.Id)
+                                                    .Select(s => s)
+                                                    .ToList();
+                dgLessons.ItemsSource = lessons;
+            }
+            else
+            {
+                List<Lesson> lessons = lessonService.GetAvailableLessons().Select(s => s).ToList();
+                dgLessons.ItemsSource = lessons;
+            }
         }
+
 
         private void dgLessons_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
@@ -89,5 +166,45 @@ namespace SR46_2021_POP2022.Views
                 e.Column.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchTerm = txtSearch.Text;
+                LessonService lesService = new LessonService();
+
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    // show all available lessons
+                    dgLessons.ItemsSource = lesService.GetAvailableLessons();
+                }
+                else
+                {
+                    DateTime searchDate;
+                    try
+                    {
+                        searchDate = DateTime.Parse(searchTerm);
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Invalid date format. Please enter date in format 'dd/mm/yyyy'", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+
+                    List<Lesson> filteredLessons = lesService.GetAvailableLessons()
+                        .Where(les => les.Date.Date == searchDate.Date)
+                        .ToList();
+
+                    dgLessons.ItemsSource = filteredLessons;
+                }
+            }
+        }
+
+
     }
+
 }
+
+

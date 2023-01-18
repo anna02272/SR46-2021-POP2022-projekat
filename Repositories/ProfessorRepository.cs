@@ -104,6 +104,7 @@ namespace SR46_2021_POP2022.Repositories
                             Id = (int)row["SchoolId"],
                             Name = row["Name"] as string
                         }
+                      
                     };
                     //user.Address = new Address
                     //{

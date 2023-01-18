@@ -46,9 +46,11 @@ namespace SR46_2021_POP2022.Views
             languagesWindow.ShowDialog();
 
         }
+
+       
         private void btnLessons_Click(object sender, RoutedEventArgs e)
         {
-            var lessonsWindow = new ShowLessonsWindow();
+            var lessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInProfessorId);
             lessonsWindow.ShowDialog();
 
         }
@@ -74,7 +76,7 @@ namespace SR46_2021_POP2022.Views
             this.Close();
         }
 
-
+        private Professor _loggedInProfessorId;
         private User _loggedInUser;
         private EUserType _loggedInUserType;
         public HomeWindow(EUserType loggedInUserType)
@@ -88,12 +90,21 @@ namespace SR46_2021_POP2022.Views
         private ShowStudentsWindow stWindow = new ShowStudentsWindow();
         private ShowProfessorsWindow prWindow = new ShowProfessorsWindow();
 
-        public HomeWindow(User loggedInUser, EUserType loggedInUserType)
+        public HomeWindow(User loggedInUser, EUserType loggedInUserType, Professor loggedInProfessorId)
         {
             InitializeComponent();
+            _loggedInProfessorId = loggedInProfessorId;
             _loggedInUser = loggedInUser;
             _loggedInUserType = loggedInUserType;
              UpdateUI();
+        }
+        public HomeWindow(User loggedInUser, EUserType loggedInUserType)
+        {
+            InitializeComponent();
+           
+            _loggedInUser = loggedInUser;
+            _loggedInUserType = loggedInUserType;
+            UpdateUI();
         }
 
         public void UpdateUI()

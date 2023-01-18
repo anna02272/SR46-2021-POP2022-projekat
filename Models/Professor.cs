@@ -36,7 +36,8 @@ namespace SR46_2021_POP2022.Models
             }
         }
         public int? SchoolId { get; set; }
-       
+        //public List<Lesson> Lessons { get; set; } = new List<Lesson>();
+
         public object Clone()
         {
             return new Professor
@@ -44,12 +45,13 @@ namespace SR46_2021_POP2022.Models
                 Id = Id,
                 User = User.Clone() as User,
                 School = School?.Clone() as School
+                //,Lessons = Lessons
             };
         }
 
         public override string ToString()
         {
-            return $"[Professor] {User.FirstName} {User.LastName}, {User.Email}, {School}";
+            return $"{User.FirstName} {User.LastName}, {User.Email}, {School}";
         }
 
      
