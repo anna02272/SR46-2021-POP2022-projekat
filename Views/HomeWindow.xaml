@@ -30,10 +30,13 @@
                 Click="btnUsers_Click" Margin="546,94,70,254">Users</Button>
 
         <Button Name="btnSchools"
-                Click="btnSchools_Click" Margin="435,314,181,34">Schools</Button>
+                Click="btnSchools_Click" Margin="580,314,36,34">Schools</Button>
 
         <Button Name="btnLessons"
                 Click="btnLessons_Click" Margin="130,319,486,29">Lessons</Button>
+
+        <Button Name="btnReservedLessons"
+                Click="btnReservedLessons_Click" Margin="350,318,266,30">Reserved Lessons</Button>
 
         <Button Name="btnLanguages"
                 Click="btnLanguages_Click" Margin="435,203,181,145">Languages</Button>

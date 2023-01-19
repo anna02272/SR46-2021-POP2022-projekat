@@ -10,15 +10,19 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
-           
+
 
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBox Name="txtSearch"  Grid.Column="0" 
-                 Margin="5,0,0,0" Width="350" Height="18" 
+        <Label Grid.Column="0" 
+               Name="lblSearch" 
+               Content="Find user by name, lastname, email, address and type:"
+               HorizontalAlignment="Left" Width="300" Margin="20,-1,0,1"></Label>
+
+        <TextBox Name="txtSearch" Width="230" Height="18" 
                  HorizontalAlignment="Left" VerticalAlignment="Center"
-                  KeyDown="txtSearch_KeyDown" 
+                  KeyDown="txtSearch_KeyDown" Margin="330,0,0,0" 
                   />
 
         <DataGrid CanUserAddRows="False" 

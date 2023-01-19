@@ -42,12 +42,33 @@ namespace SR46_2021_POP2022.Views
             InitializeComponent();
         }
 
-        public ShowProfessorsWindow(User loggedInUser)
+        public ShowProfessorsWindow(User loggedInUser, EUserType loggedInUserType)
         {
             InitializeComponent();
             _loggedInUser = loggedInUser;
+            _loggedInUserType = loggedInUserType;
             RefreshDataGrid();
+
+            if (_loggedInUserType == EUserType.STUDENT)
+            {
+                miAddProfessor.Visibility = Visibility.Collapsed;
+                miUpdateProfessor.Visibility = Visibility.Collapsed;
+                miDeleteProfessor.Visibility = Visibility.Collapsed;
+                miPickProfessor.Visibility = Visibility.Collapsed;
+            }
+            else if (_loggedInUserType == EUserType.PROFESSOR)
+            {
+                miAddProfessor.Visibility = Visibility.Collapsed;
+                miDeleteProfessor.Visibility = Visibility.Collapsed;
+                miPickProfessor.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                miPickProfessor.Visibility = Visibility.Collapsed;
+            }
         }
+
+        
         public ShowProfessorsWindow(State state = State.ADMINISTRATION, bool isRegistered = true)
         {
             InitializeComponent();
@@ -71,6 +92,7 @@ namespace SR46_2021_POP2022.Views
             {
                 miPickProfessor.Visibility = Visibility.Hidden;
             }
+
 
 
             dgProfessors.ItemsSource = professorService.GetActiveProfessors();

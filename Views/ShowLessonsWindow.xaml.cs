@@ -24,31 +24,84 @@ namespace SR46_2021_POP2022.Views
         private LessonService lessonService = new LessonService();
         private AddEditLessonsWindow addEditLessonWindow;
 
-      
+        private string _currentButton = "Lessons";
+        private Student _loggedInStudentId;
         private Professor _loggedInProfessorId;
         private User _loggedInUser;
         private EUserType _loggedInUserType;
+       
 
         public ShowLessonsWindow(EUserType loggedInUserType)
         {
             _loggedInUserType = loggedInUserType;
             InitializeComponent();
+
         }
 
-        public ShowLessonsWindow(User loggedInUser, Professor loggedInProfessorId)
+        public ShowLessonsWindow(User loggedInUser, Professor loggedInProfessorId, string currentButton, EUserType loggedInUserType)
         {
             InitializeComponent();
             _loggedInProfessorId = loggedInProfessorId;
             _loggedInUser = loggedInUser;
+            _currentButton = currentButton;
+            _loggedInUserType = loggedInUserType;
             RefreshDataGrid();
 
+            if (_loggedInUserType == EUserType.STUDENT)
+            {
+                miAddLesson.Visibility = Visibility.Collapsed;
+                miDeleteLesson.Visibility = Visibility.Collapsed;
+               
+            }
+            else
+            {
+               
+            }
         }
-        public ShowLessonsWindow(User loggedInUser)
+
+
+        public ShowLessonsWindow(User loggedInUser, Student loggedInStudentId, string currentButton, EUserType loggedInUserType)
+        {
+            InitializeComponent();
+            _loggedInStudentId = loggedInStudentId;
+            _loggedInUser = loggedInUser;
+            _currentButton = currentButton;
+            _loggedInUserType = loggedInUserType;
+            RefreshDataGrid();
+
+            if (_loggedInUserType == EUserType.STUDENT)
+            {
+                miAddLesson.Visibility = Visibility.Collapsed;
+                miDeleteLesson.Visibility = Visibility.Collapsed;
+
+            }
+            else
+            {
+
+            }
+
+
+        }
+        public ShowLessonsWindow(User loggedInUser, EUserType loggedInUserType)
         {
             InitializeComponent();
           
             _loggedInUser = loggedInUser;
+            _loggedInUserType = loggedInUserType;
+
             RefreshDataGrid();
+
+            if (_loggedInUserType == EUserType.STUDENT)
+            {
+                miAddLesson.Visibility = Visibility.Collapsed;
+                miDeleteLesson.Visibility = Visibility.Collapsed;
+
+            }
+            else
+            {
+
+            }
+
 
         }
         public ShowLessonsWindow()
@@ -58,6 +111,7 @@ namespace SR46_2021_POP2022.Views
             RefreshDataGrid();
         }
 
+    
         private void miAddLesson_Click(object sender, RoutedEventArgs e)
         {
             var addEditLessonWindow = new AddEditLessonsWindow();
@@ -139,9 +193,8 @@ namespace SR46_2021_POP2022.Views
             }
         }
 
-
-
-        private void RefreshDataGrid()
+      
+        public void RefreshDataGrid()
         {
             if (_loggedInUser.UserType == EUserType.PROFESSOR)
             {
@@ -151,12 +204,29 @@ namespace SR46_2021_POP2022.Views
                                                     .ToList();
                 dgLessons.ItemsSource = lessons;
             }
+            else if (_loggedInUser.UserType == EUserType.STUDENT)
+            {
+                if (_currentButton == "ReservedLessons")
+                {
+                    List<Lesson> lessons = lessonService.GetAvailableLessons()
+                                                        .Where(s => s.StudentId == _loggedInStudentId.Id)
+                                                        .Select(s => s)
+                                                        .ToList();
+                    dgLessons.ItemsSource = lessons;
+                }
+                else
+                {
+                    List<Lesson> lessons = lessonService.GetAvailableLessons().Where(s => s.Status == false).Select(s => s).ToList();
+                    dgLessons.ItemsSource = lessons;
+                }
+            }
             else
             {
                 List<Lesson> lessons = lessonService.GetAvailableLessons().Select(s => s).ToList();
                 dgLessons.ItemsSource = lessons;
             }
         }
+
 
 
         private void dgLessons_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -201,7 +271,31 @@ namespace SR46_2021_POP2022.Views
                 }
             }
         }
+        private void txtSearch2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchTerm = txtSearch2.Text;
+                LessonService lesService = new LessonService();
 
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    
+                    dgLessons.ItemsSource = lesService.GetAvailableLessons();
+                }
+                else
+                {
+                    List<Lesson> filteredProfesors = lesService.GetAvailableLessons()
+                        .Where(les =>
+                                les.Professor.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+
+
+                        .ToList();
+
+                    dgLessons.ItemsSource = filteredProfesors;
+                }
+            }
+        }
 
     }
 

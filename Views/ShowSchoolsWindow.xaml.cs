@@ -27,6 +27,28 @@ namespace SR46_2021_POP2022.Views
         public School SelectedSchool = null;
 
         private bool isRegistered;
+   
+        private EUserType _loggedInUserType;
+
+        public ShowSchoolsWindow( EUserType loggedInUserType)
+        {
+            InitializeComponent();
+          
+            _loggedInUserType = loggedInUserType;
+
+            RefreshDataGrid();
+            if (_loggedInUserType == EUserType.STUDENT)
+            {
+                miAddSchool.Visibility = Visibility.Collapsed;
+                miUpdateSchool.Visibility = Visibility.Collapsed;
+                miDeleteSchool.Visibility = Visibility.Collapsed;
+                miPickSchool.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                miPickSchool.Visibility = Visibility.Collapsed;
+            }
+        }
 
         public ShowSchoolsWindow(State state = State.ADMINISTRATION, bool isRegistered = true)
         {
@@ -122,25 +144,7 @@ namespace SR46_2021_POP2022.Views
             }
         }
 
-        //private void txtSearch_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Enter)
-        //    {
-        //        string searchTerm = txtSearch.Text;
-        //        SchoolService schoolService = new SchoolService();
-        //        List<School> filteredSchool = schoolService.GetActiveSchools()
-        //            .Where(school =>
-        //            //school.Name.ToLower().Contains(searchTerm.ToLower())
-        //                          //||
-        //                          school.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
-        //                     //|| school.Language.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
-
-
-        //            .ToList();
-
-        //        dgSchools.ItemsSource = filteredSchool;
-        //    }
-        //}
+       
 
         List<School> filteredSchoolByAddress = new List<School>();
         List<School> filteredSchoolByLanguage = new List<School>();

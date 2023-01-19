@@ -29,10 +29,12 @@ namespace SR46_2021_POP2022.Views
 
            
         }
+        private string _currentButton = "Lessons";
         public User _loggedInUser;
         public EUserType _loggedInUserType;
         private HomeWindow homeWindow = new HomeWindow();
         private Professor _loggedInProfessorId;
+        private Student _loggedInStudentId;
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
@@ -95,22 +97,55 @@ namespace SR46_2021_POP2022.Views
                         homeWindow.lblLoggedInUser.Content = $"Logged in as {firstName} {lastName}";
                         homeWindow.UpdateUI();
                         homeWindow.Show();
-                        var showStudentWindow = new ShowStudentsWindow(_loggedInUser);
-                        var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser);
-                        var showLessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInProfessorId);
+                       
+                        var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser, _loggedInUserType);
+                        var showLessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInProfessorId, _currentButton, _loggedInUserType);
                        
                     }
+                    else if (_loggedInUserType == EUserType.STUDENT)
+                    {
+                        string studentCommandText = $"select * from dbo.Students where UserId = {id}";
+                        SqlCommand studentCommand = new SqlCommand(studentCommandText, conn);
 
-                    else if (_loggedInUserType == EUserType.STUDENT || _loggedInUserType == EUserType.ADMINISTRATOR)
+                        SqlDataReader studentReader = studentCommand.ExecuteReader();
+
+                        if (studentReader.HasRows)
+                        {
+                           studentReader.Read();
+                            int studId = (int)studentReader["Id"];
+
+                            _loggedInStudentId = new Student
+                            {
+                                Id = studId
+
+                            };
+
+
+                            studentReader.Close();
+                        }
+
+                        this.Hide();
+                        var homeWindow = new HomeWindow(_loggedInUser, _loggedInUserType, _loggedInStudentId);
+                        homeWindow.lblLoggedInUser.Content = $"Logged in as {firstName} {lastName}";
+                        homeWindow.UpdateUI();
+                        homeWindow.Show();
+                        var showStudentWindow = new ShowStudentsWindow(_loggedInUser, _loggedInUserType);
+                        var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser, _loggedInUserType);
+                        var showStudLessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInStudentId, _currentButton, _loggedInUserType);
+                        var showLessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInUserType);
+
+                    }
+
+                    else if ( _loggedInUserType == EUserType.ADMINISTRATOR)
                     {
                         this.Hide();
                         var homeWindow2 = new HomeWindow(_loggedInUser, _loggedInUserType);
                         homeWindow2.lblLoggedInUser.Content = $"Logged in as {firstName} {lastName}";
                         homeWindow2.UpdateUI();
                         homeWindow2.Show();
-                        var showStudentWindow = new ShowStudentsWindow(_loggedInUser);
-                        var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser);
-                        var showLessonsWindow = new ShowLessonsWindow(_loggedInUser);
+                        var showStudentWindow = new ShowStudentsWindow(_loggedInUser, _loggedInUserType);
+                        var showProfessorWindow = new ShowProfessorsWindow(_loggedInUser, _loggedInUserType);
+                        var showLessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInUserType);
                     }
                     else
                     {

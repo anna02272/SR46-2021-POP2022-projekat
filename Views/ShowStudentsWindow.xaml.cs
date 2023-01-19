@@ -45,6 +45,32 @@ namespace SR46_2021_POP2022.Views
             //var showStudentWindow = new ShowStudentsWindow(_loggedInUser);
             
             RefreshDataGrid();
+          
+        }
+
+        public ShowStudentsWindow(User loggedInUser, EUserType loggedInUserType)
+        {
+            InitializeComponent();
+            _loggedInUser = loggedInUser;
+            _loggedInUserType = loggedInUserType;
+         
+            RefreshDataGrid();
+            if (_loggedInUserType == EUserType.STUDENT)
+            {
+                miAddStudent.Visibility = Visibility.Collapsed;
+                miUpdateStudent.Visibility = Visibility.Visible;
+                miDeleteStudent.Visibility = Visibility.Collapsed;
+                miPickStudent.Visibility = Visibility.Collapsed;
+
+
+            }
+            else
+            {
+                miAddStudent.Visibility = Visibility.Visible;
+                miUpdateStudent.Visibility = Visibility.Visible;
+                miDeleteStudent.Visibility = Visibility.Visible;
+                miPickStudent.Visibility = Visibility.Collapsed;
+            }
         }
 
 
@@ -64,7 +90,8 @@ namespace SR46_2021_POP2022.Views
             }
             else
             {
-                miPickStudent.Visibility = Visibility.Hidden;
+              
+                 miPickStudent.Visibility = Visibility.Hidden;
             }
 
             dgStudents.ItemsSource = studentService.GetActiveStudents();

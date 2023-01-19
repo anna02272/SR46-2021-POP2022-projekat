@@ -21,7 +21,7 @@ namespace SR46_2021_POP2022.Views
 
         private void btnProfessors_Click(object sender, RoutedEventArgs e)
         {
-            var professorsWindow = new ShowProfessorsWindow(_loggedInUser);
+            var professorsWindow = new ShowProfessorsWindow(_loggedInUser, _loggedInUserType);
             professorsWindow.ShowDialog();
             //professorsWindow.Show();
             //this.Close();
@@ -29,14 +29,14 @@ namespace SR46_2021_POP2022.Views
 
         private void btnStudents_Click(object sender, RoutedEventArgs e)
         {
-            var studentsWindow = new ShowStudentsWindow(_loggedInUser);
+            var studentsWindow = new ShowStudentsWindow(_loggedInUser, _loggedInUserType);
             studentsWindow.ShowDialog();
             //this.Hide();
         }
 
         private void btnSchools_Click(object sender, RoutedEventArgs e)
         {
-            var schoolsWindow = new ShowSchoolsWindow();
+            var schoolsWindow = new ShowSchoolsWindow( _loggedInUserType);
             schoolsWindow.ShowDialog();
 
         }
@@ -47,13 +47,26 @@ namespace SR46_2021_POP2022.Views
 
         }
 
-       
+        private string _currentButton = "Lessons";
+
         private void btnLessons_Click(object sender, RoutedEventArgs e)
         {
-            var lessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInProfessorId);
+            _currentButton = "Lessons";
+            var lessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInProfessorId, _currentButton, _loggedInUserType);
             lessonsWindow.ShowDialog();
-
         }
+
+        private void btnReservedLessons_Click(object sender, RoutedEventArgs e)
+        {
+            _currentButton = "ReservedLessons";
+            var reservedLessonsWindow = new ShowLessonsWindow(_loggedInUser, _loggedInStudentId, _currentButton, _loggedInUserType);
+            reservedLessonsWindow.ShowDialog();
+        }
+
+
+
+
+
         private void btnAddresses_Click(object sender, RoutedEventArgs e)
         {
             var addressesWindow = new ShowAddressesWindow();
@@ -77,6 +90,7 @@ namespace SR46_2021_POP2022.Views
         }
 
         private Professor _loggedInProfessorId;
+        private Student _loggedInStudentId;
         private User _loggedInUser;
         private EUserType _loggedInUserType;
         public HomeWindow(EUserType loggedInUserType)
@@ -90,6 +104,14 @@ namespace SR46_2021_POP2022.Views
         private ShowStudentsWindow stWindow = new ShowStudentsWindow();
         private ShowProfessorsWindow prWindow = new ShowProfessorsWindow();
 
+        public HomeWindow(User loggedInUser, EUserType loggedInUserType, Student loggedInStudentId)
+        {
+            InitializeComponent();
+            _loggedInStudentId = loggedInStudentId;
+            _loggedInUser = loggedInUser;
+            _loggedInUserType = loggedInUserType;
+            UpdateUI();
+        }
         public HomeWindow(User loggedInUser, EUserType loggedInUserType, Professor loggedInProfessorId)
         {
             InitializeComponent();
@@ -112,7 +134,7 @@ namespace SR46_2021_POP2022.Views
           
             if (_loggedInUser == null || _loggedInUserType == default(EUserType))
             {
-              
+                btnReservedLessons.Visibility = Visibility.Collapsed;   
             }
             else if (_loggedInUserType == EUserType.STUDENT)
             {
@@ -133,6 +155,8 @@ namespace SR46_2021_POP2022.Views
                 btnLanguages.Visibility = Visibility.Collapsed;
 
                 btnAddresses.Visibility = Visibility.Collapsed;
+
+                btnReservedLessons.Visibility = Visibility.Collapsed;
             }
         }
 

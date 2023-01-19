@@ -25,9 +25,14 @@
             <MenuItem Name="miPickProfessor" Height="30" Header="Pick professor" Click="miPickProfessor_Click"></MenuItem>
         </Menu>
 
+        <Label Grid.Column="0" 
+               Name="lblProf" 
+               Content="Find by name, lastname, email, address, language, school:"
+               HorizontalAlignment="Left" Width="320" Margin="5,-1,0,1"></Label>
+
         <TextBox Name="txtSearch"  Grid.Column="0" 
-                 Margin="5,0,0,0" Width="350" Height="18" 
-                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="315,4,0,0" Width="215" Height="18" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top"
                   KeyDown="txtSearch_KeyDown" 
                   />
 

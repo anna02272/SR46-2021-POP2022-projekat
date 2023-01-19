@@ -32,6 +32,17 @@
                   KeyDown="txtSearch_KeyDown" 
                   />
 
+        <Label Grid.Column="0" 
+               Name="lblProf" 
+               Content="Professor:"
+               HorizontalAlignment="Left" Width="160" Margin="385,-1,0,1"></Label>
+
+        <TextBox Name="txtSearch2"  Grid.Column="0" 
+                 Margin="455,4,0,0" Width="155" Height="18" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top"
+                  KeyDown="txtSearch2_KeyDown" 
+                  />
+
         <DataGrid CanUserAddRows="False" 
                   IsReadOnly="True" 
                   Grid.Row="2" 
