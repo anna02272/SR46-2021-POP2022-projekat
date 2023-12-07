@@ -88,4 +88,38 @@ The application serves both registered and unregistered users, including adminis
      - Registered Users: name, surname, email, address, and user type (available to administrators).
      - Professors: name, surname, address, email, and languages taught (available to registered/unregistered users).
      - Schools: name, address, and languages offered (available to students/unregistered users).
-   
+
+## Images of project
+### Home page :
+![Main page](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/6f461430-9828-480c-9809-b5a49f851a5e)
+#### for not registered user
+![Not registered main page](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/2e96fad5-6e9b-40c3-b83e-5374b999822f)
+#### for admin
+![Admin home window](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/6150ffc8-df94-4bfc-a7bb-9d0b2a30f96b)
+#### for student
+![Student home page](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/b990f725-7759-4eb5-857f-a880118de892)
+#### for professor
+![Professor home page](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/b66becc1-a03b-4be2-9f13-e636b4464b46)
+
+### Login and Register
+![Login](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/db5e0cf1-3bad-4fa0-b1a0-70db79138c5c)
+![Register](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/1af23bfe-e495-4f86-82d9-a839ca5707d9)
+
+### Users, Students, Professors, Schools, Lessons, Languages, Addresses
+![Users](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/8ecff2e9-de90-4baa-8225-08ad3c3ef805)
+![Students](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/9eb1152b-aa6f-47a8-a214-674fa2cbef8e)
+![Professors](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/c06425cc-382d-46dc-b7e5-37cc5728c701)
+![Schools](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/d1e29eda-ec3a-4e94-abc4-b411d465b751)
+![Lessons](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/4a8e3dab-986b-4378-8e6f-d47c34ac5d23)
+![Languages](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/15f5c1d5-3803-4aa7-b264-c88428be1cf8)
+![Addresses](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/0d8b01e4-b465-4f94-9549-1bd53cbfef48)
+
+### Search
+![Users search](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/f107ae4e-b3ed-4eae-a304-531bd634dd0f)
+
+### Add and edit
+![Add lesson](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/921ab787-d3be-4027-8f0e-5be6179e4924)
+![Edit lesson](https://github.com/anna02272/SR46-2021-POP2022-projekat/assets/96575598/e9178ab1-b6c7-4a1f-bdbc-d617f1c759c7)
+
+
+
